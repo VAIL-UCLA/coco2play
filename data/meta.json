@@ -1,0 +1,72 @@
+{
+    "_data_sources": {
+        "_comment": "Point clouds are hosted as GitHub Release assets; see scripts/upload-pointclouds.sh. {scene_id} is replaced with the scene key (e.g. 'scene1').",
+        "tag": "data-v1",
+        "point_cloud_url_template": "https://github.com/VAIL-UCLA/coco2play/releases/download/data-v1/{scene_id}_point_cloud.ply"
+    },
+    "scene1": {
+        "name": "Scene 1",
+        "spawn_point": {
+            "x": -1.0,
+            "y": 0.0,
+            "z": -17.0
+        },
+        "scene_rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    "scene2": {
+        "name": "Scene 2",
+        "spawn_point": {
+            "x": -1.2,
+            "y": 0.0,
+            "z": -12.0
+        },
+        "scene_rotation": {
+            "x": -1.7,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    "scene3": {
+        "name": "Scene 3",
+        "spawn_point": {
+            "x": 0.0,
+            "y": 4.0,
+            "z": 0.0
+        },
+        "scene_rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    "scene4": {
+        "name": "Scene 4",
+        "spawn_point": {
+            "x": 0.0,
+            "y": 2.0,
+            "z": 0.0
+        },
+        "scene_rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    },
+    "scene5": {
+        "name": "Scene 5",
+        "spawn_point": {
+            "x": -3.0,
+            "y": 0.8,
+            "z": 0.0
+        },
+        "scene_rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0
+        }
+    }
+}

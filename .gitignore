@@ -1,0 +1,11 @@
+__pycache__/
+dist/
+web/node_modules/
+.DS_Store
+
+# Gaussian splat point clouds are hosted via GitHub Releases.
+# See scripts/upload-pointclouds.sh and data/meta.json (_data_sources).
+data/scene*/point_cloud.ply
+
+# Pushable assets are not committed (~1k GLBs); host out-of-band when needed.
+*.glb

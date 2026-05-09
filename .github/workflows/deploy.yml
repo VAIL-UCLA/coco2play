@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Skip LFS smudge here so we can warm a cache before downloading
+          # the (~95 MB of) collision meshes and OBJs. Big point clouds are
+          # NOT in the repo — they're hosted as Release assets and fetched
+          # by the web client at runtime (see data/meta.json _data_sources).
+          lfs: false
+
+      - name: Cache LFS objects
+        uses: actions/cache@v4
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('.lfs-assets-id', 'data/**/*.ply', 'urdf/meshes/*.obj') }}
+          restore-keys: lfs-
+
+      - name: Pull LFS objects
+        run: git lfs pull
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: web
+
+      - name: Build
+        run: npm run build
+        working-directory: web
+
+      - name: Copy data to dist
+        # Note: data/scene*/point_cloud.ply is gitignored and intentionally
+        # absent here. The web client fetches point clouds from a GitHub
+        # Release at runtime; only mesh.ply, meta.json, etc. are bundled.
+        run: cp -r data dist/
+
+      - name: Copy urdf to dist
+        run: cp -r urdf dist/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          force_orphan: true

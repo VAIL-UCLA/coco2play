@@ -1,0 +1,240 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="coco_one">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/base_link.obj" />
+      </geometry>
+      <material name="base_link_material">
+        <color rgba="0.3 0.3 0.3 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="meshes/base_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="body_link">
+    <!-- Textured mesh recovered from coco-gradient.glb (replaces flat-color OBJ) -->
+    <visual>
+      <origin xyz="-0.4 0 0.05" rpy="0 3.141593 1.570796" />
+      <geometry>
+        <mesh filename="meshes/Back_Graphic.obj" scale="0.09286185 0.09286185 0.09286185" />
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="meshes/body_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="front_axle_link">
+    <visual>
+      <geometry>
+        <mesh filename="meshes/front_axle_link.obj" />
+      </geometry>
+      <material name="front_axle_link_material">
+        <color rgba="0.3 0.3 0.3 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <mesh filename="meshes/front_axle_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="rear_axle_link">
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="front_left_shock_link">
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="front_right_shock_link">
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="rear_left_shock_link">
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="rear_right_shock_link">
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="front_left_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/front_left_wheel_link.obj" />
+      </geometry>
+      <material name="front_left_wheel_link_material">
+        <color rgba="0.15 0.15 0.15 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/front_left_wheel_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="front_right_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/front_right_wheel_link.obj" />
+      </geometry>
+      <material name="front_right_wheel_link_material">
+        <color rgba="0.15 0.15 0.15 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/front_right_wheel_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="rear_left_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/rear_left_wheel_link.obj" />
+      </geometry>
+      <material name="rear_left_wheel_link_material">
+        <color rgba="0.15 0.15 0.15 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/rear_left_wheel_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <link name="rear_right_wheel_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/rear_right_wheel_link.obj" />
+      </geometry>
+      <material name="rear_right_wheel_link_material">
+        <color rgba="0.15 0.15 0.15 1.0" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 1.5707963267948966" />
+      <geometry>
+        <mesh filename="meshes/rear_right_wheel_link.obj" />
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.0" />
+      <inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01" />
+    </inertial>
+  </link>
+  <joint name="body_to_base_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="body_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="base_to_front_axle_joint" type="revolute">
+    <parent link="base_link" />
+    <child link="front_axle_link" />
+    <origin xyz="0.22100000083446503 0.0 -0.0949999988079071" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+    <limit lower="-0.3490658503988659" upper="0.3490658503988659" effort="100" velocity="10" />
+  </joint>
+  <joint name="base_to_rear_axle_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="rear_axle_link" />
+    <origin xyz="-0.23499999940395355 0.0 -0.0949999988079071" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="front_left_shock_joint" type="fixed">
+    <parent link="front_axle_link" />
+    <child link="front_left_shock_link" />
+    <origin xyz="0.0 0.23600000143051147 -0.07100000977516174" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="front_right_shock_joint" type="fixed">
+    <parent link="front_axle_link" />
+    <child link="front_right_shock_link" />
+    <origin xyz="0.0 -0.23600000143051147 -0.07100000977516174" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="rear_left_shock_joint" type="fixed">
+    <parent link="rear_axle_link" />
+    <child link="rear_left_shock_link" />
+    <origin xyz="0.0 0.23600000143051147 -0.07100000977516174" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="rear_right_shock_joint" type="fixed">
+    <parent link="rear_axle_link" />
+    <child link="rear_right_shock_link" />
+    <origin xyz="0.0 -0.23600000143051147 -0.07100000977516174" rpy="0 0 0" />
+    <axis xyz="0 0 1" />
+  </joint>
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="front_left_shock_link" />
+    <child link="front_left_wheel_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="front_right_shock_link" />
+    <child link="front_right_wheel_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="rear_left_shock_link" />
+    <child link="rear_left_wheel_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="rear_right_shock_link" />
+    <child link="rear_right_wheel_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+</robot>
