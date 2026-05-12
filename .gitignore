@@ -1,6 +1,8 @@
 __pycache__/
 dist/
 web/node_modules/
+worker/node_modules/
+worker/.wrangler/
 .DS_Store
 
 # Gaussian splat point clouds are hosted via GitHub Releases.

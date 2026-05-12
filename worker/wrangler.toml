@@ -1,0 +1,6 @@
+name = "coco2play-data"
+main = "src/index.js"
+compatibility_date = "2026-01-01"
+
+# Free plan defaults; no bindings, no env vars, no secrets needed.
+# The worker fetches public release assets from github.com.

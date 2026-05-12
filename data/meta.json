@@ -1,8 +1,8 @@
 {
     "_data_sources": {
-        "_comment": "Point clouds are hosted as GitHub Release assets; see scripts/upload-pointclouds.sh. {scene_id} is replaced with the scene key (e.g. 'scene1').",
+        "_comment": "Point clouds are hosted as GitHub Release assets and served through a Cloudflare Worker CORS proxy (see worker/) because github.com release URLs do not emit Access-Control-Allow-Origin. {scene_id} is replaced with the scene key (e.g. 'scene1').",
         "tag": "data-v1",
-        "point_cloud_url_template": "https://github.com/VAIL-UCLA/coco2play/releases/download/data-v1/{scene_id}_point_cloud.ply"
+        "point_cloud_url_template": "https://coco2play-data.latka-krystof.workers.dev/{scene_id}_point_cloud.ply"
     },
     "scene1": {
         "name": "Scene 1",

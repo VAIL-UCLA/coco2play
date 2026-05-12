@@ -59,15 +59,33 @@ if ! gh release view "${TAG}" --repo "${REPO}" >/dev/null 2>&1; then
     --notes "Point cloud assets for the web viewer. Managed by scripts/upload-pointclouds.sh."
 fi
 
+# `gh release upload` uses each file's basename as the asset name. Since every
+# source file is literally `point_cloud.ply`, we stage symlinks with the
+# desired final names so `gh` uploads them as scene{N}_point_cloud.ply rather
+# than clobbering one shared `point_cloud.ply` asset on every iteration.
+STAGE_DIR="$(mktemp -d -t coco2play-pcs.XXXXXX)"
+trap 'rm -rf "${STAGE_DIR}"' EXIT
+
 for ply in "${PLYS[@]}"; do
   scene_id="$(basename "$(dirname "$ply")")"
   asset_name="${scene_id}_point_cloud.ply"
   size_mb="$(du -m "$ply" | awk '{print $1}')"
   echo "  ${ply}  ->  ${asset_name}  (${size_mb} MB)"
-  gh release upload "${TAG}" "${ply}#${asset_name}" \
+  ln -sf "$(realpath "$ply")" "${STAGE_DIR}/${asset_name}"
+  gh release upload "${TAG}" "${STAGE_DIR}/${asset_name}" \
     --repo "${REPO}" \
     --clobber
 done
+
+echo
+echo "Verifying release contents..."
+asset_count="$(gh release view "${TAG}" --repo "${REPO}" --json assets -q '.assets | length')"
+if [[ "${asset_count}" -ne "${#PLYS[@]}" ]]; then
+  echo "warning: expected ${#PLYS[@]} assets, release has ${asset_count}." >&2
+  gh release view "${TAG}" --repo "${REPO}" --json assets -q '.assets[] | "  - \(.name) (\(.size) bytes)"'
+  exit 1
+fi
+echo "OK: ${asset_count} assets present."
 
 echo
 echo "Done. Verify with:"
