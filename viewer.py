@@ -565,7 +565,7 @@ def main() -> None:
     def _reset_session(sess: ClientSession, spawn: dict) -> None:
         """Reset a session's robot to the spawn point."""
         sess.robot_state.x = spawn.get("x", 0.0)
-        sess.robot_state.y = 0.0  # flat floor, wheels on ground
+        sess.robot_state.y = spawn.get("y", 0.0)
         sess.robot_state.z = spawn.get("z", 0.0)
         sess.robot_state.yaw = math.pi / 2.0
         sess.robot_state.speed = 0.0
@@ -1307,7 +1307,7 @@ def main() -> None:
         spawn = meta.get("spawn_point", {"x": 0.0, "y": 0.0, "z": 0.0})
         rs = RobotState()
         rs.x = spawn.get("x", 0.0)
-        rs.y = 0.0  # flat floor, wheels on ground
+        rs.y = spawn.get("y", 0.0)
         rs.z = spawn.get("z", 0.0)
         rs.yaw = math.pi / 2.0
 

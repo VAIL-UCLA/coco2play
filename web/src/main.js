@@ -158,10 +158,15 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
+// GaussianSplats3D draws into the same canvas; if we let three.js clear
+// each frame, splats get wiped. We manage clearing manually in animate().
+renderer.autoClear = false;
 container.appendChild(renderer.domElement);
 
 const threeScene = new THREE.Scene();
-threeScene.background = new THREE.Color(0x0a0a0a);
+// Transparent so the splat render shows through; CSS on #canvas-container
+// supplies the dark background instead.
+threeScene.background = null;
 
 const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.01, 1000);
 camera.position.set(0, -2, -5);
@@ -669,7 +674,11 @@ function animate() {
   speedDisplay.value = Math.abs(state.speed).toFixed(2);
 
   // ── Render ──
-  // Let GaussianSplats3D update its internal state
+  // Manual clear because renderer.autoClear is false (so splats survive).
+  renderer.clear();
+
+  // Splats first: they write to color + depth, and being semi-transparent
+  // they need three.js opaque geometry composited on top via depth test.
   if (splatSceneAdded) {
     try {
       gsViewer.update();
