@@ -50,8 +50,6 @@ EGO_CX = 960.0   # 1920 / 2
 EGO_CY = 540.0   # 1080 / 2
 EGO_FOV_Y = 2.0 * math.atan(EGO_CY / EGO_FY)   # ~1.387 rad (~79.4°)
 EGO_ASPECT = 1920.0 / 1080.0                     # ~1.778
-EGO_RENDER_W = 480
-EGO_RENDER_H = 270
 EGO_CAM_FORWARD_OFFSET = 0.60   # metres in front of robot centre (clears body)
 EGO_CAM_UP_OFFSET = 0.35        # metres above robot centre (−Y direction)
 EGO_FRUSTUM_FORWARD_OFFSET = 0.4  # frustum drawn slightly behind camera (near robot head)
@@ -1129,7 +1127,7 @@ def main() -> None:
 })();
 """
 
-    # Ego-view HUD overlay JavaScript (uses client-side canvas, not server get_render)
+    # Ego-view HUD badge — first-person mode drives the main viewport (no get_render).
     ego_view_js = """
 (function() {
     if (window._egoViewInitialized) return;
@@ -1139,31 +1137,21 @@ def main() -> None:
     container.id = '__ego-view';
     container.style.cssText = `
         position: fixed; top: 10px; left: 10px; z-index: 10000;
-        border: 2px solid rgba(255,255,255,0.3); border-radius: 8px;
-        overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-        background: #000; pointer-events: none;
+        border: 2px solid rgba(0, 200, 255, 0.45); border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        background: rgba(0, 0, 0, 0.55); pointer-events: none;
+        padding: 8px 12px; font-family: monospace; font-size: 12px;
+        color: rgba(255, 255, 255, 0.85); line-height: 1.4;
+        display: none;
     `;
-
-    const cvs = document.createElement('canvas');
-    cvs.id = '__ego-canvas';
-    cvs.width = 480;
-    cvs.height = 270;
-    cvs.style.cssText = 'display:block; width:auto; height:20vh;';
-    container.appendChild(cvs);
-
-    const label = document.createElement('div');
-    label.textContent = 'EGO CAM';
-    label.style.cssText = `
-        position:absolute; top:4px; left:8px;
-        font-family:monospace; font-size:11px;
-        color:rgba(255,255,255,0.7); background:rgba(0,0,0,0.5);
-        padding:2px 6px; border-radius:4px;
-    `;
-    container.appendChild(label);
+    container.innerHTML = 'EGO VIEW<br><span style="opacity:0.65;font-size:10px">'
+        + 'First-person camera</span>';
     document.body.appendChild(container);
 
-    window.setEgoViewVisible = function(v) { container.style.display = v ? 'block' : 'none'; };
-    console.log('📷 Ego view overlay ready (client-side rendering)');
+    window.setEgoViewVisible = function(v) {
+        container.style.display = v ? 'block' : 'none';
+    };
+    console.log('📷 Ego view badge ready');
 })();
 """
 
@@ -1274,11 +1262,10 @@ def main() -> None:
                 client._websock_connection.queue_message(
                     viser_messages.RunJavascriptMessage(source=ego_view_js)
                 )
-                # Enable ego view rendering on client if checkbox is on
                 if ego_view_cb.value:
                     client._websock_connection.queue_message(
                         viser_messages.RunJavascriptMessage(
-                            source="window.__egoViewEnabled = true;"
+                            source="window.setEgoViewVisible && window.setEgoViewVisible(true);"
                         )
                     )
                 client._websock_connection.queue_message(
@@ -1484,8 +1471,8 @@ def main() -> None:
                         sess.ego_frustum.visible = vis
 
         ego_view_cb = server.gui.add_checkbox(
-            "Ego View Overlay",
-            initial_value=True,
+            "First-Person (Ego) View",
+            initial_value=False,
         )
 
         @ego_view_cb.on_update
@@ -1496,10 +1483,7 @@ def main() -> None:
                 try:
                     client._websock_connection.queue_message(
                         viser_messages.RunJavascriptMessage(
-                            source=(
-                                f"window.__egoViewEnabled = {vis_str};"
-                                f"window.setEgoViewVisible && window.setEgoViewVisible({vis_str});"
-                            )
+                            source=f"window.setEgoViewVisible && window.setEgoViewVisible({vis_str});"
                         )
                     )
                 except Exception:
@@ -1741,26 +1725,37 @@ def main() -> None:
                 # Update visual
                 asset.glb_handle.position = (asset.x, asset.y, asset.z)
 
-        # Camera orbit (WASD adjusts per-session angle/elevation)
+        # Camera follow: first-person ego view, or chase-cam orbit
         if camera_follow_cb.value:
-            orbit_speed, elev_speed = 120.0, 3.0
-            if ks["orbit_left"]:  sess.camera_orbit_angle -= orbit_speed * dt
-            if ks["orbit_right"]: sess.camera_orbit_angle += orbit_speed * dt
-            if ks["orbit_up"]:    sess.camera_orbit_elevation = max(0.2, sess.camera_orbit_elevation - elev_speed * dt)
-            if ks["orbit_down"]:  sess.camera_orbit_elevation = min(8.0, sess.camera_orbit_elevation + elev_speed * dt)
-
-            follow_dist = 3.5
-            orbit_rad = math.radians(sess.camera_orbit_angle)
-            cam_x = rs.x - follow_dist * math.cos(orbit_rad)
-            cam_z = rs.z - follow_dist * math.sin(orbit_rad)
-            cam_y = rs.y - sess.camera_orbit_elevation
-
             viser_client = server.get_clients().get(sess.client_id)
             if viser_client is not None:
-                with viser_client.atomic():
-                    viser_client.camera.position     = (cam_x, cam_y, cam_z)
-                    viser_client.camera.look_at      = (rs.x, rs.y, rs.z)
-                    viser_client.camera.up_direction = (0.0, -1.0, 0.0)
+                if ego_view_cb.value:
+                    pos, _, wxyz, _ = compute_ego_camera_pose(rs)
+                    with viser_client.atomic():
+                        viser_client.camera.position = pos
+                        viser_client.camera.wxyz = wxyz
+                        viser_client.camera.fov = EGO_FOV_Y
+                        viser_client.camera.up_direction = (0.0, -1.0, 0.0)
+                else:
+                    orbit_speed, elev_speed = 120.0, 3.0
+                    if ks["orbit_left"]:  sess.camera_orbit_angle -= orbit_speed * dt
+                    if ks["orbit_right"]: sess.camera_orbit_angle += orbit_speed * dt
+                    if ks["orbit_up"]:    sess.camera_orbit_elevation = max(
+                        0.2, sess.camera_orbit_elevation - elev_speed * dt)
+                    if ks["orbit_down"]:  sess.camera_orbit_elevation = min(
+                        8.0, sess.camera_orbit_elevation + elev_speed * dt)
+
+                    follow_dist = 3.5
+                    orbit_rad = math.radians(sess.camera_orbit_angle)
+                    cam_x = rs.x - follow_dist * math.cos(orbit_rad)
+                    cam_z = rs.z - follow_dist * math.sin(orbit_rad)
+                    cam_y = rs.y - sess.camera_orbit_elevation
+
+                    with viser_client.atomic():
+                        viser_client.camera.position = (cam_x, cam_y, cam_z)
+                        viser_client.camera.look_at = (rs.x, rs.y, rs.z)
+                        viser_client.camera.fov = math.radians(fov_slider.value)
+                        viser_client.camera.up_direction = (0.0, -1.0, 0.0)
 
     def simulation_loop() -> None:
         nonlocal running
@@ -1783,40 +1778,9 @@ def main() -> None:
 
             time.sleep(sim_dt)
 
-    def ego_pose_loop() -> None:
-        """Send ego camera pose to clients at ~10 Hz for client-side rendering."""
-        while running:
-            time.sleep(0.1)  # 10 Hz pose updates
-            if not ego_view_cb.value:
-                continue
-            with sessions_lock:
-                active = list(sessions.values())
-            for sess in active:
-                try:
-                    vc = server.get_clients().get(sess.client_id)
-                    if vc is None:
-                        continue
-                    pos, _, wxyz_f, _ = compute_ego_camera_pose(sess.robot_state)
-                    # Send pose to client — rendering happens in client's useFrame
-                    # wxyz_f is OpenCV convention (Z-forward, Y-down); client applies
-                    # the OpenCV→OpenGL pi rotation on X internally.
-                    js = (
-                        f"window.__egoPose={{x:{pos[0]},y:{pos[1]},z:{pos[2]},"
-                        f"qx:{wxyz_f[1]},qy:{wxyz_f[2]},qz:{wxyz_f[3]},qw:{wxyz_f[0]},"
-                        f"fov:{EGO_FOV_Y},width:{EGO_RENDER_W},height:{EGO_RENDER_H}}};"
-                    )
-                    vc._websock_connection.queue_message(
-                        viser_messages.RunJavascriptMessage(source=js)
-                    )
-                except Exception:
-                    pass
-
     sim_thread = threading.Thread(target=simulation_loop, daemon=True)
     sim_thread.start()
-    ego_thread = threading.Thread(target=ego_pose_loop, daemon=True)
-    ego_thread.start()
     print("✓ Simulation loop started (30 Hz)")
-    print("✓ Ego pose updates started (10 Hz)")
     print("\n" + "=" * 60)
     print(f"  Viewer ready! Open http://localhost:{PUBLIC_PORT}")
     print("  Click in the browser window first to capture keys!")
