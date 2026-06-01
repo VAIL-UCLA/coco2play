@@ -5,13 +5,14 @@ Usage:
     python viewer.py
 
 Then open http://localhost:8080 in your browser.
-Use IJKL to drive the robot.
+Use IJKL to drive the robot. Press R to record ego observations to recordings/.
 The invisible mesh provides collision boundaries.
 """
 
 from __future__ import annotations
 
 import asyncio
+import base64
 import hashlib
 import json
 import math
@@ -20,6 +21,7 @@ import re
 import struct
 import threading
 import time
+from datetime import datetime
 from pathlib import Path
 from typing import TypedDict
 
@@ -53,6 +55,14 @@ EGO_ASPECT = 1920.0 / 1080.0                     # ~1.778
 EGO_CAM_FORWARD_OFFSET = 0.60   # metres in front of robot centre (clears body)
 EGO_CAM_UP_OFFSET = 0.35        # metres above robot centre (−Y direction)
 EGO_FRUSTUM_FORWARD_OFFSET = 0.4  # frustum drawn slightly behind camera (near robot head)
+
+# ──────────────────────── Observation recording ────────────────────────
+
+RECORDINGS_DIR = BASE_DIR / "recordings"
+RECORDING_HZ = 4.0  # keep below ~5 Hz to avoid viser viewport re-render churn
+RECORDING_WARMUP_S = 0.6  # wait before first frame so ego camera can settle
+RECORDING_WIDTH = 960
+RECORDING_HEIGHT = 540
 
 
 def get_available_scenes() -> list[str]:
@@ -307,6 +317,7 @@ class ClientSession:
         "last_collision_banner_time",
         "ego_frustum",
         "lives", "dead",
+        "recorder",
     )
 
     def __init__(
@@ -331,6 +342,7 @@ class ClientSession:
         self.ego_frustum: object = None
         self.lives: int = 3
         self.dead: bool = False
+        self.recorder: ObservationRecorder | None = None
 
 
 class RobotState:
@@ -407,6 +419,79 @@ class RobotState:
         self.wheel_angle += (self.speed * dt) / self.wheel_radius
 
         return new_x, new_z
+
+
+class ObservationRecorder:
+    """Writes ego-view JPEG frames and a JSONL manifest under recordings/."""
+
+    def __init__(self, episode_dir: Path, scene_id: str, client_id: int) -> None:
+        self.episode_dir = episode_dir
+        self.frames_dir = episode_dir / "frames"
+        self.frames_dir.mkdir(parents=True, exist_ok=True)
+        self.manifest_path = episode_dir / "manifest.jsonl"
+        self.scene_id = scene_id
+        self.client_id = client_id
+        self.frame_index = 0
+        self.started_at = time.time()
+        self._lock = threading.Lock()
+        meta = {
+            "scene_id": scene_id,
+            "client_id": client_id,
+            "hz": RECORDING_HZ,
+            "width": RECORDING_WIDTH,
+            "height": RECORDING_HEIGHT,
+            "started_at": self.started_at,
+        }
+        (episode_dir / "meta.json").write_text(json.dumps(meta, indent=2) + "\n")
+
+    def stop(self) -> int:
+        ended_at = time.time()
+        meta_path = self.episode_dir / "meta.json"
+        try:
+            meta = json.loads(meta_path.read_text(encoding="utf-8"))
+            meta["ended_at"] = ended_at
+            meta["duration_s"] = round(ended_at - self.started_at, 3)
+            meta["frame_count"] = self.frame_index
+            meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+        except Exception:
+            pass
+        return self.frame_index
+
+    def append_frame(
+        self,
+        image_bytes: bytes,
+        robot_state: RobotState,
+        key_state: dict,
+    ) -> int:
+        """Save a JPEG received from the browser (viewport capture). Returns frame index."""
+        controls = {k: bool(key_state[k]) for k in ("up", "down", "left", "right")}
+        throttle = 1 if controls["up"] else (-1 if controls["down"] else 0)
+        steer = 1 if controls["left"] else (-1 if controls["right"] else 0)
+        rs = robot_state
+        pose = {
+            "x": rs.x,
+            "y": rs.y,
+            "z": rs.z,
+            "yaw": rs.yaw,
+            "speed": rs.speed,
+        }
+        frame_idx = self.frame_index
+        img_path = self.frames_dir / f"{frame_idx:06d}.jpg"
+        img_path.write_bytes(image_bytes)
+        record = {
+            "frame": frame_idx,
+            "t": round(time.time() - self.started_at, 4),
+            "controls": controls,
+            "throttle": throttle,
+            "steer": steer,
+            "pose": pose,
+            "image": f"frames/{frame_idx:06d}.jpg",
+        }
+        with self._lock:
+            with open(self.manifest_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record) + "\n")
+        self.frame_index += 1
+        return frame_idx
 
 
 # ──────────────────────── Main Application ────────────────────────
@@ -671,6 +756,76 @@ def main() -> None:
 
     # ── 4) GUI Controls ──
 
+    RECORDINGS_DIR.mkdir(parents=True, exist_ok=True)
+    recording_hud_last: dict[int, int] = {}
+    recording_hud_last_ts: dict[int, float] = {}
+
+    def _update_recording_hud(client: viser.ClientHandle, active: bool, count: int) -> None:
+        vis_str = "true" if active else "false"
+        try:
+            client._websock_connection.queue_message(
+                viser_messages.RunJavascriptMessage(
+                    source=f"window.setRecordingHud && window.setRecordingHud({vis_str}, {count});"
+                )
+            )
+        except Exception:
+            pass
+
+    def _send_client_recording_js(client: viser.ClientHandle, source: str) -> None:
+        try:
+            client._websock_connection.queue_message(
+                viser_messages.RunJavascriptMessage(source=source)
+            )
+        except Exception:
+            pass
+
+    def _start_recording(sess: ClientSession, client: viser.ClientHandle) -> None:
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        episode_dir = RECORDINGS_DIR / f"{current_scene_id}_{ts}_{sess.client_id}"
+        sess.recorder = ObservationRecorder(episode_dir, current_scene_id, sess.client_id)
+        recording_hud_last[sess.client_id] = -1
+        _update_recording_hud(client, True, 0)
+        _send_client_recording_js(
+            client, "window.startClientRecording && window.startClientRecording();"
+        )
+        print(f"⏺ Recording → {episode_dir}")
+
+    def _stop_recording(sess: ClientSession, client: viser.ClientHandle) -> None:
+        if sess.recorder is None:
+            return
+        _send_client_recording_js(
+            client, "window.stopClientRecording && window.stopClientRecording();"
+        )
+        episode_dir = sess.recorder.episode_dir
+        count = sess.recorder.stop()
+        sess.recorder = None
+        recording_hud_last.pop(sess.client_id, None)
+        recording_hud_last_ts.pop(sess.client_id, None)
+        _update_recording_hud(client, False, 0)
+        print(f"⏹ Recording stopped ({count} frames) → {episode_dir}")
+
+    def _on_client_frame(sess: ClientSession, client: viser.ClientHandle, image_b64: str) -> None:
+        if sess.recorder is None:
+            return
+        try:
+            image_bytes = base64.b64decode(image_b64)
+        except Exception as e:
+            print(f"⚠ Recording decode failed: {e}")
+            return
+        frame_idx = sess.recorder.append_frame(image_bytes, sess.robot_state, sess.key_state)
+        hud_now = time.time()
+        last_hud = recording_hud_last_ts.get(sess.client_id, 0.0)
+        if frame_idx != recording_hud_last.get(sess.client_id, -1) or hud_now - last_hud >= 0.5:
+            recording_hud_last[sess.client_id] = frame_idx + 1
+            recording_hud_last_ts[sess.client_id] = hud_now
+            _update_recording_hud(client, True, frame_idx + 1)
+
+    def _toggle_recording(sess: ClientSession, client: viser.ClientHandle) -> None:
+        if sess.recorder is not None:
+            _stop_recording(sess, client)
+        else:
+            _start_recording(sess, client)
+
     # ── 4a) aiohttp proxy on PUBLIC_PORT ──
     # /keyboard WS → keyboard input handler
     # Other WS  → proxy to viser (preserving subprotocols)
@@ -680,7 +835,7 @@ def main() -> None:
 
     async def _keyboard_ws(request: web.Request) -> web.WebSocketResponse:
         """Handle /keyboard WebSocket for keyboard input."""
-        ws = web.WebSocketResponse()
+        ws = web.WebSocketResponse(max_msg_size=16 * 1024 * 1024)
         await ws.prepare(request)
         session_id: int | None = None
         try:
@@ -694,6 +849,26 @@ def main() -> None:
                         session_id = data.get("session_id")
                         continue
                     if session_id is None:
+                        continue
+                    if data.get("type") == "toggle_recording":
+                        with sessions_lock:
+                            sess = sessions.get(session_id)
+                        if sess is not None:
+                            client = server.get_clients().get(session_id)
+                            if client is not None:
+                                _toggle_recording(sess, client)
+                        continue
+                    if data.get("type") == "frame":
+                        image_b64 = data.get("image_b64")
+                        if not image_b64:
+                            continue
+                        with sessions_lock:
+                            sess = sessions.get(session_id)
+                        if sess is None:
+                            continue
+                        client = server.get_clients().get(session_id)
+                        if client is not None:
+                            _on_client_frame(sess, client, image_b64)
                         continue
                     action, key = data.get("action"), data.get("key")
                     with sessions_lock:
@@ -1155,11 +1330,121 @@ def main() -> None:
 })();
 """
 
+    controls_help_js = """
+(function() {
+    if (window._controlsHelpInitialized) return;
+    window._controlsHelpInitialized = true;
+
+    const panel = document.createElement('div');
+    panel.id = '__controls-help';
+    panel.style.cssText = `
+        position: fixed; bottom: 14px; left: 14px; z-index: 2147483638;
+        pointer-events: none;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.85);
+        background: rgba(10, 10, 10, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        border-radius: 6px;
+        padding: 11px 14px 10px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
+        line-height: 1.65;
+        min-width: 220px;
+    `;
+
+    const row = (keys, action) =>
+        '<div style="display:flex;gap:8px;justify-content:space-between;align-items:baseline;">'
+        + '<span style="color:#7ec8e3;white-space:nowrap;">' + keys + '</span>'
+        + '<span style="color:rgba(255,255,255,0.55);text-align:right;">' + action + '</span></div>';
+
+    panel.innerHTML =
+        '<div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;'
+        + 'color:rgba(255,255,255,0.42);margin-bottom:7px;padding-bottom:5px;'
+        + 'border-bottom:1px solid rgba(255,255,255,0.1);">Controls</div>'
+        + '<div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;'
+        + 'color:rgba(255,255,255,0.32);margin:4px 0 2px;">Drive</div>'
+        + row('I / &uarr;', 'Forward')
+        + row('K / &darr;', 'Backward')
+        + row('J / &larr;', 'Steer left')
+        + row('L / &rarr;', 'Steer right')
+        + '<div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;'
+        + 'color:rgba(255,255,255,0.32);margin:8px 0 2px;">Camera</div>'
+        + row('W / S', 'Tilt up / down')
+        + row('A / D', 'Orbit left / right')
+        + '<div style="font-size:11px;letter-spacing:0.08em;text-transform:uppercase;'
+        + 'color:rgba(255,255,255,0.32);margin:8px 0 2px;">Other</div>'
+        + row('R', 'Record observations')
+        + '<div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.35);">'
+        + 'Click the viewport to capture keys</div>';
+
+    document.body.appendChild(panel);
+})();
+"""
+
+    recording_hud_js = """
+(function() {
+    if (window._recordingHudInitialized) return;
+    window._recordingHudInitialized = true;
+
+    const el = document.createElement('div');
+    el.id = '__recording-hud';
+    el.style.cssText = `
+        position: fixed; top: 14px; right: 14px; z-index: 2147483640;
+        pointer-events: none; display: none;
+        font-family: monospace; font-size: 13px; font-weight: 700;
+        color: #fff; background: rgba(180, 0, 0, 0.82);
+        padding: 6px 12px; border-radius: 6px;
+        border: 1px solid rgba(255, 80, 80, 0.9);
+        box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+        letter-spacing: 0.06em;
+    `;
+    el.textContent = 'REC 0';
+    document.body.appendChild(el);
+
+    window.setRecordingHud = function(active, count) {
+        el.style.display = active ? 'block' : 'none';
+        if (active) el.textContent = 'REC ' + count;
+    };
+})();
+"""
+
+    record_interval_ms = int(1000.0 / RECORDING_HZ)
+    record_warmup_ms = int(RECORDING_WARMUP_S * 1000)
+
+    # Patch WebGL context creation so canvas reads work after compositing (page reload required).
+    webgl_preserve_buffer_js = """
+    (function() {
+        if (window.__webglPreservePatched) return;
+        window.__webglPreservePatched = true;
+        const orig = HTMLCanvasElement.prototype.getContext;
+        HTMLCanvasElement.prototype.getContext = function(type, attrs) {
+            if (type === 'webgl' || type === 'webgl2' || type === 'experimental-webgl') {
+                attrs = Object.assign({}, attrs || {}, { preserveDrawingBuffer: true });
+            }
+            return orig.call(this, type, attrs);
+        };
+    })();
+    """
+
     # JavaScript to inject into browser for keyboard capture
     keyboard_js = f"""
     (function() {{
         if (window._robotKeyboardInitialized) return;
         window._robotKeyboardInitialized = true;
+
+        const RECORD_INTERVAL_MS = {record_interval_ms};
+        const RECORD_WARMUP_MS = {record_warmup_ms};
+        const RECORD_TARGET_W = {RECORDING_WIDTH};
+        const RECORD_TARGET_H = {RECORDING_HEIGHT};
+        let recordingActive = false;
+        let recordingStartMs = 0;
+        let lastCaptureMs = 0;
+        let encodeCanvas = null;
+        let encodeCtx = null;
+        let readCanvas = null;
+        let readCtx = null;
 
         const keys = {{up: false, down: false, left: false, right: false, orbit_left: false, orbit_right: false, orbit_up: false, orbit_down: false}};
         const keyMap = {{
@@ -1208,6 +1493,12 @@ def main() -> None:
         connect();
 
         document.addEventListener('keydown', (e) => {{
+            if (e.code === 'KeyR' && !e.repeat) {{
+                if (ws && ws.readyState === WebSocket.OPEN)
+                    ws.send(JSON.stringify({{type: 'toggle_recording'}}));
+                e.preventDefault();
+                return;
+            }}
             const mapped = keyMap[e.code];
             if (mapped && !keys[mapped]) {{
                 keys[mapped] = true;
@@ -1237,6 +1528,93 @@ def main() -> None:
             }}
         }});
 
+        function getMainGlCanvas() {{
+            let best = null;
+            let bestArea = 0;
+            for (const canvas of document.querySelectorAll('canvas')) {{
+                const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+                if (!gl) continue;
+                const area = canvas.width * canvas.height;
+                if (area > bestArea) {{
+                    best = canvas;
+                    bestArea = area;
+                }}
+            }}
+            return best;
+        }}
+
+        function captureViewportFrameAfterRender() {{
+            if (!recordingActive || !ws || ws.readyState !== WebSocket.OPEN) return;
+            const now = performance.now();
+            if (now - recordingStartMs < RECORD_WARMUP_MS) return;
+            if (now - lastCaptureMs < RECORD_INTERVAL_MS) return;
+
+            const canvas = getMainGlCanvas();
+            if (!canvas) return;
+            const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+            if (!gl) return;
+
+            const w = canvas.width;
+            const h = canvas.height;
+            if (w < 1 || h < 1) return;
+
+            // readPixels must run in the same turn as the WebGL draw (here: right
+            // after the viser/r3f frame callback). setInterval + toBlob reads an
+            // already-cleared buffer and produces black JPEGs.
+            const pixels = new Uint8Array(w * h * 4);
+            gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+            if (!encodeCanvas) {{
+                encodeCanvas = document.createElement('canvas');
+                encodeCtx = encodeCanvas.getContext('2d');
+                readCanvas = document.createElement('canvas');
+                readCtx = readCanvas.getContext('2d');
+            }}
+            encodeCanvas.width = RECORD_TARGET_W;
+            encodeCanvas.height = RECORD_TARGET_H;
+            readCanvas.width = w;
+            readCanvas.height = h;
+
+            const imageData = readCtx.createImageData(w, h);
+            const row = w * 4;
+            for (let y = 0; y < h; y++) {{
+                const srcY = h - 1 - y;
+                imageData.data.set(
+                    pixels.subarray(srcY * row, srcY * row + row),
+                    y * row,
+                );
+            }}
+            readCtx.putImageData(imageData, 0, 0);
+            encodeCtx.drawImage(readCanvas, 0, 0, RECORD_TARGET_W, RECORD_TARGET_H);
+
+            const dataUrl = encodeCanvas.toDataURL('image/jpeg', 0.85);
+            const comma = dataUrl.indexOf(',');
+            const image_b64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl;
+            ws.send(JSON.stringify({{type: 'frame', image_b64: image_b64}}));
+            lastCaptureMs = now;
+        }}
+
+        function installRecordingCaptureHook() {{
+            if (window.__recordingCaptureHookInstalled) return;
+            window.__recordingCaptureHookInstalled = true;
+            const raf = window.requestAnimationFrame.bind(window);
+            window.requestAnimationFrame = (cb) => raf((ts) => {{
+                cb(ts);
+                captureViewportFrameAfterRender();
+            }});
+        }}
+        installRecordingCaptureHook();
+
+        window.startClientRecording = function() {{
+            recordingActive = true;
+            recordingStartMs = performance.now();
+            lastCaptureMs = 0;
+        }};
+
+        window.stopClientRecording = function() {{
+            recordingActive = false;
+        }};
+
         console.log('🎮 Robot keyboard controller initialized');
     }})();
     """
@@ -1254,6 +1632,9 @@ def main() -> None:
             time.sleep(delay)
             try:
                 client._websock_connection.queue_message(
+                    viser_messages.RunJavascriptMessage(source=webgl_preserve_buffer_js)
+                )
+                client._websock_connection.queue_message(
                     viser_messages.RunJavascriptMessage(source=client_id_js)
                 )
                 client._websock_connection.queue_message(
@@ -1261,6 +1642,12 @@ def main() -> None:
                 )
                 client._websock_connection.queue_message(
                     viser_messages.RunJavascriptMessage(source=ego_view_js)
+                )
+                client._websock_connection.queue_message(
+                    viser_messages.RunJavascriptMessage(source=recording_hud_js)
+                )
+                client._websock_connection.queue_message(
+                    viser_messages.RunJavascriptMessage(source=controls_help_js)
                 )
                 if ego_view_cb.value:
                     client._websock_connection.queue_message(
@@ -1346,6 +1733,16 @@ def main() -> None:
             sess = sessions.pop(cid, None)
         if sess is None:
             return
+
+        if sess.recorder is not None:
+            _send_client_recording_js(
+                client,
+                "window.stopClientRecording && window.stopClientRecording();",
+            )
+            episode_dir = sess.recorder.episode_dir
+            count = sess.recorder.stop()
+            sess.recorder = None
+            print(f"  ⏹ Recording saved on disconnect ({count} frames) → {episode_dir}")
 
         # Remove per-client scene nodes from server scene.
         # URDF must be removed first so each child node's create message in
@@ -1488,6 +1885,25 @@ def main() -> None:
                     )
                 except Exception:
                     pass
+
+        record_obs_cb = server.gui.add_checkbox(
+            "Record Observations (all clients)",
+            initial_value=False,
+        )
+
+        @record_obs_cb.on_update
+        def _(_) -> None:
+            enabled = record_obs_cb.value
+            with sessions_lock:
+                active = list(sessions.values())
+            for sess in active:
+                client = server.get_clients().get(sess.client_id)
+                if client is None:
+                    continue
+                if enabled and sess.recorder is None:
+                    _start_recording(sess, client)
+                elif not enabled and sess.recorder is not None:
+                    _stop_recording(sess, client)
 
     with server.gui.add_folder("🧱 Assets"):
         asset_count_slider = server.gui.add_slider(
@@ -1725,37 +2141,43 @@ def main() -> None:
                 # Update visual
                 asset.glb_handle.position = (asset.x, asset.y, asset.z)
 
-        # Camera follow: first-person ego view, or chase-cam orbit
-        if camera_follow_cb.value:
-            viser_client = server.get_clients().get(sess.client_id)
-            if viser_client is not None:
-                if ego_view_cb.value:
-                    pos, _, wxyz, _ = compute_ego_camera_pose(rs)
-                    with viser_client.atomic():
-                        viser_client.camera.position = pos
-                        viser_client.camera.wxyz = wxyz
-                        viser_client.camera.fov = EGO_FOV_Y
-                        viser_client.camera.up_direction = (0.0, -1.0, 0.0)
-                else:
-                    orbit_speed, elev_speed = 120.0, 3.0
-                    if ks["orbit_left"]:  sess.camera_orbit_angle -= orbit_speed * dt
-                    if ks["orbit_right"]: sess.camera_orbit_angle += orbit_speed * dt
-                    if ks["orbit_up"]:    sess.camera_orbit_elevation = max(
-                        0.2, sess.camera_orbit_elevation - elev_speed * dt)
-                    if ks["orbit_down"]:  sess.camera_orbit_elevation = min(
-                        8.0, sess.camera_orbit_elevation + elev_speed * dt)
+        # Camera follow: while recording, lock to ego view (frames captured from viewport).
+        viser_client = server.get_clients().get(sess.client_id)
+        if sess.recorder is not None and viser_client is not None:
+            pos, _, wxyz, _ = compute_ego_camera_pose(rs)
+            with viser_client.atomic():
+                viser_client.camera.position = pos
+                viser_client.camera.wxyz = wxyz
+                viser_client.camera.fov = EGO_FOV_Y
+                viser_client.camera.up_direction = (0.0, -1.0, 0.0)
+        elif camera_follow_cb.value and viser_client is not None:
+            if ego_view_cb.value:
+                pos, _, wxyz, _ = compute_ego_camera_pose(rs)
+                with viser_client.atomic():
+                    viser_client.camera.position = pos
+                    viser_client.camera.wxyz = wxyz
+                    viser_client.camera.fov = EGO_FOV_Y
+                    viser_client.camera.up_direction = (0.0, -1.0, 0.0)
+            else:
+                orbit_speed, elev_speed = 120.0, 3.0
+                if ks["orbit_left"]:  sess.camera_orbit_angle -= orbit_speed * dt
+                if ks["orbit_right"]: sess.camera_orbit_angle += orbit_speed * dt
+                if ks["orbit_up"]:    sess.camera_orbit_elevation = max(
+                    0.2, sess.camera_orbit_elevation - elev_speed * dt)
+                if ks["orbit_down"]:  sess.camera_orbit_elevation = min(
+                    8.0, sess.camera_orbit_elevation + elev_speed * dt)
 
-                    follow_dist = 3.5
-                    orbit_rad = math.radians(sess.camera_orbit_angle)
-                    cam_x = rs.x - follow_dist * math.cos(orbit_rad)
-                    cam_z = rs.z - follow_dist * math.sin(orbit_rad)
-                    cam_y = rs.y - sess.camera_orbit_elevation
+                follow_dist = 3.5
+                orbit_rad = math.radians(sess.camera_orbit_angle)
+                cam_x = rs.x - follow_dist * math.cos(orbit_rad)
+                cam_z = rs.z - follow_dist * math.sin(orbit_rad)
+                cam_y = rs.y - sess.camera_orbit_elevation
 
-                    with viser_client.atomic():
-                        viser_client.camera.position = (cam_x, cam_y, cam_z)
-                        viser_client.camera.look_at = (rs.x, rs.y, rs.z)
-                        viser_client.camera.fov = math.radians(fov_slider.value)
-                        viser_client.camera.up_direction = (0.0, -1.0, 0.0)
+                with viser_client.atomic():
+                    viser_client.camera.position = (cam_x, cam_y, cam_z)
+                    viser_client.camera.look_at = (rs.x, rs.y, rs.z)
+                    viser_client.camera.fov = math.radians(fov_slider.value)
+                    viser_client.camera.up_direction = (0.0, -1.0, 0.0)
 
     def simulation_loop() -> None:
         nonlocal running
@@ -1784,6 +2206,7 @@ def main() -> None:
     print("\n" + "=" * 60)
     print(f"  Viewer ready! Open http://localhost:{PUBLIC_PORT}")
     print("  Click in the browser window first to capture keys!")
+    print("  Press R to record ego observations → recordings/")
     print("=" * 60 + "\n")
 
     try:

@@ -11,3 +11,6 @@ data/scene*/point_cloud.ply
 
 # Pushable assets are not committed (~1k GLBs); host out-of-band when needed.
 *.glb
+
+# Local ego observation episodes (viewer.py recorder).
+recordings/

@@ -11,6 +11,7 @@ An interactive web-based viewer for driving a robot through photorealistic 3D Ga
 - **Collision Banner** — Dramatic animated "COLLISION!" overlay on impact
 - **Camera Orbit** — Follow-cam with adjustable elevation and orbit angle
 - **Ego Camera** — First-person camera view from the robot with HUD overlay and optional frustum visualization
+- **Observation Recording** — Save ego-view JPEGs plus drive controls to `recordings/` (4 Hz, press **R**)
 - **Pushable Assets** — Calibrated GLB objects placed in the scene that respond to robot collisions with real-time physics
 - **Multi-Client Sessions** — Each browser tab gets its own robot; disconnected robots are automatically cleaned up from the scene
 - **Multi-Scene** — Switch scenes at runtime; each has its own spawn point and rotation defined in `data/meta.json`
@@ -90,6 +91,7 @@ Opens on **http://localhost:1234**
 | **L / →** | Steer right |
 | **A / D** | Orbit camera left / right |
 | **W / S** | Tilt camera up / down |
+| **R** | Toggle observation recording |
 
 ### GUI Panel
 
@@ -102,8 +104,28 @@ Opens on **http://localhost:1234**
 | Camera Follow Robot | Toggle follow-cam |
 | Ego Camera View | Toggle first-person camera from robot |
 | Show Ego Frustum | Show/hide camera frustum wireframe |
+| Record Observations | Start/stop recording for all connected clients |
 | Show Mesh | Visualise the hidden collision mesh |
 | Reset Position | Teleport robot back to spawn point |
+
+---
+
+## Observation Recording
+
+Press **R** (or enable **Record Observations** in the GUI) to save ego-view data under `recordings/`:
+
+```
+recordings/
+  scene1_20260601_143022_3/
+    meta.json          # episode metadata (scene, hz, resolution, duration)
+    manifest.jsonl     # one JSON line per frame (controls, pose, image path)
+    frames/
+      000000.jpg
+      000001.jpg
+      ...
+```
+
+Each frame is captured at **4 Hz** from the browser viewport while the camera is locked to ego view, using `readPixels` immediately after each animation frame (async `canvas.toBlob` reads a cleared WebGL buffer and saves black images). Drive keys (`IJKL` / arrows) and robot pose are logged alongside each JPEG.
 
 ---
 
