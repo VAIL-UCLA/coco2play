@@ -395,7 +395,7 @@ function createLabeledAxes(length) {
 // World-aligned axes that follow the robot (for scene_rotation in meta.json).
 const AXIS_GIZMO_OFFSET_Y = -0.72;
 const worldAxesGroup = createLabeledAxes(0.85);
-worldAxesGroup.visible = true;
+worldAxesGroup.visible = false;
 threeScene.add(worldAxesGroup);
 
 function updateRobotMesh() {
@@ -556,6 +556,20 @@ function isSceneEntry(key) {
   return !key.startsWith('_');
 }
 
+function compareSceneIds(a, b) {
+  const num = id => {
+    const m = /^scene(\d+)$/i.exec(id);
+    return m ? [0, parseInt(m[1], 10), id] : [1, 0, id];
+  };
+  const [ra, na] = num(a);
+  const [rb, nb] = num(b);
+  return ra - rb || na - nb || a.localeCompare(b);
+}
+
+function sortedSceneIds() {
+  return Object.keys(meta).filter(isSceneEntry).sort(compareSceneIds);
+}
+
 function sceneRotationEuler(sceneId) {
   const rot = meta[sceneId]?.scene_rotation || { x: 0, y: 0, z: 0 };
   return new THREE.Euler(
@@ -689,8 +703,8 @@ const showAxesToggle   = document.getElementById('show-axes-toggle');
 
 function populateSceneDropdown() {
   sceneSelect.innerHTML = '';
-  for (const [id, sceneMeta] of Object.entries(meta)) {
-    if (!isSceneEntry(id)) continue;
+  for (const id of sortedSceneIds()) {
+    const sceneMeta = meta[id];
     const opt = document.createElement('option');
     opt.value = id;
     opt.textContent = sceneMeta.name || id;
@@ -783,7 +797,7 @@ async function init() {
     await loadMeta();
     populateSceneDropdown();
 
-    const firstScene = Object.keys(meta).find(isSceneEntry);
+    const firstScene = sortedSceneIds()[0];
     if (firstScene) {
       sceneSelect.value = firstScene;
       await loadScene(firstScene);

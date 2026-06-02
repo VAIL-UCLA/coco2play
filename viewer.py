@@ -65,13 +65,20 @@ RECORDING_WIDTH = 960
 RECORDING_HEIGHT = 540
 
 
+def _scene_sort_key(scene_id: str) -> tuple[int, int, str]:
+    m = re.match(r"^scene(\d+)$", scene_id, re.IGNORECASE)
+    if m:
+        return (0, int(m.group(1)), scene_id)
+    return (1, 0, scene_id)
+
+
 def get_available_scenes() -> list[str]:
     """Return scene IDs (subdir names) that have both required PLY files."""
     scenes = []
-    for d in sorted(DATA_DIR.iterdir()):
+    for d in DATA_DIR.iterdir():
         if d.is_dir() and (d / "point_cloud.ply").exists() and (d / "mesh.ply").exists():
             scenes.append(d.name)
-    return scenes
+    return sorted(scenes, key=_scene_sort_key)
 
 
 def load_scene_meta() -> dict:
@@ -517,7 +524,7 @@ def main() -> None:
 
     # Mutable scene state (replaced on scene switch)
     scene_handles: dict = {"frame": None, "splats": None, "mesh": None}
-    axes_visible: dict = {"value": True}
+    axes_visible: dict = {"value": False}
     AXIS_GIZMO_OFFSET_Y = 0.6  # metres above robot (Y-up)
     collision_state: dict = {"mesh": None, "manager": None, "robot_box": None}
     box_half = (0.35, 0.2, 0.25)
@@ -1856,7 +1863,7 @@ def main() -> None:
         )
         axes_cb = server.gui.add_checkbox(
             "Show Axes (X/Y/Z)",
-            initial_value=True,
+            initial_value=False,
         )
 
         @axes_cb.on_update
