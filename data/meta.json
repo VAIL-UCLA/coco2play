@@ -68,5 +68,70 @@
             "y": 0.0,
             "z": 0.0
         }
+    },
+    "scene6": {
+        "name": "Scene 6",
+        "spawn_point": {
+            "x": -8.0,
+            "y": 1.0,
+            "z": 0.0
+        },
+        "scene_rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 180.0
+        }
+    },
+    "scene7": {
+        "name": "Scene 7",
+        "spawn_point": {
+            "x": -8.0,
+            "y": 0.8,
+            "z": 0.0
+        },
+        "scene_rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 180.0
+        }
+    },
+    "scene8": {
+        "name": "Scene 8",
+        "spawn_point": {
+            "x": -8.0,
+            "y": 0.5,
+            "z": 0.0
+        },
+        "scene_rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 180.0
+        }
+    },
+    "scene9": {
+        "name": "Scene 9",
+        "spawn_point": {
+            "x": 0.0,
+            "y": 0.8,
+            "z": 11.0
+        },
+        "scene_rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 180.0
+        }
+    },
+    "scene10": {
+        "name": "Scene 10",
+        "spawn_point": {
+            "x": -7.0,
+            "y": 0.6,
+            "z": 10.0
+        },
+        "scene_rotation": {
+            "x": 90.0,
+            "y": 0.0,
+            "z": 180.0
+        }
     }
 }

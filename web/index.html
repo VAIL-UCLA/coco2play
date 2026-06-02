@@ -184,6 +184,19 @@
       background: #d633a0;
     }
 
+    .gui-hint {
+      font-size: 9px;
+      color: #555;
+      line-height: 1.45;
+      letter-spacing: 0.03em;
+      margin: -4px 0 10px;
+    }
+
+    .gui-hint code {
+      color: #777;
+      font-size: 9px;
+    }
+
     /* Key hints */
     #key-hints {
       position: fixed;
@@ -277,6 +290,16 @@
         <span class="toggle-slider"></span>
       </label>
     </div>
+
+    <div class="gui-toggle-row">
+      <span class="toggle-label">Show Axes</span>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="show-axes-toggle" checked />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <p class="gui-hint">Red +X, green +Y, blue +Z — same axes as <code>scene_rotation</code> in meta.json</p>
 
     <button id="reset-btn">&#8635; Reset Position</button>
   </div>

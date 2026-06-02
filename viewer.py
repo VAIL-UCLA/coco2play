@@ -312,7 +312,7 @@ class ClientSession:
 
     __slots__ = (
         "client_id", "robot_state", "key_state",
-        "robot_frame", "viser_urdf",
+        "robot_frame", "viser_urdf", "axis_gizmo",
         "camera_orbit_angle", "camera_orbit_elevation",
         "last_collision_banner_time",
         "ego_frustum",
@@ -331,6 +331,7 @@ class ClientSession:
         self.robot_state = robot_state
         self.robot_frame = robot_frame
         self.viser_urdf = viser_urdf
+        self.axis_gizmo = None
         self.key_state: dict = {
             "up": False, "down": False, "left": False, "right": False,
             "orbit_left": False, "orbit_right": False,
@@ -516,6 +517,8 @@ def main() -> None:
 
     # Mutable scene state (replaced on scene switch)
     scene_handles: dict = {"frame": None, "splats": None, "mesh": None}
+    axes_visible: dict = {"value": True}
+    AXIS_GIZMO_OFFSET_Y = 0.6  # metres above robot (Y-up)
     collision_state: dict = {"mesh": None, "manager": None, "robot_box": None}
     box_half = (0.35, 0.2, 0.25)
 
@@ -697,8 +700,12 @@ def main() -> None:
         print("✓ Gaussian splats added to scene")
 
         # Load collision mesh (server-side only — not added to scene to save
-        # ~53 MB of bandwidth per client connection)
+        # ~53 MB of bandwidth per client connection). Apply the same rotation
+        # as the /scene frame so collision matches the visible splats.
         mesh = load_collision_mesh(scene_dir / "mesh.ply")
+        rot_tf = np.eye(4)
+        rot_tf[:3, :3] = scene_rot.as_matrix()
+        mesh.apply_transform(rot_tf)
         collision_state["mesh"] = mesh
         scene_handles["mesh"] = None
         print("✓ Collision mesh loaded (server-side only, not sent to clients)")
@@ -1692,6 +1699,13 @@ def main() -> None:
         robot_root = f"/robot_{cid}"
         rf = server.scene.add_frame(robot_root, show_axes=False)
         rf.position = (rs.x, rs.y, rs.z)
+        axis_gizmo = server.scene.add_frame(
+            f"/axis_gizmo_{cid}",
+            show_axes=True,
+            axes_length=0.85,
+        )
+        axis_gizmo.visible = axes_visible["value"]
+        axis_gizmo.position = (rs.x, rs.y + AXIS_GIZMO_OFFSET_Y, rs.z)
         vu = ViserUrdf(
             server,
             urdf_or_path=ROBOT_URDF,
@@ -1719,6 +1733,7 @@ def main() -> None:
             robot_frame=rf,
             viser_urdf=vu,
         )
+        sess.axis_gizmo = axis_gizmo
         sess.ego_frustum = ego_frust
         with sessions_lock:
             sessions[cid] = sess
@@ -1755,6 +1770,7 @@ def main() -> None:
             warnings.filterwarnings("ignore", message="Attempted to remove already removed node")
             for label, node in [
                 ("urdf", sess.viser_urdf),
+                ("axis_gizmo", sess.axis_gizmo),
                 ("robot_frame", sess.robot_frame),
                 ("ego_frustum", sess.ego_frustum),
             ]:
@@ -1838,6 +1854,19 @@ def main() -> None:
             step=0.5,
             initial_value=2.0,
         )
+        axes_cb = server.gui.add_checkbox(
+            "Show Axes (X/Y/Z)",
+            initial_value=True,
+        )
+
+        @axes_cb.on_update
+        def _(_) -> None:
+            axes_visible["value"] = axes_cb.value
+            with sessions_lock:
+                for sess in sessions.values():
+                    if sess.axis_gizmo is not None:
+                        sess.axis_gizmo.visible = axes_cb.value
+
         collision_cb = server.gui.add_checkbox(
             "Enable Collision",
             initial_value=True,
@@ -2031,6 +2060,9 @@ def main() -> None:
         yaw_rot     = tf.SO3.from_y_radians(np.pi / 2 - rs.yaw)
         sess.robot_frame.position = (rs.x, rs.y, rs.z)
         sess.robot_frame.wxyz     = (yaw_rot @ base_rot @ mesh_rot_90).wxyz
+        if sess.axis_gizmo is not None:
+            sess.axis_gizmo.position = (rs.x, rs.y + AXIS_GIZMO_OFFSET_Y, rs.z)
+            sess.axis_gizmo.wxyz = (1.0, 0.0, 0.0, 0.0)
 
         joint_config = np.array([
             rs.steering_angle,

@@ -335,6 +335,69 @@ wheelMeshes.forEach(w => {
   w.mesh.add(h2);
 });
 
+// ─────────────────────────────────────────────
+//  World axis gizmo (matches meta.json scene_rotation)
+// ─────────────────────────────────────────────
+
+function makeAxisLabel(text, hexColor, position) {
+  const size = 128;
+  const canvas = document.createElement('canvas');
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, size, size);
+  ctx.font = 'bold 64px monospace';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillStyle = `#${hexColor.toString(16).padStart(6, '0')}`;
+  ctx.fillText(text, size / 2, size / 2);
+  const tex = new THREE.CanvasTexture(canvas);
+  tex.needsUpdate = true;
+  const mat = new THREE.SpriteMaterial({
+    map: tex,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false,
+  });
+  const sprite = new THREE.Sprite(mat);
+  sprite.position.copy(position);
+  sprite.renderOrder = 999;
+  const labelScale = 0.32;
+  sprite.scale.set(labelScale, labelScale, 1);
+  return sprite;
+}
+
+function createLabeledAxes(length) {
+  const group = new THREE.Group();
+  const tipOffset = 1.12;
+  const axes = [
+    { dir: [1, 0, 0], color: 0xff4444, label: '+X' },
+    { dir: [0, 1, 0], color: 0x44ff44, label: '+Y' },
+    { dir: [0, 0, 1], color: 0x4488ff, label: '+Z' },
+  ];
+  for (const { dir, color, label } of axes) {
+    const direction = new THREE.Vector3(...dir).normalize();
+    const arrow = new THREE.ArrowHelper(
+      direction,
+      new THREE.Vector3(0, 0, 0),
+      length,
+      color,
+      length * 0.18,
+      length * 0.09,
+    );
+    group.add(arrow);
+    const tip = direction.clone().multiplyScalar(length * tipOffset);
+    group.add(makeAxisLabel(label, color, tip));
+  }
+  return group;
+}
+
+// World-aligned axes that follow the robot (for scene_rotation in meta.json).
+const AXIS_GIZMO_OFFSET_Y = -0.72;
+const worldAxesGroup = createLabeledAxes(0.85);
+worldAxesGroup.visible = true;
+threeScene.add(worldAxesGroup);
+
 function updateRobotMesh() {
   // Position: scene is +Y down (like Python), so use state.y directly
   robotGroup.position.set(state.x, state.y, state.z);
@@ -352,6 +415,10 @@ function updateRobotMesh() {
     // Rolling rotation: wheels roll around their local X (after being rotated to Z-axle)
     w.mesh.rotation.y = state.wheelAngle;
   });
+
+  // Keep axis labels world-aligned (same frame as meta.json scene_rotation).
+  worldAxesGroup.position.set(state.x, state.y + AXIS_GIZMO_OFFSET_Y, state.z);
+  worldAxesGroup.rotation.set(0, 0, 0);
 }
 
 // ─────────────────────────────────────────────
@@ -489,13 +556,25 @@ function isSceneEntry(key) {
   return !key.startsWith('_');
 }
 
+function sceneRotationEuler(sceneId) {
+  const rot = meta[sceneId]?.scene_rotation || { x: 0, y: 0, z: 0 };
+  return new THREE.Euler(
+    THREE.MathUtils.degToRad(rot.x || 0),
+    THREE.MathUtils.degToRad(rot.y || 0),
+    THREE.MathUtils.degToRad(rot.z || 0),
+    'XYZ',
+  );
+}
+
+/** Quaternion [x, y, z, w] for GaussianSplats3D addSplatScene(). */
+function sceneRotationQuaternion(sceneId) {
+  const q = new THREE.Quaternion().setFromEuler(sceneRotationEuler(sceneId));
+  return [q.x, q.y, q.z, q.w];
+}
+
 function applySceneRotation(sceneId) {
-  const sceneMeta = meta[sceneId] || {};
-  const rot = sceneMeta.scene_rotation || { x: 0, y: 0, z: 0 };
-  const rx = THREE.MathUtils.degToRad(rot.x || 0);
-  const ry = THREE.MathUtils.degToRad(rot.y || 0);
-  const rz = THREE.MathUtils.degToRad(rot.z || 0);
-  sceneGroup.rotation.set(rx, ry, rz, 'XYZ');
+  const euler = sceneRotationEuler(sceneId);
+  sceneGroup.rotation.copy(euler);
 }
 
 function resetRobotToSpawn(sceneId) {
@@ -585,6 +664,7 @@ async function loadScene(sceneId) {
     await gsViewer.addSplatScene(splatUrl, {
       splatAlphaRemovalThreshold: 5,
       showLoadingUI: false,
+      rotation: sceneRotationQuaternion(sceneId),
     });
     splatSceneAdded = true;
   } catch (err) {
@@ -604,7 +684,8 @@ async function loadScene(sceneId) {
 const sceneSelect    = document.getElementById('scene-select');
 const speedDisplay   = document.getElementById('speed-display');
 const resetBtn       = document.getElementById('reset-btn');
-const showMeshToggle = document.getElementById('show-mesh-toggle');
+const showMeshToggle   = document.getElementById('show-mesh-toggle');
+const showAxesToggle   = document.getElementById('show-axes-toggle');
 
 function populateSceneDropdown() {
   sceneSelect.innerHTML = '';
@@ -628,6 +709,10 @@ resetBtn.addEventListener('click', () => {
 showMeshToggle.addEventListener('change', () => {
   collisionMeshVisible = showMeshToggle.checked;
   if (collisionMesh) collisionMesh.visible = collisionMeshVisible;
+});
+
+showAxesToggle.addEventListener('change', () => {
+  worldAxesGroup.visible = showAxesToggle.checked;
 });
 
 // ─────────────────────────────────────────────
