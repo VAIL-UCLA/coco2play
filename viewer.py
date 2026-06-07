@@ -64,6 +64,24 @@ RECORDING_WARMUP_S = 0.6  # wait before first frame so ego camera can settle
 RECORDING_WIDTH = 960
 RECORDING_HEIGHT = 540
 
+# ──────────────────────── Autopilot (Coco-GL-SW1k) ────────────────────────
+
+AUTOPILOT_HZ = 5.0
+AUTOPILOT_OBS_H = 288
+AUTOPILOT_OBS_W = 512
+AUTOPILOT_OBS_FRAMES = 21
+AUTOPILOT_WARMUP_S = 0.6
+
+try:
+    from models.coco_navigator import CocoNavigator, autopilot_available, autopilot_status
+
+    AUTOPILOT_AVAILABLE = autopilot_available()
+    _AUTOPILOT_STATUS = autopilot_status()
+except Exception as _autopilot_import_exc:
+    CocoNavigator = None  # type: ignore[misc, assignment]
+    AUTOPILOT_AVAILABLE = False
+    _AUTOPILOT_STATUS = str(_autopilot_import_exc)
+
 
 def _scene_sort_key(scene_id: str) -> tuple[int, int, str]:
     m = re.match(r"^scene(\d+)$", scene_id, re.IGNORECASE)
@@ -311,6 +329,41 @@ def compute_ego_camera_pose(
     return (cam_x, cam_y, cam_z), (frust_x, frust_y, frust_z), wxyz_frustum, wxyz_render
 
 
+def vw_to_throttle_steering(v: float, w: float, rs: "RobotState") -> tuple[float, float]:
+    """Map model (v, w) outputs to viewer throttle and steering targets."""
+    throttle = float(np.clip(v / max(rs.max_speed, 1e-6), -1.0, 1.0))
+    if abs(v) > 1e-3:
+        steering = float(
+            np.clip(math.atan(w * rs.wheelbase / abs(v)), -rs.max_steering, rs.max_steering)
+        )
+    else:
+        steering = float(np.clip(w * rs.wheelbase, -rs.max_steering, rs.max_steering))
+    return throttle, steering
+
+
+class AutopilotSession:
+    """Per-client autopilot state: frame buffer, navigator, and held commands."""
+
+    def __init__(self) -> None:
+        self.navigator = None  # CocoNavigator, lazy-init when autopilot runs
+        self.frame_buffer: list[npt.NDArray[np.floating]] = []
+        self.throttle: float = 0.0
+        self.steering_angle: float = 0.0
+        self.last_inference_time: float = 0.0
+        self.warmup_until: float = 0.0
+        self.inference_in_flight: bool = False
+
+    def reset(self) -> None:
+        self.frame_buffer.clear()
+        self.throttle = 0.0
+        self.steering_angle = 0.0
+        self.last_inference_time = 0.0
+        self.warmup_until = time.time() + AUTOPILOT_WARMUP_S
+        self.inference_in_flight = False
+        if self.navigator is not None:
+            self.navigator.reset()
+
+
 # ──────────────────────── Robot Driving Model ────────────────────────
 
 
@@ -325,6 +378,7 @@ class ClientSession:
         "ego_frustum",
         "lives", "dead",
         "recorder",
+        "autopilot",
     )
 
     def __init__(
@@ -351,6 +405,7 @@ class ClientSession:
         self.lives: int = 3
         self.dead: bool = False
         self.recorder: ObservationRecorder | None = None
+        self.autopilot = AutopilotSession()
 
 
 class RobotState:
@@ -671,6 +726,7 @@ def main() -> None:
             sess.key_state[k] = False
         sess.lives = 3
         sess.dead = False
+        sess.autopilot.reset()
 
     def load_scene(scene_id: str) -> None:
         """Load splats + collision mesh for the given scene_id, replacing existing ones."""
@@ -1922,6 +1978,30 @@ def main() -> None:
                 except Exception:
                     pass
 
+        autopilot_cb = None
+        if AUTOPILOT_AVAILABLE:
+            autopilot_cb = server.gui.add_checkbox(
+                "Autopilot (Coco-GL-SW1k)",
+                initial_value=False,
+            )
+
+            @autopilot_cb.on_update
+            def _(_) -> None:
+                enabled = autopilot_cb.value
+                with sessions_lock:
+                    for sess in sessions.values():
+                        sess.autopilot.reset()
+                if enabled:
+                    for client in server.get_clients().values():
+                        try:
+                            client._websock_connection.queue_message(
+                                viser_messages.RunJavascriptMessage(
+                                    source="window.setEgoViewVisible && window.setEgoViewVisible(true);"
+                                )
+                            )
+                        except Exception:
+                            pass
+
         record_obs_cb = server.gui.add_checkbox(
             "Record Observations (all clients)",
             initial_value=False,
@@ -1985,6 +2065,78 @@ def main() -> None:
     sim_dt = 1.0 / 30.0  # 30 Hz
     running = True
 
+    def _ensure_autopilot_navigator(ap: AutopilotSession) -> None:
+        if ap.navigator is None:
+            device = "cuda"
+            try:
+                import torch
+
+                if not torch.cuda.is_available():
+                    device = "cpu"
+            except Exception:
+                device = "cpu"
+            ap.navigator = CocoNavigator(device=device)
+
+    def _run_autopilot_inference(sess: ClientSession, client: viser.ClientHandle) -> None:
+        ap = sess.autopilot
+        _ensure_autopilot_navigator(ap)
+        assert ap.navigator is not None
+
+        pos, _, wxyz, _ = compute_ego_camera_pose(sess.robot_state)
+        img = client.get_render(
+            height=AUTOPILOT_OBS_H,
+            width=AUTOPILOT_OBS_W,
+            wxyz=wxyz,
+            position=pos,
+            fov=EGO_FOV_Y,
+            transport_format="jpeg",
+        )
+        if img.ndim != 3 or img.shape[2] < 3:
+            return
+
+        frame = img[:, :, :3].astype(np.float32) / 255.0
+        frame = np.transpose(frame, (2, 0, 1))
+        ap.frame_buffer.append(frame)
+        while len(ap.frame_buffer) > AUTOPILOT_OBS_FRAMES:
+            ap.frame_buffer.pop(0)
+
+        pad_count = AUTOPILOT_OBS_FRAMES - len(ap.frame_buffer)
+        padded = [ap.frame_buffer[0]] * pad_count + ap.frame_buffer
+        obs = np.stack(padded[-AUTOPILOT_OBS_FRAMES :], axis=0)[np.newaxis, ...]
+
+        vw, _ = ap.navigator.inference_vw(obs)
+        v = float(vw[0, 0].detach().cpu().item())
+        w = float(vw[0, 1].detach().cpu().item())
+        ap.throttle, ap.steering_angle = vw_to_throttle_steering(
+            v, w, sess.robot_state
+        )
+
+    def _maybe_run_autopilot_inference(sess: ClientSession, now: float) -> None:
+        if autopilot_cb is None or not autopilot_cb.value:
+            return
+        ap = sess.autopilot
+        if ap.inference_in_flight or now < ap.warmup_until:
+            return
+        if now - ap.last_inference_time < 1.0 / AUTOPILOT_HZ:
+            return
+
+        client = server.get_clients().get(sess.client_id)
+        if client is None:
+            return
+
+        ap.inference_in_flight = True
+        ap.last_inference_time = now
+
+        def _worker() -> None:
+            try:
+                _run_autopilot_inference(sess, client)
+            except Exception as exc:
+                print(f"⚠ Autopilot inference failed (client {sess.client_id}): {exc}")
+            finally:
+                ap.inference_in_flight = False
+
+        threading.Thread(target=_worker, daemon=True).start()
+
     def _step_session(sess: ClientSession, dt: float, now: float) -> None:
         """Advance one simulation tick for a single client session."""
         if sess.dead and game_mode.value == "Survival":
@@ -1994,8 +2146,12 @@ def main() -> None:
 
         rs.max_speed = max_speed_slider.value
 
-        throttle = 1.0 if ks["up"] else (-1.0 if ks["down"] else 0.0)
-        steering = rs.max_steering if ks["left"] else (-rs.max_steering if ks["right"] else 0.0)
+        if autopilot_cb is not None and autopilot_cb.value:
+            throttle = sess.autopilot.throttle
+            steering = sess.autopilot.steering_angle
+        else:
+            throttle = 1.0 if ks["up"] else (-1.0 if ks["down"] else 0.0)
+            steering = rs.max_steering if ks["left"] else (-rs.max_steering if ks["right"] else 0.0)
 
         new_x, new_z = rs.update(dt, throttle, steering)
 
@@ -2190,7 +2346,10 @@ def main() -> None:
                 viser_client.camera.fov = EGO_FOV_Y
                 viser_client.camera.up_direction = (0.0, -1.0, 0.0)
         elif camera_follow_cb.value and viser_client is not None:
-            if ego_view_cb.value:
+            use_ego_cam = ego_view_cb.value or (
+                autopilot_cb is not None and autopilot_cb.value
+            )
+            if use_ego_cam:
                 pos, _, wxyz, _ = compute_ego_camera_pose(rs)
                 with viser_client.atomic():
                     viser_client.camera.position = pos
@@ -2218,6 +2377,8 @@ def main() -> None:
                     viser_client.camera.fov = math.radians(fov_slider.value)
                     viser_client.camera.up_direction = (0.0, -1.0, 0.0)
 
+        _maybe_run_autopilot_inference(sess, now)
+
     def simulation_loop() -> None:
         nonlocal running
         last_time = time.time()
@@ -2242,10 +2403,16 @@ def main() -> None:
     sim_thread = threading.Thread(target=simulation_loop, daemon=True)
     sim_thread.start()
     print("✓ Simulation loop started (30 Hz)")
+    if AUTOPILOT_AVAILABLE:
+        print(f"✓ Autopilot ready ({_AUTOPILOT_STATUS})")
+    else:
+        print(f"⚠ Autopilot disabled: {_AUTOPILOT_STATUS}")
     print("\n" + "=" * 60)
     print(f"  Viewer ready! Open http://localhost:{PUBLIC_PORT}")
     print("  Click in the browser window first to capture keys!")
     print("  Press R to record ego observations → recordings/")
+    if AUTOPILOT_AVAILABLE:
+        print("  Enable Autopilot in the Ego Camera panel to drive with Coco-GL-SW1k")
     print("=" * 60 + "\n")
 
     try:
