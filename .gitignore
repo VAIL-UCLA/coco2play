@@ -15,4 +15,4 @@ data/scene*/point_cloud.ply
 # Local ego observation episodes (viewer.py recorder).
 recordings/
 
-models/
+models/Coco_GL_SW1k/
