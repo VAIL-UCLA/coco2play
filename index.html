@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vid2Sim — Robot Driving Demo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+    }
+
+    #canvas-container {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+
+    #canvas-container canvas {
+      display: block;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* ── GUI Panel ── */
+    #gui-panel {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 100;
+      width: 240px;
+      background: rgba(10, 10, 10, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 6px;
+      padding: 14px 16px 16px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+    }
+
+    #gui-panel h2 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 8px;
+    }
+
+    .gui-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .gui-row:last-child { margin-bottom: 0; }
+
+    .gui-label {
+      font-size: 11px;
+      color: #999;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      margin-right: 8px;
+    }
+
+    #scene-select {
+      flex: 1;
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      color: #e0e0e0;
+      font-family: inherit;
+      font-size: 11px;
+      padding: 4px 6px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #scene-select:focus {
+      border-color: rgba(214, 51, 160, 0.6);
+    }
+
+    #speed-display {
+      flex: 1;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 4px;
+      color: #d633a0;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 6px;
+      text-align: right;
+      pointer-events: none;
+      width: 70px;
+    }
+
+    #reset-btn {
+      width: 100%;
+      margin-top: 4px;
+      padding: 7px 0;
+      background: rgba(214, 51, 160, 0.15);
+      border: 1px solid rgba(214, 51, 160, 0.4);
+      border-radius: 4px;
+      color: #d633a0;
+      font-family: inherit;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    #reset-btn:hover {
+      background: rgba(214, 51, 160, 0.28);
+      border-color: rgba(214, 51, 160, 0.7);
+    }
+
+    #reset-btn:active {
+      background: rgba(214, 51, 160, 0.4);
+    }
+
+    .gui-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .toggle-label {
+      font-size: 11px;
+      color: #999;
+      letter-spacing: 0.05em;
+    }
+
+    /* Custom checkbox */
+    .toggle-wrap {
+      position: relative;
+      width: 34px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    .toggle-wrap input[type="checkbox"] {
+      opacity: 0;
+      width: 0; height: 0;
+      position: absolute;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #2a2a2a;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      left: 2px; top: 2px;
+      background: #666;
+      border-radius: 50%;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .toggle-wrap input:checked + .toggle-slider {
+      background: rgba(214, 51, 160, 0.25);
+      border-color: rgba(214, 51, 160, 0.5);
+    }
+
+    .toggle-wrap input:checked + .toggle-slider::before {
+      transform: translateX(16px);
+      background: #d633a0;
+    }
+
+    .gui-hint {
+      font-size: 9px;
+      color: #555;
+      line-height: 1.45;
+      letter-spacing: 0.03em;
+      margin: -4px 0 10px;
+    }
+
+    .gui-hint code {
+      color: #777;
+      font-size: 9px;
+    }
+
+    /* Key hints */
+    #key-hints {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      z-index: 100;
+      font-size: 10px;
+      color: #444;
+      line-height: 1.7;
+      letter-spacing: 0.04em;
+      pointer-events: none;
+    }
+
+    #key-hints span {
+      color: #666;
+    }
+
+    /* ── Loading Overlay ── */
+    #loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(4px);
+      gap: 20px;
+      transition: opacity 0.4s;
+    }
+
+    #loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 3px solid rgba(214, 51, 160, 0.15);
+      border-top-color: #d633a0;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    #loading-status {
+      font-size: 12px;
+      color: #888;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      max-width: 280px;
+      text-align: center;
+    }
+
+    #loading-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #d633a0;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+  </style>
+  <script type="module" crossorigin src="/coco2play/assets/index-BYyf-Sqp.js"></script>
+</head>
+<body>
+
+  <div id="canvas-container"></div>
+
+  <!-- GUI Panel -->
+  <div id="gui-panel">
+    <h2>Vid2Sim Demo</h2>
+
+    <div class="gui-row">
+      <span class="gui-label">Scene</span>
+      <select id="scene-select"></select>
+    </div>
+
+    <div class="gui-row">
+      <span class="gui-label">Speed m/s</span>
+      <input id="speed-display" type="number" readonly value="0.00" step="0.01" />
+    </div>
+
+    <div class="gui-toggle-row">
+      <span class="toggle-label">Show Mesh</span>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="show-mesh-toggle" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <div class="gui-toggle-row">
+      <span class="toggle-label">Show Axes</span>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="show-axes-toggle" />
+        <span class="toggle-slider"></span>
+      </label>
+    </div>
+
+    <p class="gui-hint">Red +X, green +Y, blue +Z — same axes as <code>scene_rotation</code> in meta.json</p>
+
+    <button id="reset-btn">&#8635; Reset Position</button>
+  </div>
+
+  <!-- Key hints -->
+  <div id="key-hints">
+    <span>IJKL / Arrows</span> — drive<br>
+    <span>WASD</span> — orbit camera
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay">
+    <div id="loading-title">Vid2Sim</div>
+    <div class="spinner"></div>
+    <div id="loading-status">Initializing…</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,5810 @@
+{
+    "Advertising_board-0a4cd8e975884115bfb62b5fc0d72f09.glb": {
+        "category": "Advertising_board",
+        "scale": 0.740741,
+        "collision_radius": 0.832,
+        "pushable": false,
+        "raw_size": [
+            2.247,
+            2.7,
+            0.09
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-19b2ae093df74c37b46e03e5a4ca5a26.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-33d169c88dbd45edb7b6fe2c4ca0ee34.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-350e89dbc298494ca1514c6d4baae992.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-3e62a6f01271441091d95a7e9f344fe1.glb": {
+        "category": "Advertising_board",
+        "scale": 0.321807,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            3.109,
+            6.215,
+            2.045
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-3ef2f4608e094eb396e4c33b1de03cfc.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-4caa5186081b475d909cb8c8de9466b5.glb": {
+        "category": "Advertising_board",
+        "scale": 0.503447,
+        "collision_radius": 0.715,
+        "pushable": false,
+        "raw_size": [
+            0.781,
+            3.973,
+            2.839
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-57465836162a49c189a0d4ee13ecd6d8.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-5cf7991899bc49499f073b813d6c7283.glb": {
+        "category": "Advertising_board",
+        "scale": 0.464975,
+        "collision_radius": 0.465,
+        "pushable": false,
+        "raw_size": [
+            2.0,
+            4.301,
+            0.226
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-5d0405cc87c3494a856e6fd2107e9447.glb": {
+        "category": "Advertising_board",
+        "scale": 1.816546,
+        "collision_radius": 0.799,
+        "pushable": false,
+        "raw_size": [
+            0.879,
+            1.101,
+            0.639
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-61cad720676a41a98750f7bbf59b46e0.glb": {
+        "category": "Advertising_board",
+        "scale": 0.728865,
+        "collision_radius": 0.449,
+        "pushable": false,
+        "raw_size": [
+            1.231,
+            2.744,
+            0.99
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-663d47d377394acd9b1f657334f78ee6.glb": {
+        "category": "Advertising_board",
+        "scale": 0.071331,
+        "collision_radius": 0.299,
+        "pushable": false,
+        "raw_size": [
+            8.382,
+            28.038,
+            0.807
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-6e64e375caa0464580b2cb8726f4ddf3.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-7041447e474f41889fdb901a87dca3f8.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-7e44cfac32754fe0a2ad096e42b45a6c.glb": {
+        "category": "Advertising_board",
+        "scale": 0.77098,
+        "collision_radius": 0.551,
+        "pushable": false,
+        "raw_size": [
+            1.18,
+            2.594,
+            1.429
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-8493a64aa0f648c1bca44b6ea141bfbf.glb": {
+        "category": "Advertising_board",
+        "scale": 0.839124,
+        "collision_radius": 0.628,
+        "pushable": false,
+        "raw_size": [
+            1.497,
+            2.383,
+            1.194
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-864b8ce5d520478481198d1face5a7e5.glb": {
+        "category": "Advertising_board",
+        "scale": 0.836682,
+        "collision_radius": 0.945,
+        "pushable": false,
+        "raw_size": [
+            2.26,
+            2.39,
+            0.59
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-8e1f650189d84fb988edbe1d2775a101.glb": {
+        "category": "Advertising_board",
+        "scale": 0.113928,
+        "collision_radius": 0.437,
+        "pushable": false,
+        "raw_size": [
+            2.62,
+            17.555,
+            7.666
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-8ea410084b54404bad4b2bcf1e4473ad.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-989f2b2838d9467198644b626be76d43.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-a8f7eefd555e4b74b9e2f4e84ef42d10.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-a98a625c80784b318aad8f5f153aba3c.glb": {
+        "category": "Advertising_board",
+        "scale": 0.036492,
+        "collision_radius": 0.255,
+        "pushable": false,
+        "raw_size": [
+            10.414,
+            54.806,
+            13.974
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-acf02084ebd3404eaedd75bf8efb7148.glb": {
+        "category": "Advertising_board",
+        "scale": 0.170442,
+        "collision_radius": 0.827,
+        "pushable": false,
+        "raw_size": [
+            9.7,
+            11.734,
+            4.694
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-ad4575430e2241ae8a4fff46bf375987.glb": {
+        "category": "Advertising_board",
+        "scale": 0.080817,
+        "collision_radius": 0.461,
+        "pushable": false,
+        "raw_size": [
+            11.4,
+            24.747,
+            3.4
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-aefef47ae9a948328556a4080cb996a6.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-afd85cc6fb2f45af80d63450c64e0c13.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-b92ee04771ed46b68a805e49c1fe22a7.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-d4663b2763b448e09a07e7b0f47b9e1b.glb": {
+        "category": "Advertising_board",
+        "scale": 0.443804,
+        "collision_radius": 0.541,
+        "pushable": false,
+        "raw_size": [
+            1.769,
+            4.506,
+            2.438
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-dcf8a43a3bcc4028b4609b5b66c31893.glb": {
+        "category": "Advertising_board",
+        "scale": 0.443804,
+        "collision_radius": 0.541,
+        "pushable": false,
+        "raw_size": [
+            1.769,
+            4.506,
+            2.438
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-de8f23c2a23a42eead89db9aadc5f12d.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-f1320e411dbb4474bc41cbe4f72972a2.glb": {
+        "category": "Advertising_board",
+        "scale": 14.810755,
+        "collision_radius": 0.589,
+        "pushable": false,
+        "raw_size": [
+            0.08,
+            0.135,
+            0.004
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-f3be35040fe94782bf5e3c0a88d34d5e.glb": {
+        "category": "Advertising_board",
+        "scale": 0.557399,
+        "collision_radius": 0.609,
+        "pushable": false,
+        "raw_size": [
+            2.186,
+            3.588,
+            1.804
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-f6eba097b685423eb717d5cf2506cb31.glb": {
+        "category": "Advertising_board",
+        "scale": 0.163871,
+        "collision_radius": 0.645,
+        "pushable": false,
+        "raw_size": [
+            7.874,
+            12.205,
+            3.228
+        ],
+        "calibrated_height": 2.0
+    },
+    "Advertising_board-fed3c89920944e57ab3945a2f9126cea.glb": {
+        "category": "Advertising_board",
+        "scale": 0.113928,
+        "collision_radius": 0.437,
+        "pushable": false,
+        "raw_size": [
+            2.62,
+            17.555,
+            7.666
+        ],
+        "calibrated_height": 2.0
+    },
+    "Bag-0628ce6bd62b4daea54ccea1cac16787.glb": {
+        "category": "Bag",
+        "scale": 0.180908,
+        "collision_radius": 0.187,
+        "pushable": true,
+        "raw_size": [
+            1.158,
+            2.211,
+            2.066
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-0c32b5e717bd4a76a0420120f919e003.glb": {
+        "category": "Bag",
+        "scale": 0.176289,
+        "collision_radius": 0.2,
+        "pushable": true,
+        "raw_size": [
+            5.106,
+            2.269,
+            2.842
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-16dfbfdf1d2a484eb7fd79bde1428c10.glb": {
+        "category": "Bag",
+        "scale": 0.021415,
+        "collision_radius": 0.177,
+        "pushable": true,
+        "raw_size": [
+            16.564,
+            18.679,
+            9.434
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-1ac3789442f34d17a1605eb019eea9cc.glb": {
+        "category": "Bag",
+        "scale": 0.751811,
+        "collision_radius": 0.147,
+        "pushable": true,
+        "raw_size": [
+            0.391,
+            0.532,
+            0.292
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-25f768edfd9245f0b018d40fa72c686e.glb": {
+        "category": "Bag",
+        "scale": 2.515723,
+        "collision_radius": 0.2,
+        "pushable": true,
+        "raw_size": [
+            0.26,
+            0.159,
+            0.248
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-45911c6ebebe483d8fe2d10635b238ca.glb": {
+        "category": "Bag",
+        "scale": 1.37457,
+        "collision_radius": 0.2,
+        "pushable": true,
+        "raw_size": [
+            0.331,
+            0.291,
+            0.167
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-4873908248a04f7b9af32a58a1918a28.glb": {
+        "category": "Bag",
+        "scale": 1.783393,
+        "collision_radius": 0.137,
+        "pushable": true,
+        "raw_size": [
+            0.154,
+            0.224,
+            0.081
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-56750bf94c9d4ae283cd94fd539dcca8.glb": {
+        "category": "Bag",
+        "scale": 0.856381,
+        "collision_radius": 0.174,
+        "pushable": true,
+        "raw_size": [
+            0.407,
+            0.467,
+            0.271
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-61a560ec857b438eb34f978828532919.glb": {
+        "category": "Bag",
+        "scale": 0.941176,
+        "collision_radius": 0.2,
+        "pushable": true,
+        "raw_size": [
+            0.32,
+            0.425,
+            0.459
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-888947939fb743fd9cea71a2a5c07684.glb": {
+        "category": "Bag",
+        "scale": 0.000991,
+        "collision_radius": 0.182,
+        "pushable": true,
+        "raw_size": [
+            104.656,
+            403.52,
+            367.718
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-905a632ee2554ed18e14bbf37c2b9e56.glb": {
+        "category": "Bag",
+        "scale": 2.424242,
+        "collision_radius": 0.2,
+        "pushable": true,
+        "raw_size": [
+            0.281,
+            0.165,
+            0.231
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-9ab63ddd36d44c87807534e7d9bd7c61.glb": {
+        "category": "Bag",
+        "scale": 0.925555,
+        "collision_radius": 0.197,
+        "pushable": true,
+        "raw_size": [
+            0.315,
+            0.432,
+            0.425
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-b8037798633640e7bf040aac16ea8d45.glb": {
+        "category": "Bag",
+        "scale": 0.11557,
+        "collision_radius": 0.166,
+        "pushable": true,
+        "raw_size": [
+            2.642,
+            3.461,
+            2.879
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-d5b3a043a2f04aae8f56439cb8aa2f19.glb": {
+        "category": "Bag",
+        "scale": 0.207039,
+        "collision_radius": 0.2,
+        "pushable": true,
+        "raw_size": [
+            2.829,
+            1.932,
+            6.335
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bag-f6e6bac42c114f39b07f918ac16a355a.glb": {
+        "category": "Bag",
+        "scale": 0.831773,
+        "collision_radius": 0.128,
+        "pushable": true,
+        "raw_size": [
+            0.246,
+            0.481,
+            0.309
+        ],
+        "calibrated_height": 0.4
+    },
+    "Bench-0fc91c47c6b04717bb4400c247de573e.glb": {
+        "category": "Bench",
+        "scale": 0.007707,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            194.629,
+            70.334,
+            59.526
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-1a726089b873441587e45ba5e815ebe1.glb": {
+        "category": "Bench",
+        "scale": 0.249958,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            2.659,
+            3.063,
+            6.001
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-1b70102941ba4d49a60c5594e990185e.glb": {
+        "category": "Bench",
+        "scale": 2.793558,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            0.536,
+            0.326,
+            0.537
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-1dffe12a2d4747d6bf030c69f3c71ac4.glb": {
+        "category": "Bench",
+        "scale": 0.021167,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            70.866,
+            44.267,
+            54.014
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-220423b220f246b48ea16efa74cab450.glb": {
+        "category": "Bench",
+        "scale": 0.631026,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            1.379,
+            1.547,
+            2.377
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-26c89011fdbe4f3d8da663dd2ad7887a.glb": {
+        "category": "Bench",
+        "scale": 0.277225,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            5.411,
+            2.418,
+            1.951
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-394be945cdfb46b0af16dc8148ebbf8b.glb": {
+        "category": "Bench",
+        "scale": 0.297324,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            5.045,
+            3.52,
+            2.046
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-39ee5c499030472ca7460f3b03077135.glb": {
+        "category": "Bench",
+        "scale": 0.504179,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            2.975,
+            2.052,
+            1.389
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-43d3b29df5c8433b806e554db3dfcb9e.glb": {
+        "category": "Bench",
+        "scale": 0.007493,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            200.195,
+            101.084,
+            67.91
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-453d262499f54a4b886e00b3d1af3cbf.glb": {
+        "category": "Bench",
+        "scale": 0.75,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            2.0,
+            0.495,
+            0.65
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-6397326d4ee34d35a759b41798de6b4d.glb": {
+        "category": "Bench",
+        "scale": 0.011719,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            128.0,
+            84.0,
+            66.0
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-64289c570aef49f194e7cb74c62c3929.glb": {
+        "category": "Bench",
+        "scale": 0.235599,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            6.244,
+            4.152,
+            6.367
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-66e4ad4904034e92aaf376118e6e5902.glb": {
+        "category": "Bench",
+        "scale": 15.226994,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            0.046,
+            0.062,
+            0.099
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-734af460a5ec403193d7dbbbbf8edbfb.glb": {
+        "category": "Bench",
+        "scale": 0.015854,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            21.288,
+            35.686,
+            94.615
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-7ab40267de694cb38bc10b35aaa02086.glb": {
+        "category": "Bench",
+        "scale": 0.002485,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            603.583,
+            559.256,
+            358.605
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-7b637957da7a4ec3bac58cf046fd0f56.glb": {
+        "category": "Bench",
+        "scale": 0.055993,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            26.789,
+            12.107,
+            8.662
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-80993e9e2d00478ca229bf35ba870b7d.glb": {
+        "category": "Bench",
+        "scale": 0.008141,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            184.264,
+            98.0,
+            62.883
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-82cadef8dfb24c0784eefff7be71610c.glb": {
+        "category": "Bench",
+        "scale": 0.206888,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            3.225,
+            3.459,
+            7.25
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-932ae4fca8b949a3b0d10a555ab5e893.glb": {
+        "category": "Bench",
+        "scale": 1.198796,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            0.77,
+            0.889,
+            1.251
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-973507d6b4e44265887f8feffa6de13e.glb": {
+        "category": "Bench",
+        "scale": 0.009424,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            159.164,
+            71.69,
+            55.32
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-9aecdbb725e84a1ab77642aa7767b383.glb": {
+        "category": "Bench",
+        "scale": 0.225863,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            6.641,
+            4.922,
+            4.065
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-9e03a70fed9741049ffd67a260017e9e.glb": {
+        "category": "Bench",
+        "scale": 0.003694,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            406.014,
+            105.326,
+            81.208
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-9e59bc0485594f74b75ff2191215fed2.glb": {
+        "category": "Bench",
+        "scale": 0.75,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            0.698,
+            0.921,
+            2.0
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-a6da0dff0f9b4a5a8e821c40b370a98f.glb": {
+        "category": "Bench",
+        "scale": 0.010604,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            55.838,
+            66.098,
+            141.449
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-a8a26f771d5845f092e71371a6e30566.glb": {
+        "category": "Bench",
+        "scale": 0.060121,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            24.95,
+            10.63,
+            6.026
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-acf643ab6a4a4ef2b894abd59aebdf4d.glb": {
+        "category": "Bench",
+        "scale": 0.850829,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            1.763,
+            0.838,
+            0.69
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-ae902139fd8f4a2989e988e9f34609d6.glb": {
+        "category": "Bench",
+        "scale": 0.001702,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            881.278,
+            361.392,
+            295.586
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-bef15092b6ac4ba2939396cf2b3572c4.glb": {
+        "category": "Bench",
+        "scale": 0.75,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            1.12,
+            1.502,
+            2.0
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-c18b73277d924fdbbee0cf28e6d9565a.glb": {
+        "category": "Bench",
+        "scale": 0.24324,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            6.167,
+            4.308,
+            2.743
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-c214a03489fc4ef282091a3be557afbb.glb": {
+        "category": "Bench",
+        "scale": 0.001463,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            1025.635,
+            619.893,
+            540.323
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-c9335640145b4577b94a591ca73ab2ac.glb": {
+        "category": "Bench",
+        "scale": 0.095696,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            8.99,
+            13.338,
+            15.675
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-d0af244b3ab34d3b978deffac44d1a26.glb": {
+        "category": "Bench",
+        "scale": 0.091839,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            5.929,
+            6.155,
+            16.333
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-dcb057ffb7e949a7a1ec5523321d965b.glb": {
+        "category": "Bench",
+        "scale": 0.006625,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            226.4,
+            120.122,
+            80.316
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-de8f88802afa4c7b8cf54ebc4381046e.glb": {
+        "category": "Bench",
+        "scale": 0.495914,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            3.025,
+            1.867,
+            1.265
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-eb5257dc531847dfbe00c8a1900b6d40.glb": {
+        "category": "Bench",
+        "scale": 1.100527,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            0.707,
+            0.955,
+            1.363
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bench-ec6317d80f6444d693c30379afd716bf.glb": {
+        "category": "Bench",
+        "scale": 0.727273,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            1.0,
+            1.313,
+            2.062
+        ],
+        "calibrated_height": 1.5
+    },
+    "Bicycle-0cee5bf9bbe74d0f9d5db3849ad70b86.glb": {
+        "category": "Bicycle",
+        "scale": 0.184375,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            1.991,
+            5.039,
+            9.22
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-16bfab70fa29407db9e65e0a4c251e1a.glb": {
+        "category": "Bicycle",
+        "scale": 0.991332,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            1.715,
+            1.041,
+            0.467
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-1a1751bdef69489b84fbf581c6b1a8d4.glb": {
+        "category": "Bicycle",
+        "scale": 0.223684,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            2.351,
+            4.511,
+            7.6
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-25aa85eeba944baea33ce5cde985ca49.glb": {
+        "category": "Bicycle",
+        "scale": 0.010557,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            161.025,
+            114.922,
+            85.617
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-400d478205aa4c88a29ec317696dea76.glb": {
+        "category": "Bicycle",
+        "scale": 0.291337,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            1.46,
+            3.278,
+            5.835
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-495d15cf741849229ec9131c345f6c3e.glb": {
+        "category": "Bicycle",
+        "scale": 0.010243,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            64.419,
+            113.865,
+            165.961
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-507a9cce128d4263adf3fbc2f134faf4.glb": {
+        "category": "Bicycle",
+        "scale": 0.268797,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            6.324,
+            5.564,
+            2.359
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-692d4d1536f647acb6c7f652a99ecca7.glb": {
+        "category": "Bicycle",
+        "scale": 0.004764,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            356.872,
+            220.815,
+            134.184
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-6ff55560e82c47b98804d0ca3843f7ba.glb": {
+        "category": "Bicycle",
+        "scale": 0.020012,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            84.947,
+            43.864,
+            19.133
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-97a7243c1f304159802473331ee17071.glb": {
+        "category": "Bicycle",
+        "scale": 0.001973,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            309.188,
+            523.797,
+            861.675
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-aea62def081e4df086198bc985d1a20a.glb": {
+        "category": "Bicycle",
+        "scale": 0.958272,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            0.754,
+            1.126,
+            1.774
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-d5c7ab157aa84eb08e2deaee6165e764.glb": {
+        "category": "Bicycle",
+        "scale": 0.007377,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            230.449,
+            135.628,
+            61.686
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-d78921adfcfa4ce49d1703726f15f107.glb": {
+        "category": "Bicycle",
+        "scale": 0.011565,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            55.099,
+            86.02,
+            146.992
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-e4af135e494b4e5ba916c2e9e15778b9.glb": {
+        "category": "Bicycle",
+        "scale": 0.031087,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            23.787,
+            33.935,
+            54.684
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-ee74fcdacb694abfb444cbcc5954526a.glb": {
+        "category": "Bicycle",
+        "scale": 0.3675,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            4.626,
+            2.482,
+            1.096
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-f16e716b099941abb186ce2e40700a0a.glb": {
+        "category": "Bicycle",
+        "scale": 0.009661,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            175.972,
+            112.933,
+            56.316
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bicycle-f675530c40bd404d8df317c15d0bb55f.glb": {
+        "category": "Bicycle",
+        "scale": 0.145912,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            2.875,
+            6.563,
+            11.651
+        ],
+        "calibrated_height": 1.7
+    },
+    "Bollard-0b87b812751d4545943ef436c5f997a8.glb": {
+        "category": "Bollard",
+        "scale": 0.962088,
+        "collision_radius": 0.072,
+        "pushable": true,
+        "raw_size": [
+            0.143,
+            1.039,
+            0.15
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-0f856d6fe19440aaacf577be1bdd8546.glb": {
+        "category": "Bollard",
+        "scale": 0.002687,
+        "collision_radius": 0.166,
+        "pushable": true,
+        "raw_size": [
+            123.732,
+            372.152,
+            120.63
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-0fd2b057d93d4e3da8045de37b646d52.glb": {
+        "category": "Bollard",
+        "scale": 0.749432,
+        "collision_radius": 0.121,
+        "pushable": true,
+        "raw_size": [
+            0.322,
+            1.334,
+            0.322
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-15ef23e2f6b1442cb698e2fa6618c928.glb": {
+        "category": "Bollard",
+        "scale": 0.002389,
+        "collision_radius": 0.212,
+        "pushable": true,
+        "raw_size": [
+            171.373,
+            418.627,
+            177.186
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-24cc770a1eed4cc6bd92893b9439d650.glb": {
+        "category": "Bollard",
+        "scale": 0.02979,
+        "collision_radius": 0.231,
+        "pushable": true,
+        "raw_size": [
+            9.926,
+            33.568,
+            15.483
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-2ca2cd17f9d544088d18f9623a1c17af.glb": {
+        "category": "Bollard",
+        "scale": 0.094466,
+        "collision_radius": 0.106,
+        "pushable": true,
+        "raw_size": [
+            2.24,
+            10.586,
+            2.24
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-35ef0ff111b447ecace9021ae4d19053.glb": {
+        "category": "Bollard",
+        "scale": 0.308215,
+        "collision_radius": 0.154,
+        "pushable": true,
+        "raw_size": [
+            0.987,
+            3.244,
+            0.996
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-37f2b91cb5be47eda8b6ddb362d7100e.glb": {
+        "category": "Bollard",
+        "scale": 0.006519,
+        "collision_radius": 0.116,
+        "pushable": true,
+        "raw_size": [
+            35.71,
+            153.398,
+            35.694
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-3afabff2d68c49a081dc010ff99fccaa.glb": {
+        "category": "Bollard",
+        "scale": 0.002633,
+        "collision_radius": 0.113,
+        "pushable": true,
+        "raw_size": [
+            86.134,
+            379.842,
+            86.134
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-3fae33c9563d49fd985c0ccad7795502.glb": {
+        "category": "Bollard",
+        "scale": 0.041594,
+        "collision_radius": 0.141,
+        "pushable": true,
+        "raw_size": [
+            6.763,
+            24.042,
+            6.763
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-486f76bf01bd4905910d076686741747.glb": {
+        "category": "Bollard",
+        "scale": 0.5,
+        "collision_radius": 0.43,
+        "pushable": true,
+        "raw_size": [
+            1.718,
+            2.0,
+            1.718
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-49fd4be9698c4fde9baa2b7ff754dc29.glb": {
+        "category": "Bollard",
+        "scale": 0.071465,
+        "collision_radius": 0.135,
+        "pushable": true,
+        "raw_size": [
+            3.6,
+            13.993,
+            3.785
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-532b02858c67410f9a1973544f25dcc4.glb": {
+        "category": "Bollard",
+        "scale": 1.422697,
+        "collision_radius": 0.051,
+        "pushable": true,
+        "raw_size": [
+            0.071,
+            0.703,
+            0.071
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-5665c15e266e4fa7906f88601077e545.glb": {
+        "category": "Bollard",
+        "scale": 0.004599,
+        "collision_radius": 0.045,
+        "pushable": true,
+        "raw_size": [
+            19.702,
+            217.439,
+            19.403
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-5c0870dce44447f78ed682da2ff3c9be.glb": {
+        "category": "Bollard",
+        "scale": 0.166776,
+        "collision_radius": 0.148,
+        "pushable": true,
+        "raw_size": [
+            1.777,
+            5.996,
+            1.76
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-62c8780a456f4bb0a10b3a5413d8829d.glb": {
+        "category": "Bollard",
+        "scale": 0.021571,
+        "collision_radius": 0.136,
+        "pushable": true,
+        "raw_size": [
+            12.432,
+            46.358,
+            12.608
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-6ef04c1e67de4e889152de1c25aa1553.glb": {
+        "category": "Bollard",
+        "scale": 0.010729,
+        "collision_radius": 0.055,
+        "pushable": true,
+        "raw_size": [
+            10.3,
+            93.209,
+            10.3
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-7d2bcd7d8c8f4d53a3cfd12e8917821a.glb": {
+        "category": "Bollard",
+        "scale": 0.119281,
+        "collision_radius": 0.122,
+        "pushable": true,
+        "raw_size": [
+            2.015,
+            8.384,
+            2.04
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-8bdd4475718f4dc1983d735031330587.glb": {
+        "category": "Bollard",
+        "scale": 0.5,
+        "collision_radius": 0.107,
+        "pushable": true,
+        "raw_size": [
+            0.429,
+            2.0,
+            0.429
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-9d7488e815534920bdfdcc3759ac2839.glb": {
+        "category": "Bollard",
+        "scale": 0.032544,
+        "collision_radius": 0.163,
+        "pushable": true,
+        "raw_size": [
+            10.043,
+            30.727,
+            8.55
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-9eaa9bffee354e28a7d494933bd9fde5.glb": {
+        "category": "Bollard",
+        "scale": 1.064453,
+        "collision_radius": 0.101,
+        "pushable": true,
+        "raw_size": [
+            0.189,
+            0.939,
+            0.189
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-c659efcc548b4785aff81015da3df1d5.glb": {
+        "category": "Bollard",
+        "scale": 1.141392,
+        "collision_radius": 0.121,
+        "pushable": true,
+        "raw_size": [
+            0.212,
+            0.876,
+            0.212
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-ca34201672274769a6ae1d59c9443bb6.glb": {
+        "category": "Bollard",
+        "scale": 0.337949,
+        "collision_radius": 0.172,
+        "pushable": true,
+        "raw_size": [
+            1.012,
+            2.959,
+            1.021
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-d309a2fd84d24c9fa6e4cae6c03de1a8.glb": {
+        "category": "Bollard",
+        "scale": 1.011122,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            3.6,
+            0.989,
+            0.989
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-d4c506d643c64a6792085caf89675ede.glb": {
+        "category": "Bollard",
+        "scale": 1.030221,
+        "collision_radius": 0.109,
+        "pushable": true,
+        "raw_size": [
+            0.212,
+            0.971,
+            0.212
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-d85a62240a1a4a31859ff12f8341e371.glb": {
+        "category": "Bollard",
+        "scale": 0.288702,
+        "collision_radius": 0.164,
+        "pushable": true,
+        "raw_size": [
+            1.137,
+            3.464,
+            0.859
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-da5d88c473414c7b8734d1a4be7a91c4.glb": {
+        "category": "Bollard",
+        "scale": 0.097194,
+        "collision_radius": 0.19,
+        "pushable": true,
+        "raw_size": [
+            3.917,
+            10.289,
+            3.917
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-e7e5f9b0c9c046869e81dd2fecd9dbc1.glb": {
+        "category": "Bollard",
+        "scale": 0.006526,
+        "collision_radius": 0.163,
+        "pushable": true,
+        "raw_size": [
+            50.0,
+            153.228,
+            50.0
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bollard-ecbddde0f274409cb18191e341ee1d86.glb": {
+        "category": "Bollard",
+        "scale": 0.042123,
+        "collision_radius": 0.274,
+        "pushable": true,
+        "raw_size": [
+            13.0,
+            23.74,
+            6.5
+        ],
+        "calibrated_height": 1.0
+    },
+    "Bonsai-02263be0b2e64c42bfff86f5c2c18514.glb": {
+        "category": "Bonsai",
+        "scale": 0.03639,
+        "collision_radius": 0.232,
+        "pushable": true,
+        "raw_size": [
+            12.737,
+            13.74,
+            7.541
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-1053b1f8eeed4ca4b17227ed399c1b8f.glb": {
+        "category": "Bonsai",
+        "scale": 0.11026,
+        "collision_radius": 0.241,
+        "pushable": true,
+        "raw_size": [
+            4.371,
+            4.535,
+            3.766
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-16101d3f2bdf4bc5aefffb7674086dc2.glb": {
+        "category": "Bonsai",
+        "scale": 2.705822,
+        "collision_radius": 0.218,
+        "pushable": true,
+        "raw_size": [
+            0.161,
+            0.185,
+            0.115
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-1763875ddd7041fd89f0f08c7d1f8b81.glb": {
+        "category": "Bonsai",
+        "scale": 0.016659,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            38.878,
+            30.013,
+            16.18
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-1b3042aba5454ce8890a49a75d7f86f6.glb": {
+        "category": "Bonsai",
+        "scale": 0.198037,
+        "collision_radius": 0.152,
+        "pushable": true,
+        "raw_size": [
+            1.15,
+            2.525,
+            1.537
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-208097cfe0314650be789fbda9f6fe3c.glb": {
+        "category": "Bonsai",
+        "scale": 0.038762,
+        "collision_radius": 0.213,
+        "pushable": true,
+        "raw_size": [
+            11.002,
+            12.899,
+            6.597
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-2be632cc7f36409f9595a9e62f85ef10.glb": {
+        "category": "Bonsai",
+        "scale": 0.088865,
+        "collision_radius": 0.195,
+        "pushable": true,
+        "raw_size": [
+            4.237,
+            5.626,
+            4.385
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-2e90cc03b71c48e79efefc1816aee5f3.glb": {
+        "category": "Bonsai",
+        "scale": 0.880529,
+        "collision_radius": 0.204,
+        "pushable": true,
+        "raw_size": [
+            0.463,
+            0.568,
+            0.414
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-2ec7ccf413a841e2b51be9494a66c9df.glb": {
+        "category": "Bonsai",
+        "scale": 0.062727,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            7.686,
+            7.971,
+            10.044
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-320fe1e4ba8c442f84cb94e833935944.glb": {
+        "category": "Bonsai",
+        "scale": 0.043837,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            13.695,
+            11.406,
+            4.694
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-32db199454ee42c79712f24991295635.glb": {
+        "category": "Bonsai",
+        "scale": 0.106606,
+        "collision_radius": 0.22,
+        "pushable": true,
+        "raw_size": [
+            4.123,
+            4.69,
+            3.671
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-3ab4b8485d08488184e910dcc8b58bc2.glb": {
+        "category": "Bonsai",
+        "scale": 0.564893,
+        "collision_radius": 0.221,
+        "pushable": true,
+        "raw_size": [
+            0.783,
+            0.885,
+            0.606
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-3bb88c7c70de4037a494b50d8675accf.glb": {
+        "category": "Bonsai",
+        "scale": 0.025981,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            35.914,
+            19.245,
+            35.914
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-41cb36ba609a4f9dab4080b47b2c60c3.glb": {
+        "category": "Bonsai",
+        "scale": 0.019556,
+        "collision_radius": 0.146,
+        "pushable": true,
+        "raw_size": [
+            14.956,
+            25.567,
+            12.976
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-46ceadbb01a94fcb93076c19c29e228c.glb": {
+        "category": "Bonsai",
+        "scale": 0.035203,
+        "collision_radius": 0.218,
+        "pushable": true,
+        "raw_size": [
+            12.411,
+            14.203,
+            6.0
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-4ef1f5f0181e439bbe7de4cef9851103.glb": {
+        "category": "Bonsai",
+        "scale": 0.035203,
+        "collision_radius": 0.226,
+        "pushable": true,
+        "raw_size": [
+            12.827,
+            14.203,
+            6.0
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-4f09442c12634740b95994790864d354.glb": {
+        "category": "Bonsai",
+        "scale": 0.04913,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            9.844,
+            10.177,
+            12.744
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-67bf1718a51d4dcca9ca453cb9a25274.glb": {
+        "category": "Bonsai",
+        "scale": 0.015287,
+        "collision_radius": 0.225,
+        "pushable": true,
+        "raw_size": [
+            29.457,
+            32.708,
+            23.02
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-6bbc9b1aa6bc4ec48c960985aaa9a7a4.glb": {
+        "category": "Bonsai",
+        "scale": 0.343239,
+        "collision_radius": 0.242,
+        "pushable": true,
+        "raw_size": [
+            0.907,
+            1.457,
+            1.412
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-6e031624f7994103ac33be9c68bb8672.glb": {
+        "category": "Bonsai",
+        "scale": 0.024547,
+        "collision_radius": 0.244,
+        "pushable": true,
+        "raw_size": [
+            19.869,
+            20.369,
+            8.642
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-703c040519d14326b0bf4744ee50794d.glb": {
+        "category": "Bonsai",
+        "scale": 0.015308,
+        "collision_radius": 0.182,
+        "pushable": true,
+        "raw_size": [
+            22.613,
+            32.662,
+            23.758
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-85a06b2cfe434a4ebed80d932090a75c.glb": {
+        "category": "Bonsai",
+        "scale": 1.778684,
+        "collision_radius": 0.222,
+        "pushable": true,
+        "raw_size": [
+            0.211,
+            0.281,
+            0.25
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-88a12f46479c40079b33cdba39362400.glb": {
+        "category": "Bonsai",
+        "scale": 0.03134,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            17.037,
+            15.954,
+            4.437
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-931ba14ec03249a6abed393ec49be67e.glb": {
+        "category": "Bonsai",
+        "scale": 0.028747,
+        "collision_radius": 0.168,
+        "pushable": true,
+        "raw_size": [
+            11.701,
+            17.393,
+            6.633
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-9ff401e97a30418ab7d865e36a467fba.glb": {
+        "category": "Bonsai",
+        "scale": 0.054509,
+        "collision_radius": 0.188,
+        "pushable": true,
+        "raw_size": [
+            6.885,
+            9.173,
+            3.869
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-a148dc4ea44948138332b0d86c6f0851.glb": {
+        "category": "Bonsai",
+        "scale": 0.732297,
+        "collision_radius": 0.191,
+        "pushable": true,
+        "raw_size": [
+            0.52,
+            0.683,
+            0.371
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-aad6a3d4eaf74655a8cb2e134c6990a5.glb": {
+        "category": "Bonsai",
+        "scale": 0.351412,
+        "collision_radius": 0.215,
+        "pushable": true,
+        "raw_size": [
+            1.108,
+            1.423,
+            1.225
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-ba5c03d8aff24231945cbea6d8b0ae81.glb": {
+        "category": "Bonsai",
+        "scale": 0.403877,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            1.364,
+            1.238,
+            1.224
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-bb78fba55edf41c499427f4106ef1e69.glb": {
+        "category": "Bonsai",
+        "scale": 0.10293,
+        "collision_radius": 0.193,
+        "pushable": true,
+        "raw_size": [
+            3.489,
+            4.858,
+            3.755
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-c3cbe3fb33b0469c8e5566345a02e498.glb": {
+        "category": "Bonsai",
+        "scale": 0.030834,
+        "collision_radius": 0.198,
+        "pushable": true,
+        "raw_size": [
+            12.853,
+            16.216,
+            6.064
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-d1741c762acb4a8e953c5c86aef1e457.glb": {
+        "category": "Bonsai",
+        "scale": 0.089928,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            6.884,
+            5.56,
+            7.736
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-da95b8f20c56476a81765e5eb2c4726d.glb": {
+        "category": "Bonsai",
+        "scale": 0.009063,
+        "collision_radius": 0.142,
+        "pushable": true,
+        "raw_size": [
+            31.427,
+            55.169,
+            31.368
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-eb00c134f9934bce864a9cf597bfde08.glb": {
+        "category": "Bonsai",
+        "scale": 0.088339,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            6.649,
+            5.66,
+            7.395
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-f6bfe49027c64734a77738d3baba37b0.glb": {
+        "category": "Bonsai",
+        "scale": 0.001129,
+        "collision_radius": 0.204,
+        "pushable": true,
+        "raw_size": [
+            362.157,
+            442.862,
+            163.184
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bonsai-f92fe84a43f742e096ae1032818612ce.glb": {
+        "category": "Bonsai",
+        "scale": 2.17422,
+        "collision_radius": 0.204,
+        "pushable": true,
+        "raw_size": [
+            0.171,
+            0.23,
+            0.188
+        ],
+        "calibrated_height": 0.5
+    },
+    "Bridge-033b97d71a7747f98d338852c1f8ef31.glb": {
+        "category": "Bridge",
+        "scale": 0.144182,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            34.678,
+            11.564,
+            12.466
+        ],
+        "calibrated_height": 5.0
+    },
+    "Bridge-035aaebed58342d88fb1b81af332344e.glb": {
+        "category": "Bridge",
+        "scale": 0.519636,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            9.622,
+            3.88,
+            5.031
+        ],
+        "calibrated_height": 5.0
+    },
+    "Bridge-29aef33898ac4c1593feae070ee9693d.glb": {
+        "category": "Bridge",
+        "scale": 0.050127,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            99.747,
+            29.559,
+            55.818
+        ],
+        "calibrated_height": 5.0
+    },
+    "Building-0303c1cccb2e4546845b4581dca7e8f5.glb": {
+        "category": "Building",
+        "scale": 2.053575,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            7.304,
+            3.543,
+            3.194
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-05229ac1d1f94e6c8cacaad91110c602.glb": {
+        "category": "Building",
+        "scale": 9.03003,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            0.683,
+            1.148,
+            1.661
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-0a2b279c723c4a8a848a816430027bed.glb": {
+        "category": "Building",
+        "scale": 0.235029,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            55.723,
+            23.198,
+            63.822
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-1fddcc3aa7354c21a0c1bd9d84411bee.glb": {
+        "category": "Building",
+        "scale": 0.810763,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            18.501,
+            14.91,
+            11.333
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-234942f51b8d4405a7370b56aa182e2f.glb": {
+        "category": "Building",
+        "scale": 0.65322,
+        "collision_radius": 5.719,
+        "pushable": false,
+        "raw_size": [
+            17.512,
+            22.963,
+            16.043
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-2ed8530340894145a235e98e5145061a.glb": {
+        "category": "Building",
+        "scale": 0.902071,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            15.552,
+            16.114,
+            16.628
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-315756ab8c534a5b8212c55a5810398c.glb": {
+        "category": "Building",
+        "scale": 0.777904,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            18.034,
+            18.686,
+            19.283
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-35df908b113d4599b185cd3ffb2be740.glb": {
+        "category": "Building",
+        "scale": 0.50454,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            29.73,
+            15.362,
+            13.899
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-444d49afad63481691536b797283ed97.glb": {
+        "category": "Building",
+        "scale": 1.75168,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            3.183,
+            3.504,
+            8.563
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-5b84941cb3bb4e3e868d2f157660e266.glb": {
+        "category": "Building",
+        "scale": 7.5,
+        "collision_radius": 5.662,
+        "pushable": false,
+        "raw_size": [
+            1.51,
+            2.0,
+            1.147
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-60595f5e3a7e4eaba79493989344d3c9.glb": {
+        "category": "Building",
+        "scale": 151.44099,
+        "collision_radius": 7.077,
+        "pushable": false,
+        "raw_size": [
+            0.069,
+            0.099,
+            0.093
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-6751fd9141fd436c8ffa6a19518474ed.glb": {
+        "category": "Building",
+        "scale": 50.38831,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            0.298,
+            0.174,
+            0.135
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-694adf5094fa41f99a245ed822293f47.glb": {
+        "category": "Building",
+        "scale": 0.559671,
+        "collision_radius": 4.684,
+        "pushable": false,
+        "raw_size": [
+            16.738,
+            26.801,
+            14.044
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-738972de7752491382457c068ab0a6ac.glb": {
+        "category": "Building",
+        "scale": 0.5,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            30.0,
+            15.457,
+            30.0
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-7458a492c7cc42358a1209aa5f7c7de0.glb": {
+        "category": "Building",
+        "scale": 1.119742,
+        "collision_radius": 5.189,
+        "pushable": false,
+        "raw_size": [
+            5.918,
+            13.396,
+            9.268
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-845ebddd346047a4aa0fc26ca06797fd.glb": {
+        "category": "Building",
+        "scale": 0.962861,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            7.097,
+            6.785,
+            15.579
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-985ee9ee795740a284c3886d6b812b9e.glb": {
+        "category": "Building",
+        "scale": 64.687583,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            0.232,
+            0.057,
+            0.071
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-992ee80b8f8c4bdab78e18a93a463371.glb": {
+        "category": "Building",
+        "scale": 0.867751,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            17.286,
+            13.75,
+            17.286
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-9f9fdefacd4f494bad95aaf7867580cc.glb": {
+        "category": "Building",
+        "scale": 7.5,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            0.758,
+            0.649,
+            2.0
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-9feed409a1254723a510a18edb92535b.glb": {
+        "category": "Building",
+        "scale": 2.677815,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            5.602,
+            3.645,
+            3.881
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-af72abe84fa042c6b19cae960abf04ab.glb": {
+        "category": "Building",
+        "scale": 0.121874,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            60.035,
+            76.049,
+            123.078
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-b3295edbc6ee4023978c2209df0d9a35.glb": {
+        "category": "Building",
+        "scale": 2.541551,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            5.807,
+            5.784,
+            5.902
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-caa43dbcbb3b4087b3c1c9a60560f33a.glb": {
+        "category": "Building",
+        "scale": 13.731298,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            0.851,
+            0.987,
+            1.092
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-cef9a7217f00475db4a3743dd1c90412.glb": {
+        "category": "Building",
+        "scale": 0.395278,
+        "collision_radius": 3.278,
+        "pushable": false,
+        "raw_size": [
+            16.585,
+            37.948,
+            13.653
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-cfddccc5a9884d1aaa4431c957c71e21.glb": {
+        "category": "Building",
+        "scale": 0.269801,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            55.596,
+            39.437,
+            46.367
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-d2e53f7f283247c685b7df8273742727.glb": {
+        "category": "Building",
+        "scale": 0.584704,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            25.654,
+            8.625,
+            6.08
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-d67227ca6421499d849b753ff0844326.glb": {
+        "category": "Building",
+        "scale": 0.372373,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            40.282,
+            30.612,
+            16.994
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-dbe3278250244ec08fb3e58518bfcfc8.glb": {
+        "category": "Building",
+        "scale": 0.237628,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            40.158,
+            20.33,
+            63.124
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-e23a4b96b5fe4df4a3f5be969d69c700.glb": {
+        "category": "Building",
+        "scale": 12.639573,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            1.126,
+            1.032,
+            1.187
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-e7390aa8b980439e8913aa98af85116c.glb": {
+        "category": "Building",
+        "scale": 2.40128,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            3.515,
+            2.855,
+            6.247
+        ],
+        "calibrated_height": 15.0
+    },
+    "Building-f7d7b826a4da46eab908d6e64a988f9f.glb": {
+        "category": "Building",
+        "scale": 0.638077,
+        "collision_radius": 7.5,
+        "pushable": false,
+        "raw_size": [
+            23.508,
+            10.762,
+            6.791
+        ],
+        "calibrated_height": 15.0
+    },
+    "Bus-1533810cfbf146ac813da2b03f12befa.glb": {
+        "category": "Bus",
+        "scale": 4.0,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            2.5,
+            0.778,
+            0.617
+        ],
+        "calibrated_height": 10.0
+    },
+    "Bus-60c006be9a834849895438f15d4927c0.glb": {
+        "category": "Bus",
+        "scale": 0.399944,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            8.249,
+            9.005,
+            25.004
+        ],
+        "calibrated_height": 10.0
+    },
+    "Bus-c6dc0d2275524bb1a43ddc398d2be3bc.glb": {
+        "category": "Bus",
+        "scale": 0.01787,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            241.893,
+            254.464,
+            559.587
+        ],
+        "calibrated_height": 10.0
+    },
+    "Bus-e73c8b9cf1d94ab586a88e2771b856a0.glb": {
+        "category": "Bus",
+        "scale": 1.415588,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            2.656,
+            2.947,
+            7.064
+        ],
+        "calibrated_height": 10.0
+    },
+    "Caravan-0d1b1ff7d7b54af9b6b16fd0ef349904.glb": {
+        "category": "Caravan",
+        "scale": 0.490638,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            10.191,
+            5.305,
+            4.805
+        ],
+        "calibrated_height": 5.0
+    },
+    "Caravan-657b2a0836af4f31a7545c36080f6952.glb": {
+        "category": "Caravan",
+        "scale": 0.536887,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            3.5,
+            2.784,
+            9.313
+        ],
+        "calibrated_height": 5.0
+    },
+    "Caravan-bc096d0ad5c64ac1a48647200fd559c2.glb": {
+        "category": "Caravan",
+        "scale": 0.670159,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            7.461,
+            2.749,
+            2.92
+        ],
+        "calibrated_height": 5.0
+    },
+    "Chair-0fc91c47c6b04717bb4400c247de573e.glb": {
+        "category": "Chair",
+        "scale": 0.012085,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            194.629,
+            70.334,
+            59.526
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-1b70102941ba4d49a60c5594e990185e.glb": {
+        "category": "Chair",
+        "scale": 2.607362,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            0.536,
+            0.326,
+            0.537
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-1dffe12a2d4747d6bf030c69f3c71ac4.glb": {
+        "category": "Chair",
+        "scale": 0.019202,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            70.866,
+            44.267,
+            54.014
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-26c89011fdbe4f3d8da663dd2ad7887a.glb": {
+        "category": "Chair",
+        "scale": 0.35153,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            5.411,
+            2.418,
+            1.951
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-3f3ee423cbc245d98f0a93ec773680f5.glb": {
+        "category": "Chair",
+        "scale": 0.002639,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            596.05,
+            322.071,
+            302.552
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-538b5c85746e4f1991be49347efe0b11.glb": {
+        "category": "Chair",
+        "scale": 0.009986,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            53.008,
+            85.122,
+            185.282
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-734af460a5ec403193d7dbbbbf8edbfb.glb": {
+        "category": "Chair",
+        "scale": 0.023819,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            21.288,
+            35.686,
+            94.615
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-7b637957da7a4ec3bac58cf046fd0f56.glb": {
+        "category": "Chair",
+        "scale": 0.070207,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            26.789,
+            12.107,
+            8.662
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-9aecdbb725e84a1ab77642aa7767b383.glb": {
+        "category": "Chair",
+        "scale": 0.172694,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            6.641,
+            4.922,
+            4.065
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-a6da0dff0f9b4a5a8e821c40b370a98f.glb": {
+        "category": "Chair",
+        "scale": 0.01286,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            55.838,
+            66.098,
+            141.449
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-acf643ab6a4a4ef2b894abd59aebdf4d.glb": {
+        "category": "Chair",
+        "scale": 1.01432,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            1.763,
+            0.838,
+            0.69
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-ae902139fd8f4a2989e988e9f34609d6.glb": {
+        "category": "Chair",
+        "scale": 0.002352,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            881.278,
+            361.392,
+            295.586
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-be38157bd0b2440983c2da950bc63bf8.glb": {
+        "category": "Chair",
+        "scale": 2.615385,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            0.606,
+            0.325,
+            0.313
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-c214a03489fc4ef282091a3be557afbb.glb": {
+        "category": "Chair",
+        "scale": 0.001371,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            1025.635,
+            619.893,
+            540.323
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-c9335640145b4577b94a591ca73ab2ac.glb": {
+        "category": "Chair",
+        "scale": 0.063728,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            8.99,
+            13.338,
+            15.675
+        ],
+        "calibrated_height": 0.85
+    },
+    "Chair-dcb057ffb7e949a7a1ec5523321d965b.glb": {
+        "category": "Chair",
+        "scale": 0.007076,
+        "collision_radius": 0.425,
+        "pushable": true,
+        "raw_size": [
+            226.4,
+            120.122,
+            80.316
+        ],
+        "calibrated_height": 0.85
+    },
+    "Fence-09cc87a006f941f1911098ba26e73d88.glb": {
+        "category": "Fence",
+        "scale": 0.01,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            8.0,
+            83.349,
+            150.0
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-0c97fff0e7244a57a3dcc8f233823fbc.glb": {
+        "category": "Fence",
+        "scale": 0.005177,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            16.49,
+            140.682,
+            289.76
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-0f19540503894263a7ed92f1ff522b64.glb": {
+        "category": "Fence",
+        "scale": 0.009546,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            157.133,
+            11.254,
+            127.408
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-1b48d9745ea94233982556ecdbc0739c.glb": {
+        "category": "Fence",
+        "scale": 1.12661,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            1.331,
+            1.006,
+            0.101
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-1f0bfb8e2f494f5181d6b8d85f0e51fd.glb": {
+        "category": "Fence",
+        "scale": 0.186155,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            8.058,
+            3.0,
+            0.161
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-1f4b998025224824a2a63875baad08a8.glb": {
+        "category": "Fence",
+        "scale": 0.00965,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            155.443,
+            88.284,
+            34.67
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-232b92add37c4328809f42fdcff21a03.glb": {
+        "category": "Fence",
+        "scale": 0.005491,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            273.176,
+            215.48,
+            35.0
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-269eab8c60494252baf51b50aed0781b.glb": {
+        "category": "Fence",
+        "scale": 0.31964,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            4.693,
+            3.921,
+            0.537
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-298a373cd3684588bd0d86e2301bfb29.glb": {
+        "category": "Fence",
+        "scale": 0.615495,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            2.437,
+            1.6,
+            0.388
+        ],
+        "calibrated_height": 1.5
+    },
+    "Fence-2ae34f8c74cc4d04bd6b6fc4f5fe5a8b.glb": {
+        "category": "Fence",
+        "scale": 0.510456,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            2.939,
+            1.065,
+            0.055
+        ],
+        "calibrated_height": 1.5
+    },
+    "GasStation-f4971d0f40c14d4c926216413a4f6d29.glb": {
+        "category": "GasStation",
+        "scale": 0.106186,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            47.087,
+            10.694,
+            46.996
+        ],
+        "calibrated_height": 5.0
+    },
+    "Lamp_post-0a34dc814a3a44cfa76388e732c05376.glb": {
+        "category": "Lamp_post",
+        "scale": 0.342592,
+        "collision_radius": 0.342,
+        "pushable": false,
+        "raw_size": [
+            1.999,
+            11.676,
+            1.999
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-0e3a4b2486a9440493174a96dafc516c.glb": {
+        "category": "Lamp_post",
+        "scale": 0.015797,
+        "collision_radius": 0.204,
+        "pushable": false,
+        "raw_size": [
+            25.882,
+            253.212,
+            25.882
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-126574e84ac243e0a91dc169fd02ec48.glb": {
+        "category": "Lamp_post",
+        "scale": 0.841007,
+        "collision_radius": 0.593,
+        "pushable": false,
+        "raw_size": [
+            1.411,
+            4.756,
+            0.562
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-1fbf6e80cb7e4705b39680cc17e622b2.glb": {
+        "category": "Lamp_post",
+        "scale": 0.304057,
+        "collision_radius": 0.908,
+        "pushable": false,
+        "raw_size": [
+            5.97,
+            13.155,
+            0.67
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-2c0cc1b8b4ec43e9a3bae32627adc1c4.glb": {
+        "category": "Lamp_post",
+        "scale": 0.042335,
+        "collision_radius": 0.606,
+        "pushable": false,
+        "raw_size": [
+            28.649,
+            94.484,
+            25.429
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-4218a29e816046bbb0bd6a9f468ab968.glb": {
+        "category": "Lamp_post",
+        "scale": 0.979166,
+        "collision_radius": 0.275,
+        "pushable": false,
+        "raw_size": [
+            0.562,
+            4.085,
+            0.562
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-46b49bcc519348e78caf65a4af222564.glb": {
+        "category": "Lamp_post",
+        "scale": 2.0,
+        "collision_radius": 0.245,
+        "pushable": false,
+        "raw_size": [
+            0.245,
+            2.0,
+            0.226
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-50232fe8caaa4f6989a5fe27946c53df.glb": {
+        "category": "Lamp_post",
+        "scale": 2.876468,
+        "collision_radius": 0.89,
+        "pushable": false,
+        "raw_size": [
+            0.619,
+            1.391,
+            0.211
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-55434f4105444a2f933492cf3210a267.glb": {
+        "category": "Lamp_post",
+        "scale": 0.087363,
+        "collision_radius": 0.685,
+        "pushable": false,
+        "raw_size": [
+            13.592,
+            45.786,
+            15.674
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-7664695f05234c409e27afba756d3a1c.glb": {
+        "category": "Lamp_post",
+        "scale": 0.013262,
+        "collision_radius": 0.48,
+        "pushable": false,
+        "raw_size": [
+            62.585,
+            301.615,
+            72.317
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-82818c1deeb24b2fbe84ba6cc20f79ef.glb": {
+        "category": "Lamp_post",
+        "scale": 2.0,
+        "collision_radius": 0.384,
+        "pushable": false,
+        "raw_size": [
+            0.384,
+            2.0,
+            0.275
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-89fa7ee886344bfa981b097e6b99e828.glb": {
+        "category": "Lamp_post",
+        "scale": 0.03169,
+        "collision_radius": 0.382,
+        "pushable": false,
+        "raw_size": [
+            24.124,
+            126.224,
+            24.124
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-a3c54b9fcc8c42f1be66bcd89de3151f.glb": {
+        "category": "Lamp_post",
+        "scale": 0.966931,
+        "collision_radius": 0.627,
+        "pushable": false,
+        "raw_size": [
+            1.297,
+            4.137,
+            0.496
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-beec88802ab448c2a1fa2a49f7e91c78.glb": {
+        "category": "Lamp_post",
+        "scale": 0.38301,
+        "collision_radius": 0.926,
+        "pushable": false,
+        "raw_size": [
+            4.836,
+            10.444,
+            1.132
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-e2e112f3a4e44495bbac566eb126eb15.glb": {
+        "category": "Lamp_post",
+        "scale": 0.003929,
+        "collision_radius": 0.778,
+        "pushable": false,
+        "raw_size": [
+            80.729,
+            1018.159,
+            396.267
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-e9bb977320834368ae71b10dbe913c0e.glb": {
+        "category": "Lamp_post",
+        "scale": 0.112588,
+        "collision_radius": 0.226,
+        "pushable": false,
+        "raw_size": [
+            4.022,
+            35.528,
+            4.022
+        ],
+        "calibrated_height": 4.0
+    },
+    "Lamp_post-fdf1673f1f6d41a99a90312db9bb2351.glb": {
+        "category": "Lamp_post",
+        "scale": 0.010451,
+        "collision_radius": 0.671,
+        "pushable": false,
+        "raw_size": [
+            128.387,
+            382.756,
+            18.038
+        ],
+        "calibrated_height": 4.0
+    },
+    "Mailbox-2173ac25461e485aa834f8210bc16e4f.glb": {
+        "category": "Mailbox",
+        "scale": 0.957915,
+        "collision_radius": 0.311,
+        "pushable": true,
+        "raw_size": [
+            0.65,
+            1.253,
+            0.641
+        ],
+        "calibrated_height": 1.2
+    },
+    "Mailbox-28495ea68ceb40749d68f8f57894e320.glb": {
+        "category": "Mailbox",
+        "scale": 0.010001,
+        "collision_radius": 0.204,
+        "pushable": true,
+        "raw_size": [
+            40.854,
+            119.992,
+            40.854
+        ],
+        "calibrated_height": 1.2
+    },
+    "Mailbox-2ee23bbe8de44874afefc35d376c6bbd.glb": {
+        "category": "Mailbox",
+        "scale": 0.556432,
+        "collision_radius": 0.383,
+        "pushable": true,
+        "raw_size": [
+            0.874,
+            2.157,
+            1.376
+        ],
+        "calibrated_height": 1.2
+    },
+    "Mailbox-6cf41ee1a60143efb983b74c0d69a9a4.glb": {
+        "category": "Mailbox",
+        "scale": 1.544865,
+        "collision_radius": 0.385,
+        "pushable": true,
+        "raw_size": [
+            0.499,
+            0.777,
+            0.341
+        ],
+        "calibrated_height": 1.2
+    },
+    "Mailbox-8dfa57e7280b4f0ea0ac8770ca1f115a.glb": {
+        "category": "Mailbox",
+        "scale": 0.214287,
+        "collision_radius": 0.196,
+        "pushable": true,
+        "raw_size": [
+            1.825,
+            5.6,
+            1.195
+        ],
+        "calibrated_height": 1.2
+    },
+    "Mailbox-a3b4bc95daf243f1a95b37d4d5880856.glb": {
+        "category": "Mailbox",
+        "scale": 0.250521,
+        "collision_radius": 0.346,
+        "pushable": true,
+        "raw_size": [
+            1.106,
+            4.79,
+            2.759
+        ],
+        "calibrated_height": 1.2
+    },
+    "Mailbox-ca4040f4585b4fd6b24cf5163e6b1970.glb": {
+        "category": "Mailbox",
+        "scale": 0.6,
+        "collision_radius": 0.394,
+        "pushable": true,
+        "raw_size": [
+            1.314,
+            2.0,
+            0.906
+        ],
+        "calibrated_height": 1.2
+    },
+    "NoAccess-63a266f23c4f40fb97d70be0ee6d0e2e.glb": {
+        "category": "NoAccess",
+        "scale": 1.29199,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            2.0,
+            0.774,
+            0.541
+        ],
+        "calibrated_height": 1.0
+    },
+    "NoAccess-9eff5d87fb5d4a369be015b800aa3a14.glb": {
+        "category": "NoAccess",
+        "scale": 0.007876,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            629.95,
+            126.976,
+            83.711
+        ],
+        "calibrated_height": 1.0
+    },
+    "NoAccess-b55a102dd7e74140905a0b8940de4463.glb": {
+        "category": "NoAccess",
+        "scale": 1.426534,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            2.0,
+            0.701,
+            0.455
+        ],
+        "calibrated_height": 1.0
+    },
+    "NoAccess-e8cc11529b7b4833acb0891787ca92ba.glb": {
+        "category": "NoAccess",
+        "scale": 0.931099,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            0.289,
+            1.074,
+            6.131
+        ],
+        "calibrated_height": 1.0
+    },
+    "ParkingMeter-bd7808fc98464b5eb66c79f9a93c726b.glb": {
+        "category": "ParkingMeter",
+        "scale": 0.748935,
+        "collision_radius": 0.262,
+        "pushable": true,
+        "raw_size": [
+            0.674,
+            1.736,
+            0.701
+        ],
+        "calibrated_height": 1.3
+    },
+    "ParkingMeter-cfaf0f457ca244e59c746ebdd6f3ad6c.glb": {
+        "category": "ParkingMeter",
+        "scale": 1.036664,
+        "collision_radius": 0.086,
+        "pushable": true,
+        "raw_size": [
+            0.165,
+            1.254,
+            0.16
+        ],
+        "calibrated_height": 1.3
+    },
+    "Scooter-351ab8599bed4072b16f63860941da11.glb": {
+        "category": "Scooter",
+        "scale": 0.017036,
+        "collision_radius": 0.736,
+        "pushable": false,
+        "raw_size": [
+            34.0,
+            88.047,
+            86.438
+        ],
+        "calibrated_height": 1.5
+    },
+    "Scooter-3b419a6f0e254fc4ac420fb574c99b59.glb": {
+        "category": "Scooter",
+        "scale": 1.571491,
+        "collision_radius": 0.72,
+        "pushable": false,
+        "raw_size": [
+            0.5,
+            0.955,
+            0.917
+        ],
+        "calibrated_height": 1.5
+    },
+    "Scooter-93a1f690e9054236adf53cbf79facb1b.glb": {
+        "category": "Scooter",
+        "scale": 0.741667,
+        "collision_radius": 0.75,
+        "pushable": false,
+        "raw_size": [
+            0.969,
+            1.488,
+            2.022
+        ],
+        "calibrated_height": 1.5
+    },
+    "Scooter-9479a6d3f1474971afde26b33fe96c55.glb": {
+        "category": "Scooter",
+        "scale": 0.984295,
+        "collision_radius": 0.738,
+        "pushable": false,
+        "raw_size": [
+            1.499,
+            1.524,
+            0.576
+        ],
+        "calibrated_height": 1.5
+    },
+    "Scooter-94b873b7773f4028b4eccd8ebd04d86f.glb": {
+        "category": "Scooter",
+        "scale": 0.065887,
+        "collision_radius": 0.649,
+        "pushable": false,
+        "raw_size": [
+            19.687,
+            22.766,
+            15.162
+        ],
+        "calibrated_height": 1.5
+    },
+    "Table-0a747dd101d24ac9bea930d4c00fc61b.glb": {
+        "category": "Table",
+        "scale": 0.714286,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.4,
+            0.75,
+            0.7
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-0d5aacbd6a3d469eaf6af26abbeb7a73.glb": {
+        "category": "Table",
+        "scale": 0.5,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            2.0,
+            1.2,
+            1.0
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-2fd3e9e09a96406889400ad024c8bc4e.glb": {
+        "category": "Table",
+        "scale": 0.030303,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            33.0,
+            12.342,
+            15.0
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-3a3315f0198d4cd8b3c81cfef4d0efde.glb": {
+        "category": "Table",
+        "scale": 0.396825,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            2.52,
+            0.84,
+            1.2
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-449a87e7751b4a478188d461a277ac7d.glb": {
+        "category": "Table",
+        "scale": 0.5,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            2.0,
+            0.805,
+            1.0
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-64f3b95d38044fcc966a6d92ea3a36b2.glb": {
+        "category": "Table",
+        "scale": 0.714286,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.4,
+            0.72,
+            0.85
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-6dd3f4d2bace4996bee47d8e76f6e4f9.glb": {
+        "category": "Table",
+        "scale": 1.0,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.0,
+            0.73,
+            0.6
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-77ec465b45574d12bf527a26ece473e8.glb": {
+        "category": "Table",
+        "scale": 1.818182,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            0.55,
+            0.45,
+            0.55
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-7ebd8bc119ee4a14ab22f290670d10a2.glb": {
+        "category": "Table",
+        "scale": 0.714286,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.4,
+            0.75,
+            0.7
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-83060b5cbc0d459d835a27a2c2139918.glb": {
+        "category": "Table",
+        "scale": 0.25,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            2.283,
+            2.388,
+            4.0
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-9e3a6f37fca944359ac0deb1b32b1043.glb": {
+        "category": "Table",
+        "scale": 1.0,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.0,
+            0.503,
+            0.6
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-b3f7a53841c1489ea57ebbd7c1673627.glb": {
+        "category": "Table",
+        "scale": 0.833333,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.2,
+            0.75,
+            1.2
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-c165c5f8589346108f554f934b5f6eae.glb": {
+        "category": "Table",
+        "scale": 0.714286,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.4,
+            0.73,
+            0.75
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-c23f24951e074990b36561a9b7e35d19.glb": {
+        "category": "Table",
+        "scale": 0.006665,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            150.033,
+            73.016,
+            75.033
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-c3fae288a3de45f89bee0d1bdfbfe675.glb": {
+        "category": "Table",
+        "scale": 0.468691,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.067,
+            0.768,
+            2.134
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-da86571d692442dc9e4ccbab60fdf81c.glb": {
+        "category": "Table",
+        "scale": 0.002286,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            437.392,
+            250.908,
+            203.949
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-f7e53de4e34a440e917061333b02e292.glb": {
+        "category": "Table",
+        "scale": 0.714286,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.4,
+            0.75,
+            0.7
+        ],
+        "calibrated_height": 1.0
+    },
+    "Table-fb2f8f65156e45fc88d0adffe021f6ab.glb": {
+        "category": "Table",
+        "scale": 0.526739,
+        "collision_radius": 0.5,
+        "pushable": false,
+        "raw_size": [
+            1.898,
+            0.766,
+            0.989
+        ],
+        "calibrated_height": 1.0
+    },
+    "Telephone_booth-0fdfe616df064592b8c5ea8ed632e248.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.205174,
+        "collision_radius": 0.72,
+        "pushable": false,
+        "raw_size": [
+            5.093,
+            12.185,
+            7.018
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-1098f2ad36a947ad8dda202c9a6114b6.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.939266,
+        "collision_radius": 0.65,
+        "pushable": false,
+        "raw_size": [
+            1.384,
+            2.662,
+            1.384
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-2c7977b3bac34426ab0ca6d3ef42984d.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.894684,
+        "collision_radius": 0.641,
+        "pushable": false,
+        "raw_size": [
+            1.432,
+            2.794,
+            1.432
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-43b08a60ec7242dfa02a9bc031d9483b.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.261755,
+        "collision_radius": 0.644,
+        "pushable": false,
+        "raw_size": [
+            4.919,
+            9.551,
+            4.836
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-6eae0ad6204747f683cae4012dc3f8ce.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.799535,
+        "collision_radius": 0.467,
+        "pushable": false,
+        "raw_size": [
+            1.169,
+            3.127,
+            1.169
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-869366d687b94193a625a84040db4a64.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.767597,
+        "collision_radius": 0.483,
+        "pushable": false,
+        "raw_size": [
+            1.258,
+            3.257,
+            0.782
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-993b70f1fb2540d4b3f9711ff457e04e.glb": {
+        "category": "Telephone_booth",
+        "scale": 0.014673,
+        "collision_radius": 0.409,
+        "pushable": false,
+        "raw_size": [
+            45.397,
+            170.384,
+            55.814
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-b9033372814b421a8fb225990c8f2226.glb": {
+        "category": "Telephone_booth",
+        "scale": 1.25,
+        "collision_radius": 0.416,
+        "pushable": false,
+        "raw_size": [
+            0.665,
+            2.0,
+            0.665
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-cc60dbdf82b84c9a987d92928b8df29d.glb": {
+        "category": "Telephone_booth",
+        "scale": 1.25,
+        "collision_radius": 0.623,
+        "pushable": false,
+        "raw_size": [
+            0.997,
+            2.0,
+            0.997
+        ],
+        "calibrated_height": 2.5
+    },
+    "Telephone_booth-d1bf6285f4c4458d8128a5ece3749b96.glb": {
+        "category": "Telephone_booth",
+        "scale": 8.242153,
+        "collision_radius": 0.477,
+        "pushable": false,
+        "raw_size": [
+            0.115,
+            0.303,
+            0.116
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_light-2f720ea69cb2407ba8598c02305ce524.glb": {
+        "category": "Traffic_light",
+        "scale": 0.012445,
+        "collision_radius": 0.51,
+        "pushable": false,
+        "raw_size": [
+            82.026,
+            401.762,
+            54.153
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-30f361478c8143fbb463dcf9b2a0cb61.glb": {
+        "category": "Traffic_light",
+        "scale": 0.063581,
+        "collision_radius": 0.402,
+        "pushable": false,
+        "raw_size": [
+            9.609,
+            78.64,
+            12.656
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-31bebc39a5a0470983dc26e72d5cb68e.glb": {
+        "category": "Traffic_light",
+        "scale": 0.313815,
+        "collision_radius": 0.736,
+        "pushable": false,
+        "raw_size": [
+            4.689,
+            15.933,
+            4.118
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-525722b75cca448ea57df110a9d5df84.glb": {
+        "category": "Traffic_light",
+        "scale": 0.420847,
+        "collision_radius": 0.439,
+        "pushable": false,
+        "raw_size": [
+            2.085,
+            11.881,
+            1.654
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-6f50614649a24b908634710dc65992a7.glb": {
+        "category": "Traffic_light",
+        "scale": 0.861912,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            5.801,
+            5.716,
+            0.585
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-7b86bedf64c04e15a0e01a84d29ea93d.glb": {
+        "category": "Traffic_light",
+        "scale": 0.139064,
+        "collision_radius": 2.026,
+        "pushable": false,
+        "raw_size": [
+            29.138,
+            35.955,
+            3.18
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-7c70f93203c0497d9a3c7404a1581bd6.glb": {
+        "category": "Traffic_light",
+        "scale": 0.006231,
+        "collision_radius": 0.454,
+        "pushable": false,
+        "raw_size": [
+            100.0,
+            802.491,
+            145.828
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-7da97e81a45346cfad4a8e1ec47994ab.glb": {
+        "category": "Traffic_light",
+        "scale": 0.885433,
+        "collision_radius": 1.052,
+        "pushable": false,
+        "raw_size": [
+            2.024,
+            5.647,
+            2.377
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-91e0f0d9601f48baaf9b3524578bd854.glb": {
+        "category": "Traffic_light",
+        "scale": 1.091906,
+        "collision_radius": 0.572,
+        "pushable": false,
+        "raw_size": [
+            0.856,
+            4.579,
+            1.048
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-aeed7931c96a4428aa8ff71eb398ee43.glb": {
+        "category": "Traffic_light",
+        "scale": 0.019811,
+        "collision_radius": 0.506,
+        "pushable": false,
+        "raw_size": [
+            51.073,
+            252.387,
+            35.746
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-b066e72f53324d3180dfb7960f12b877.glb": {
+        "category": "Traffic_light",
+        "scale": 2.5,
+        "collision_radius": 2.07,
+        "pushable": false,
+        "raw_size": [
+            0.28,
+            2.0,
+            1.656
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_light-dc39ecedc7be4fe0a1aa48841e268eaf.glb": {
+        "category": "Traffic_light",
+        "scale": 0.319505,
+        "collision_radius": 0.285,
+        "pushable": false,
+        "raw_size": [
+            1.724,
+            15.649,
+            1.784
+        ],
+        "calibrated_height": 5.0
+    },
+    "Traffic_sign-1358f096c19248d1a5284cac34c7ce25.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.546988,
+        "collision_radius": 0.407,
+        "pushable": false,
+        "raw_size": [
+            0.527,
+            1.616,
+            0.056
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-1409b6874ce04aa4a370dd81036b2cba.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.051971,
+        "collision_radius": 0.523,
+        "pushable": false,
+        "raw_size": [
+            0.995,
+            2.376,
+            0.063
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-1d7638953658403291f7eec8e00b6c9b.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.71516,
+        "collision_radius": 0.378,
+        "pushable": false,
+        "raw_size": [
+            1.057,
+            3.496,
+            0.206
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-2225bb40891b4ed083a75bd17e447dd0.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.008333,
+        "collision_radius": 0.417,
+        "pushable": false,
+        "raw_size": [
+            100.0,
+            300.0,
+            9.346
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-22f0c1d3e4dd4a489270ce69810feaeb.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.528893,
+        "collision_radius": 0.338,
+        "pushable": false,
+        "raw_size": [
+            0.266,
+            4.727,
+            1.279
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-3368a11b5c6940af836d1f22cdd7e109.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.446429,
+        "collision_radius": 0.201,
+        "pushable": false,
+        "raw_size": [
+            0.9,
+            5.6,
+            0.132
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-459c229bb92a4f9481ea42b167082ff8.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.920709,
+        "collision_radius": 0.336,
+        "pushable": false,
+        "raw_size": [
+            0.73,
+            2.715,
+            0.12
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-555fbab686004738b974373f6ad71d82.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.25,
+        "collision_radius": 0.282,
+        "pushable": false,
+        "raw_size": [
+            0.451,
+            2.0,
+            0.096
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-5cba813005fa467eb01f01a2b3aa90fa.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.236179,
+        "collision_radius": 0.46,
+        "pushable": false,
+        "raw_size": [
+            3.894,
+            10.585,
+            0.136
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-69007e71473f44d8b005f3073a1ab8f1.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.25,
+        "collision_radius": 0.294,
+        "pushable": false,
+        "raw_size": [
+            0.47,
+            2.0,
+            0.071
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-6cce0016ca3845c79b73b36a3208d94d.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.25,
+        "collision_radius": 0.374,
+        "pushable": false,
+        "raw_size": [
+            0.599,
+            2.0,
+            0.08
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-7096908956904c72a76852a949985a10.glb": {
+        "category": "Traffic_sign",
+        "scale": 3.476806,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            0.719,
+            0.695,
+            0.521
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-7da97e81a45346cfad4a8e1ec47994ab.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.442716,
+        "collision_radius": 0.526,
+        "pushable": false,
+        "raw_size": [
+            2.024,
+            5.647,
+            2.377
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-8a799f317db34aa8a1dab3cba303ce19.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.25,
+        "collision_radius": 0.57,
+        "pushable": false,
+        "raw_size": [
+            0.912,
+            2.0,
+            0.137
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-8e632f9680714da6b9536f5e6003c722.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.003826,
+        "collision_radius": 0.357,
+        "pushable": false,
+        "raw_size": [
+            26.477,
+            653.389,
+            186.378
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-9617eb0d8d18455692606d0e3f897bba.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.414027,
+        "collision_radius": 0.415,
+        "pushable": false,
+        "raw_size": [
+            2.005,
+            6.038,
+            0.214
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-a1af6017dc7d45f5a76df81258763dd2.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.017745,
+        "collision_radius": 0.471,
+        "pushable": false,
+        "raw_size": [
+            53.124,
+            140.882,
+            5.662
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-a3963ab8133b45cab4e60da94d255ac3.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.219538,
+        "collision_radius": 0.401,
+        "pushable": false,
+        "raw_size": [
+            0.657,
+            2.05,
+            0.07
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-a6ff6aa7753348bfb7de7d5abe55798b.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.009427,
+        "collision_radius": 0.435,
+        "pushable": false,
+        "raw_size": [
+            92.388,
+            265.194,
+            18.0
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-accb33eb52e6451a93fd707f9c91f68c.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.027795,
+        "collision_radius": 0.329,
+        "pushable": false,
+        "raw_size": [
+            23.676,
+            89.944,
+            3.259
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-adca408fc3684648bc21b8deb3fe62dd.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.834604,
+        "collision_radius": 0.386,
+        "pushable": false,
+        "raw_size": [
+            0.925,
+            2.995,
+            0.098
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-b066e72f53324d3180dfb7960f12b877.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.25,
+        "collision_radius": 1.035,
+        "pushable": false,
+        "raw_size": [
+            0.28,
+            2.0,
+            1.656
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-b0acaa246442490ab18ce0434dae7b0c.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.03876,
+        "collision_radius": 0.259,
+        "pushable": false,
+        "raw_size": [
+            4.01,
+            64.499,
+            13.358
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-c78915c065ef4c489c72bc138c7d0be8.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.425941,
+        "collision_radius": 0.441,
+        "pushable": false,
+        "raw_size": [
+            2.071,
+            5.869,
+            0.155
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-c8d085861b654e4f900abd02af15b038.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.208806,
+        "collision_radius": 0.261,
+        "pushable": false,
+        "raw_size": [
+            0.412,
+            11.973,
+            2.496
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-ce046168e8da425e96e41eb2807ff87c.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.018948,
+        "collision_radius": 0.571,
+        "pushable": false,
+        "raw_size": [
+            60.25,
+            131.938,
+            8.672
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-da93f352bf434f108dfe5e6460a99766.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.525097,
+        "collision_radius": 0.508,
+        "pushable": false,
+        "raw_size": [
+            1.935,
+            4.761,
+            1.059
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-dfde58b69a5543b29baa733e655c13dc.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.295674,
+        "collision_radius": 0.289,
+        "pushable": false,
+        "raw_size": [
+            1.957,
+            8.455,
+            0.247
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-e87be76d37364866aef993b47cc4501d.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.258522,
+        "collision_radius": 0.502,
+        "pushable": false,
+        "raw_size": [
+            0.798,
+            1.986,
+            0.045
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-eb9ad0f9d00d441a9fdac0dd951368b3.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.204876,
+        "collision_radius": 0.414,
+        "pushable": false,
+        "raw_size": [
+            0.39,
+            12.203,
+            4.042
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-f150e9e0ddd148e8b0e1f2a9a14084b1.glb": {
+        "category": "Traffic_sign",
+        "scale": 1.056184,
+        "collision_radius": 0.317,
+        "pushable": false,
+        "raw_size": [
+            0.6,
+            2.367,
+            0.071
+        ],
+        "calibrated_height": 2.5
+    },
+    "Traffic_sign-fd35bebdb5c444fbb917dfd1979ab4e2.glb": {
+        "category": "Traffic_sign",
+        "scale": 0.355588,
+        "collision_radius": 0.447,
+        "pushable": false,
+        "raw_size": [
+            2.515,
+            7.031,
+            0.065
+        ],
+        "calibrated_height": 2.5
+    },
+    "Train-00b78f7c14184e76805e0cea44aa5acb.glb": {
+        "category": "Train",
+        "scale": 0.184273,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            54.267,
+            5.682,
+            5.207
+        ],
+        "calibrated_height": 10.0
+    },
+    "Train-03532cc34da94fb2b05d20b81ee29a96.glb": {
+        "category": "Train",
+        "scale": 0.425326,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            2.918,
+            4.124,
+            23.511
+        ],
+        "calibrated_height": 10.0
+    },
+    "Train-07d7a69ffb544ec48442ae3448ee6f1f.glb": {
+        "category": "Train",
+        "scale": 0.183994,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            1.974,
+            3.312,
+            54.35
+        ],
+        "calibrated_height": 10.0
+    },
+    "Train-15037d079ed54288829e119c2fdf40f8.glb": {
+        "category": "Train",
+        "scale": 0.554374,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            3.025,
+            4.173,
+            18.038
+        ],
+        "calibrated_height": 10.0
+    },
+    "Train-16f43dc3abdd46ed907a1a51d4840c58.glb": {
+        "category": "Train",
+        "scale": 0.351218,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            2.0,
+            2.188,
+            28.472
+        ],
+        "calibrated_height": 10.0
+    },
+    "TrashCan-0e0a38f2d5424c00b7ce9a121a4d4017.glb": {
+        "category": "TrashCan",
+        "scale": 0.000933,
+        "collision_radius": 0.229,
+        "pushable": true,
+        "raw_size": [
+            484.777,
+            857.866,
+            491.311
+        ],
+        "calibrated_height": 0.8
+    },
+    "TrashCan-327df22c26dd458bb1ea63d89a254b91.glb": {
+        "category": "TrashCan",
+        "scale": 0.4,
+        "collision_radius": 0.275,
+        "pushable": true,
+        "raw_size": [
+            1.377,
+            2.0,
+            1.194
+        ],
+        "calibrated_height": 0.8
+    },
+    "TrashCan-4fe0c97a751640d7a434f2e6b5461e46.glb": {
+        "category": "TrashCan",
+        "scale": 0.244304,
+        "collision_radius": 0.269,
+        "pushable": true,
+        "raw_size": [
+            1.978,
+            3.275,
+            2.2
+        ],
+        "calibrated_height": 0.8
+    },
+    "TrashCan-685c0c5a9c3f4144993c4f146a527d8d.glb": {
+        "category": "TrashCan",
+        "scale": 0.119411,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            4.186,
+            6.7,
+            4.186
+        ],
+        "calibrated_height": 0.8
+    },
+    "TrashCan-6be8f9bde1bd4977b07c6440e4a5c51c.glb": {
+        "category": "TrashCan",
+        "scale": 0.003893,
+        "collision_radius": 0.176,
+        "pushable": true,
+        "raw_size": [
+            90.308,
+            205.514,
+            77.887
+        ],
+        "calibrated_height": 0.8
+    },
+    "TrashCan-9f78ea63f9794f87acb480309397b1cb.glb": {
+        "category": "TrashCan",
+        "scale": 0.846032,
+        "collision_radius": 0.245,
+        "pushable": true,
+        "raw_size": [
+            0.58,
+            0.946,
+            0.489
+        ],
+        "calibrated_height": 0.8
+    },
+    "TrashCan-e5e0f42aec4846a0bff905d0601fdd1e.glb": {
+        "category": "TrashCan",
+        "scale": 0.4,
+        "collision_radius": 0.268,
+        "pushable": true,
+        "raw_size": [
+            1.341,
+            2.0,
+            1.33
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-047f2510738e4969a0af9bde79f8c903.glb": {
+        "category": "Trash_bin",
+        "scale": 0.4,
+        "collision_radius": 0.276,
+        "pushable": true,
+        "raw_size": [
+            0.975,
+            2.0,
+            1.378
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-13255497c58745ffa04f84608fa76ea3.glb": {
+        "category": "Trash_bin",
+        "scale": 0.338955,
+        "collision_radius": 0.309,
+        "pushable": true,
+        "raw_size": [
+            1.729,
+            2.36,
+            1.824
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-1aba5376ea5c43ec84d01b9c0f713ee3.glb": {
+        "category": "Trash_bin",
+        "scale": 0.516927,
+        "collision_radius": 0.204,
+        "pushable": true,
+        "raw_size": [
+            0.788,
+            1.548,
+            0.788
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-210d05ab6d2f49c99d851263c5294358.glb": {
+        "category": "Trash_bin",
+        "scale": 0.006526,
+        "collision_radius": 0.273,
+        "pushable": true,
+        "raw_size": [
+            83.542,
+            122.586,
+            82.897
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-2503723f5571430c8a8732008bc2c4a3.glb": {
+        "category": "Trash_bin",
+        "scale": 1.300065,
+        "collision_radius": 0.265,
+        "pushable": true,
+        "raw_size": [
+            0.408,
+            0.615,
+            0.408
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-28df46b079434ec8b9e999c9aba1b08a.glb": {
+        "category": "Trash_bin",
+        "scale": 0.190156,
+        "collision_radius": 0.214,
+        "pushable": true,
+        "raw_size": [
+            2.248,
+            4.207,
+            2.248
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-48f510a8d6854d1a8f512217a6f55454.glb": {
+        "category": "Trash_bin",
+        "scale": 0.33123,
+        "collision_radius": 0.284,
+        "pushable": true,
+        "raw_size": [
+            1.712,
+            2.415,
+            1.64
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-558210e47805420ebac0a3e0d1bae429.glb": {
+        "category": "Trash_bin",
+        "scale": 0.001,
+        "collision_radius": 0.165,
+        "pushable": true,
+        "raw_size": [
+            330.0,
+            800.0,
+            330.0
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-576e6bcadb764bb5ad91bf48d93a95a5.glb": {
+        "category": "Trash_bin",
+        "scale": 0.596004,
+        "collision_radius": 0.244,
+        "pushable": true,
+        "raw_size": [
+            0.781,
+            1.342,
+            0.818
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-81e273d7b3fe438a89a7a25dd0903b07.glb": {
+        "category": "Trash_bin",
+        "scale": 0.007884,
+        "collision_radius": 0.246,
+        "pushable": true,
+        "raw_size": [
+            60.0,
+            101.471,
+            62.5
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-8dca3d38daf44ef9b3866efdce2eb8bb.glb": {
+        "category": "Trash_bin",
+        "scale": 0.805331,
+        "collision_radius": 0.166,
+        "pushable": true,
+        "raw_size": [
+            0.329,
+            0.993,
+            0.413
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-a6b953e4a23249b0b9a022df57baf91c.glb": {
+        "category": "Trash_bin",
+        "scale": 0.002238,
+        "collision_radius": 0.311,
+        "pushable": true,
+        "raw_size": [
+            277.801,
+            357.442,
+            278.027
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-a9ec83449cb54f56852f6090e45c682a.glb": {
+        "category": "Trash_bin",
+        "scale": 0.4,
+        "collision_radius": 0.306,
+        "pushable": true,
+        "raw_size": [
+            1.518,
+            2.0,
+            1.531
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-ab1f4b2e9d214eea95a3133bc3404a3b.glb": {
+        "category": "Trash_bin",
+        "scale": 0.752708,
+        "collision_radius": 0.338,
+        "pushable": true,
+        "raw_size": [
+            0.899,
+            1.063,
+            0.881
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-b555371c60fd4dc1879f6fb34cae240c.glb": {
+        "category": "Trash_bin",
+        "scale": 0.4,
+        "collision_radius": 0.291,
+        "pushable": true,
+        "raw_size": [
+            1.457,
+            2.0,
+            1.444
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-bdda2234bae0494995faedf33f434de4.glb": {
+        "category": "Trash_bin",
+        "scale": 0.045179,
+        "collision_radius": 0.223,
+        "pushable": true,
+        "raw_size": [
+            9.875,
+            17.707,
+            9.878
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-c0a78b0c02f046cbb770837cfd7d748f.glb": {
+        "category": "Trash_bin",
+        "scale": 0.006469,
+        "collision_radius": 0.289,
+        "pushable": true,
+        "raw_size": [
+            89.268,
+            123.674,
+            82.131
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-cdb190c53a7c4507b51bd36d00f674aa.glb": {
+        "category": "Trash_bin",
+        "scale": 0.016316,
+        "collision_radius": 0.272,
+        "pushable": true,
+        "raw_size": [
+            33.361,
+            49.033,
+            33.361
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-d70e1d9cbef24eabbaea329896ea08a7.glb": {
+        "category": "Trash_bin",
+        "scale": 0.929786,
+        "collision_radius": 0.281,
+        "pushable": true,
+        "raw_size": [
+            0.604,
+            0.86,
+            0.604
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-d72ea8fa07c4405785db809103ba16fc.glb": {
+        "category": "Trash_bin",
+        "scale": 0.264478,
+        "collision_radius": 0.321,
+        "pushable": true,
+        "raw_size": [
+            2.426,
+            3.025,
+            2.422
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-e7c6abf4fafd42a6a820feed01b0c6d2.glb": {
+        "category": "Trash_bin",
+        "scale": 1.086071,
+        "collision_radius": 0.346,
+        "pushable": true,
+        "raw_size": [
+            0.565,
+            0.737,
+            0.638
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-ea947728c46f40ffbbe95f0f2d7dd6d9.glb": {
+        "category": "Trash_bin",
+        "scale": 0.031133,
+        "collision_radius": 0.311,
+        "pushable": true,
+        "raw_size": [
+            18.0,
+            25.696,
+            20.0
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-f16b7d84113d4cba869412ee95769910.glb": {
+        "category": "Trash_bin",
+        "scale": 0.00493,
+        "collision_radius": 0.318,
+        "pushable": true,
+        "raw_size": [
+            128.849,
+            162.281,
+            114.658
+        ],
+        "calibrated_height": 0.8
+    },
+    "Trash_bin-f4440ba1c72f42bb887110ada7dcf3ca.glb": {
+        "category": "Trash_bin",
+        "scale": 0.4,
+        "collision_radius": 0.279,
+        "pushable": true,
+        "raw_size": [
+            1.127,
+            2.0,
+            1.397
+        ],
+        "calibrated_height": 0.8
+    },
+    "Tree-0918412ae8ce463192b117e5b901c81c.glb": {
+        "category": "Tree",
+        "scale": 3.711232,
+        "collision_radius": 1.967,
+        "pushable": false,
+        "raw_size": [
+            0.969,
+            1.078,
+            1.06
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-1f96dd69bd714542b8ad93ad17dadf27.glb": {
+        "category": "Tree",
+        "scale": 0.414417,
+        "collision_radius": 1.709,
+        "pushable": false,
+        "raw_size": [
+            8.25,
+            9.652,
+            6.262
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-344718eb9a83419e9f816253edcf3b7b.glb": {
+        "category": "Tree",
+        "scale": 0.231967,
+        "collision_radius": 1.14,
+        "pushable": false,
+        "raw_size": [
+            9.796,
+            17.244,
+            9.832
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-3ec75ea77a4d4ffc8ea2dc9744580151.glb": {
+        "category": "Tree",
+        "scale": 0.808833,
+        "collision_radius": 0.715,
+        "pushable": false,
+        "raw_size": [
+            1.579,
+            4.945,
+            1.768
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-43e343d8c83f4c0d8c7424e43edbf5c9.glb": {
+        "category": "Tree",
+        "scale": 0.634165,
+        "collision_radius": 1.542,
+        "pushable": false,
+        "raw_size": [
+            4.52,
+            6.308,
+            4.862
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-4886701e316b4d21bb4ff56080d05a27.glb": {
+        "category": "Tree",
+        "scale": 12.76398,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            0.313,
+            0.272,
+            0.303
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-5761dc5e469b42898d95bd8c0c814c9e.glb": {
+        "category": "Tree",
+        "scale": 0.15523,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            25.768,
+            23.257,
+            23.627
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-59601f2f73b84b5d951647b15aa2ea81.glb": {
+        "category": "Tree",
+        "scale": 0.950547,
+        "collision_radius": 1.193,
+        "pushable": false,
+        "raw_size": [
+            1.866,
+            4.208,
+            2.511
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-60cee0b63e4742d2a904d63609870621.glb": {
+        "category": "Tree",
+        "scale": 0.768191,
+        "collision_radius": 1.589,
+        "pushable": false,
+        "raw_size": [
+            4.133,
+            5.207,
+            4.137
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-6328df8a0f214143a880a72b86db2ab4.glb": {
+        "category": "Tree",
+        "scale": 0.707999,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            5.257,
+            4.606,
+            5.65
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-66075081e89f41f993161218dce12c64.glb": {
+        "category": "Tree",
+        "scale": 0.466339,
+        "collision_radius": 1.466,
+        "pushable": false,
+        "raw_size": [
+            6.286,
+            8.577,
+            5.759
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-728be0af32654c3eb235e1ff8659a417.glb": {
+        "category": "Tree",
+        "scale": 4.992945,
+        "collision_radius": 1.206,
+        "pushable": false,
+        "raw_size": [
+            0.483,
+            0.801,
+            0.466
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-75e82512822841d9b758d26f56da4cb4.glb": {
+        "category": "Tree",
+        "scale": 0.069735,
+        "collision_radius": 1.345,
+        "pushable": false,
+        "raw_size": [
+            38.571,
+            57.36,
+            37.011
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-7ce5b68f34834372aa3c49540793bf56.glb": {
+        "category": "Tree",
+        "scale": 0.005061,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            790.33,
+            699.96,
+            697.16
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-7d8cb01c1a3e4735940a8c73f4223c52.glb": {
+        "category": "Tree",
+        "scale": 0.20573,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            12.868,
+            15.048,
+            19.443
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-80c6afd83fcd496fb779c19a07335575.glb": {
+        "category": "Tree",
+        "scale": 1.245209,
+        "collision_radius": 1.78,
+        "pushable": false,
+        "raw_size": [
+            2.858,
+            3.212,
+            2.425
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-81746515b5a94e71a60ec18aa4583f83.glb": {
+        "category": "Tree",
+        "scale": 0.635747,
+        "collision_radius": 1.089,
+        "pushable": false,
+        "raw_size": [
+            3.037,
+            6.292,
+            3.425
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-851ebedd82264f5b9b5d0a38af10f2e3.glb": {
+        "category": "Tree",
+        "scale": 2.0,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            2.0,
+            1.654,
+            1.357
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-8b4f2938bcdf43d0a84834ebca200979.glb": {
+        "category": "Tree",
+        "scale": 0.17151,
+        "collision_radius": 1.178,
+        "pushable": false,
+        "raw_size": [
+            12.508,
+            23.322,
+            13.732
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-ad86036d9df24e60b53ce7b53dc551dd.glb": {
+        "category": "Tree",
+        "scale": 1.054835,
+        "collision_radius": 1.104,
+        "pushable": false,
+        "raw_size": [
+            2.094,
+            3.792,
+            1.701
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-c529315762d04ae5878daddf1cd5489c.glb": {
+        "category": "Tree",
+        "scale": 0.065136,
+        "collision_radius": 0.746,
+        "pushable": false,
+        "raw_size": [
+            18.8,
+            61.41,
+            22.916
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-c55bfe9f6ff94d1d94443796b3b320a5.glb": {
+        "category": "Tree",
+        "scale": 0.220016,
+        "collision_radius": 1.719,
+        "pushable": false,
+        "raw_size": [
+            12.848,
+            18.181,
+            15.622
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-c73983ac9d5b49eaacbbe260dc39176b.glb": {
+        "category": "Tree",
+        "scale": 0.257708,
+        "collision_radius": 1.387,
+        "pushable": false,
+        "raw_size": [
+            10.762,
+            15.521,
+            9.741
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-f678f5f553e4488b91234bbb2f9cf8ae.glb": {
+        "category": "Tree",
+        "scale": 2.0,
+        "collision_radius": 1.151,
+        "pushable": false,
+        "raw_size": [
+            1.151,
+            2.0,
+            0.89
+        ],
+        "calibrated_height": 4.0
+    },
+    "Tree-f70a95844f3d40b9b7fac241a71f9cd8.glb": {
+        "category": "Tree",
+        "scale": 4.525409,
+        "collision_radius": 1.62,
+        "pushable": false,
+        "raw_size": [
+            0.642,
+            0.884,
+            0.716
+        ],
+        "calibrated_height": 4.0
+    },
+    "Vegetation-3bb1c5445e22498db449a296b34620a5.glb": {
+        "category": "Vegetation",
+        "scale": 0.032618,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            17.007,
+            15.329,
+            15.245
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vegetation-3bf353171e7e48b4a50861f908f05be7.glb": {
+        "category": "Vegetation",
+        "scale": 1.960784,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            0.358,
+            0.255,
+            0.367
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vegetation-3f1cc53244254c3dab0ddfe3cac2aa34.glb": {
+        "category": "Vegetation",
+        "scale": 3.505029,
+        "collision_radius": 0.131,
+        "pushable": true,
+        "raw_size": [
+            0.073,
+            0.143,
+            0.075
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vegetation-520dc8e3d01d4ddc8d97c710508f9f8b.glb": {
+        "category": "Vegetation",
+        "scale": 0.570125,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            1.004,
+            0.877,
+            1.004
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vegetation-5479974baffe4d2b879c195745ccb11f.glb": {
+        "category": "Vegetation",
+        "scale": 0.181538,
+        "collision_radius": 0.201,
+        "pushable": true,
+        "raw_size": [
+            2.214,
+            2.754,
+            2.03
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vegetation-6c2980169c1e44e499d94a67c1752477.glb": {
+        "category": "Vegetation",
+        "scale": 0.134698,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            24.596,
+            3.712,
+            24.596
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vegetation-7e834bd36441470d94f62145accb18a3.glb": {
+        "category": "Vegetation",
+        "scale": 0.09996,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            6.083,
+            5.002,
+            5.644
+        ],
+        "calibrated_height": 0.5
+    },
+    "Vending_machine-1f698b4d051f46d282b6c6a044b50e0a.glb": {
+        "category": "Vending_machine",
+        "scale": 0.239765,
+        "collision_radius": 0.767,
+        "pushable": false,
+        "raw_size": [
+            6.399,
+            8.342,
+            3.983
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-349728c47f7e4f28b8cad5d86a9a38c2.glb": {
+        "category": "Vending_machine",
+        "scale": 0.010639,
+        "collision_radius": 0.651,
+        "pushable": false,
+        "raw_size": [
+            81.342,
+            187.982,
+            122.444
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-431394ee886141349e187fb8dcc2307a.glb": {
+        "category": "Vending_machine",
+        "scale": 1.002591,
+        "collision_radius": 0.6,
+        "pushable": false,
+        "raw_size": [
+            1.197,
+            1.995,
+            0.406
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-5140ea570e8c42018bf5180549f97a30.glb": {
+        "category": "Vending_machine",
+        "scale": 0.830215,
+        "collision_radius": 0.563,
+        "pushable": false,
+        "raw_size": [
+            0.969,
+            2.409,
+            1.356
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-65b4086c9c2e4feb8d273e48e146d786.glb": {
+        "category": "Vending_machine",
+        "scale": 0.372324,
+        "collision_radius": 0.376,
+        "pushable": false,
+        "raw_size": [
+            1.525,
+            5.372,
+            2.022
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-70f8f7b0d3aa4bd4b5d896f494eb1bb5.glb": {
+        "category": "Vending_machine",
+        "scale": 0.427781,
+        "collision_radius": 0.646,
+        "pushable": false,
+        "raw_size": [
+            3.018,
+            4.675,
+            2.368
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-72ce292e1bd945aea580d223c75a870e.glb": {
+        "category": "Vending_machine",
+        "scale": 0.483669,
+        "collision_radius": 0.523,
+        "pushable": false,
+        "raw_size": [
+            1.077,
+            4.135,
+            2.163
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-efb393f5a3bb4bbfbe1bf5c13abb372d.glb": {
+        "category": "Vending_machine",
+        "scale": 0.186802,
+        "collision_radius": 0.555,
+        "pushable": false,
+        "raw_size": [
+            5.944,
+            10.707,
+            3.274
+        ],
+        "calibrated_height": 2.0
+    },
+    "Vending_machine-fa0f89663cc941e0989532d718f909bd.glb": {
+        "category": "Vending_machine",
+        "scale": 0.008809,
+        "collision_radius": 0.44,
+        "pushable": false,
+        "raw_size": [
+            100.0,
+            227.052,
+            90.82
+        ],
+        "calibrated_height": 2.0
+    },
+    "Wall-017de849d95447b79377ff40dfbc3c8d.glb": {
+        "category": "Wall",
+        "scale": 0.006253,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            399.82,
+            199.922,
+            8.713
+        ],
+        "calibrated_height": 2.5
+    },
+    "Wall-026a65b989184ccb91d1359233a0cfdf.glb": {
+        "category": "Wall",
+        "scale": 0.112598,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            22.203,
+            2.592,
+            1.607
+        ],
+        "calibrated_height": 2.5
+    },
+    "Wall-0788f8b362a6463fa08ad75273c530ea.glb": {
+        "category": "Wall",
+        "scale": 0.006137,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            407.348,
+            200.611,
+            158.16
+        ],
+        "calibrated_height": 2.5
+    },
+    "Wall-0c5ac6f214504a3bb65cfacca8ab50df.glb": {
+        "category": "Wall",
+        "scale": 0.175189,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            1.272,
+            5.581,
+            14.27
+        ],
+        "calibrated_height": 2.5
+    },
+    "Wall-0c61955a8f2440eeb2bba3d8f5b27750.glb": {
+        "category": "Wall",
+        "scale": 0.124428,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            20.092,
+            8.033,
+            3.333
+        ],
+        "calibrated_height": 2.5
+    },
+    "Wall-0cbf546419cf499cbabfee3af0916215.glb": {
+        "category": "Wall",
+        "scale": 0.208333,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            12.0,
+            2.334,
+            5.0
+        ],
+        "calibrated_height": 2.5
+    },
+    "Wheelchair-11774a25e4bd407c811a208a06c04290.glb": {
+        "category": "Wheelchair",
+        "scale": 0.279782,
+        "collision_radius": 0.6,
+        "pushable": false,
+        "raw_size": [
+            4.289,
+            3.279,
+            3.518
+        ],
+        "calibrated_height": 1.2
+    },
+    "Wheelchair-379b5009f94b4996b5d14d5e287283c7.glb": {
+        "category": "Wheelchair",
+        "scale": 0.036017,
+        "collision_radius": 0.6,
+        "pushable": false,
+        "raw_size": [
+            33.318,
+            29.019,
+            18.178
+        ],
+        "calibrated_height": 1.2
+    },
+    "Wheelchair-3edbd8ffbb34480ca4876aa5b9e6f0ca.glb": {
+        "category": "Wheelchair",
+        "scale": 0.512029,
+        "collision_radius": 0.571,
+        "pushable": false,
+        "raw_size": [
+            1.622,
+            2.344,
+            2.23
+        ],
+        "calibrated_height": 1.2
+    },
+    "Wheelchair-e193b47b584e4b978d71f7b68178e61c.glb": {
+        "category": "Wheelchair",
+        "scale": 0.025934,
+        "collision_radius": 0.6,
+        "pushable": false,
+        "raw_size": [
+            32.39,
+            45.782,
+            46.271
+        ],
+        "calibrated_height": 1.2
+    },
+    "Wheelchair-f0e327c8b90c4c66a4cc5326e848b743.glb": {
+        "category": "Wheelchair",
+        "scale": 0.279782,
+        "collision_radius": 0.6,
+        "pushable": false,
+        "raw_size": [
+            4.289,
+            3.279,
+            3.518
+        ],
+        "calibrated_height": 1.2
+    },
+    "bicycle-9d2902a4d3ec4921b3bc9c4eeeb7c13d.glb": {
+        "category": "Bicycle",
+        "scale": 0.189444,
+        "collision_radius": 0.85,
+        "pushable": false,
+        "raw_size": [
+            8.974,
+            6.25,
+            3.903
+        ],
+        "calibrated_height": 1.7
+    },
+    "bus station-001e4438fc2742ad81356aae14c94d4a.glb": {
+        "category": "Bus",
+        "scale": 0.142085,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            70.381,
+            61.136,
+            40.672
+        ],
+        "calibrated_height": 10.0
+    },
+    "bus station-5acd6128d0b64ea2802bb7ae9aaa6c3d.glb": {
+        "category": "Bus",
+        "scale": 0.380678,
+        "collision_radius": 5.0,
+        "pushable": false,
+        "raw_size": [
+            13.222,
+            14.598,
+            26.269
+        ],
+        "calibrated_height": 10.0
+    },
+    "car-03a6d639648540e3ad45ed38c9b19d1f.glb": {
+        "category": "car",
+        "scale": 2.25,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            1.041,
+            0.855,
+            2.0
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-334ebc41e59747898f612b38cef4aa7a.glb": {
+        "category": "car",
+        "scale": 0.694038,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            3.164,
+            1.55,
+            6.484
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-389f9ebcaeb84cbfb020a88a25751edc.glb": {
+        "category": "car",
+        "scale": 0.956095,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            4.707,
+            1.428,
+            2.152
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-5416965277554e7682fcc2dc4961a99d.glb": {
+        "category": "car",
+        "scale": 0.022739,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            85.681,
+            66.749,
+            197.901
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-af108d4773df4722a62420f65dd5b8fe.glb": {
+        "category": "car",
+        "scale": 0.007359,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            304.757,
+            228.678,
+            611.489
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-d893ecd4f4d94f509aa7312306d74c61.glb": {
+        "category": "car",
+        "scale": 0.008325,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            251.048,
+            210.168,
+            540.541
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-d999506c52cf4313aad5220f4af2da6c.glb": {
+        "category": "car",
+        "scale": 0.906746,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            2.294,
+            1.387,
+            4.963
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-e4087350c4d84d8391de09b405c96488.glb": {
+        "category": "car",
+        "scale": 1.020447,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            2.033,
+            1.664,
+            4.41
+        ],
+        "calibrated_height": 4.5
+    },
+    "car-f3c9f419c0924e968deed17196248c98.glb": {
+        "category": "car",
+        "scale": 1.3735,
+        "collision_radius": 2.25,
+        "pushable": false,
+        "raw_size": [
+            3.276,
+            1.081,
+            1.13
+        ],
+        "calibrated_height": 4.5
+    },
+    "crosswalk-58536b98094b4755b50910f94ab8e24d.glb": {
+        "category": "crosswalk",
+        "scale": 1.0,
+        "collision_radius": 3.0,
+        "pushable": false,
+        "raw_size": [
+            6.0,
+            0.092,
+            6.0
+        ],
+        "calibrated_height": 6.0
+    },
+    "deliberyrobot-002.glb": {
+        "category": "deliberyrobot",
+        "scale": 0.112529,
+        "collision_radius": 0.354,
+        "pushable": false,
+        "raw_size": [
+            5.789,
+            8.887,
+            6.297
+        ],
+        "calibrated_height": 1.0
+    },
+    "deliveryrobot-001.glb": {
+        "category": "deliveryrobot",
+        "scale": 0.362191,
+        "collision_radius": 0.351,
+        "pushable": false,
+        "raw_size": [
+            1.941,
+            2.761,
+            1.363
+        ],
+        "calibrated_height": 1.0
+    },
+    "dog-1459b443cf6b4d5499387bc76942a1d9.glb": {
+        "category": "dog",
+        "scale": 0.002574,
+        "collision_radius": 0.4,
+        "pushable": false,
+        "raw_size": [
+            80.359,
+            238.571,
+            310.848
+        ],
+        "calibrated_height": 0.8
+    },
+    "dog-166469433a8948c386d127c6cf374513.glb": {
+        "category": "dog",
+        "scale": 0.005807,
+        "collision_radius": 0.4,
+        "pushable": false,
+        "raw_size": [
+            137.763,
+            112.392,
+            46.002
+        ],
+        "calibrated_height": 0.8
+    },
+    "firerelated-003199cc6ff2410cb2d8e6f8a9cbb163.glb": {
+        "category": "firerelated",
+        "scale": 0.999919,
+        "collision_radius": 0.451,
+        "pushable": true,
+        "raw_size": [
+            0.903,
+            1.0,
+            0.903
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-0777a03dfb694e7dad44d9cd4f24aa0b.glb": {
+        "category": "firerelated",
+        "scale": 1.121012,
+        "collision_radius": 0.276,
+        "pushable": true,
+        "raw_size": [
+            0.493,
+            0.892,
+            0.476
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-401975f4ad99458988d484f540d92b77.glb": {
+        "category": "firerelated",
+        "scale": 0.101268,
+        "collision_radius": 0.298,
+        "pushable": true,
+        "raw_size": [
+            5.893,
+            9.875,
+            5.107
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-6adac8e59c2949ad8e0acb003f49a7d9.glb": {
+        "category": "firerelated",
+        "scale": 0.946315,
+        "collision_radius": 0.275,
+        "pushable": true,
+        "raw_size": [
+            0.576,
+            1.057,
+            0.582
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-6f95f738a4ed4ad1853b4185629b403b.glb": {
+        "category": "firerelated",
+        "scale": 0.00304,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            872.045,
+            328.906,
+            1285.0
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-7595589f732245ac9b2ddae0ef931868.glb": {
+        "category": "firerelated",
+        "scale": 0.94605,
+        "collision_radius": 0.279,
+        "pushable": true,
+        "raw_size": [
+            0.59,
+            1.057,
+            0.59
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-87edf04deb28434993274d9f05070865.glb": {
+        "category": "firerelated",
+        "scale": 0.094625,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            31.266,
+            10.568,
+            23.61
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-aac70737c4f5478ebf9e14387a123214.glb": {
+        "category": "firerelated",
+        "scale": 0.358038,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            6.737,
+            2.793,
+            2.486
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-b1f70147994249f7bec09c836deb28a4.glb": {
+        "category": "firerelated",
+        "scale": 0.347826,
+        "collision_radius": 0.5,
+        "pushable": true,
+        "raw_size": [
+            2.808,
+            2.875,
+            8.245
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-d901e4ef6c55419b91a7542fefe83983.glb": {
+        "category": "firerelated",
+        "scale": 0.048243,
+        "collision_radius": 0.269,
+        "pushable": true,
+        "raw_size": [
+            10.599,
+            20.728,
+            11.136
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-e960933dc93d4c9aa08696798b779100.glb": {
+        "category": "firerelated",
+        "scale": 0.032585,
+        "collision_radius": 0.218,
+        "pushable": true,
+        "raw_size": [
+            12.48,
+            30.689,
+            13.356
+        ],
+        "calibrated_height": 1.0
+    },
+    "firerelated-f05b0c2f9bcf41cea188a4b4c848068a.glb": {
+        "category": "firerelated",
+        "scale": 0.012244,
+        "collision_radius": 0.235,
+        "pushable": true,
+        "raw_size": [
+            37.257,
+            81.672,
+            38.362
+        ],
+        "calibrated_height": 1.0
+    },
+    "foodtruck-21330fcaf3e446118397aadced6fa218.glb": {
+        "category": "foodtruck",
+        "scale": 2.0,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            1.101,
+            1.367,
+            2.0
+        ],
+        "calibrated_height": 4.0
+    },
+    "foodtruck-73e98eb961c7465da9e1b61091b75727.glb": {
+        "category": "foodtruck",
+        "scale": 0.744285,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            3.847,
+            3.28,
+            5.374
+        ],
+        "calibrated_height": 4.0
+    },
+    "foodtruck-871520a4f91c483f95c279926ac524c6.glb": {
+        "category": "foodtruck",
+        "scale": 1.074976,
+        "collision_radius": 2.0,
+        "pushable": false,
+        "raw_size": [
+            3.721,
+            1.853,
+            2.054
+        ],
+        "calibrated_height": 4.0
+    },
+    "robot_dog-003.glb": {
+        "category": "robot_dog",
+        "scale": 0.90289,
+        "collision_radius": 0.25,
+        "pushable": false,
+        "raw_size": [
+            0.554,
+            0.321,
+            0.243
+        ],
+        "calibrated_height": 0.5
+    },
+    "robot_dog-005.glb": {
+        "category": "robot_dog",
+        "scale": 0.121525,
+        "collision_radius": 0.25,
+        "pushable": false,
+        "raw_size": [
+            1.83,
+            2.621,
+            4.114
+        ],
+        "calibrated_height": 0.5
+    },
+    "static biker-d165593433754d2283f655e2b3cc8dc1.glb": {
+        "category": "static",
+        "scale": 0.009475,
+        "collision_radius": 0.9,
+        "pushable": false,
+        "raw_size": [
+            189.965,
+            160.188,
+            94.542
+        ],
+        "calibrated_height": 1.8
+    },
+    "static motocycle-15e67a3076494bb99ba7504c9913ceb5.glb": {
+        "category": "static",
+        "scale": 0.677074,
+        "collision_radius": 0.9,
+        "pushable": false,
+        "raw_size": [
+            0.938,
+            1.595,
+            2.658
+        ],
+        "calibrated_height": 1.8
+    },
+    "static motocycle-f121301624174b179ca4d50158797b03.glb": {
+        "category": "static",
+        "scale": 0.842349,
+        "collision_radius": 0.9,
+        "pushable": false,
+        "raw_size": [
+            0.857,
+            1.418,
+            2.137
+        ],
+        "calibrated_height": 1.8
+    },
+    "stop rail-1ca049b5951542f094ef409f74534ae3.glb": {
+        "category": "stop",
+        "scale": 0.014488,
+        "collision_radius": 1.25,
+        "pushable": false,
+        "raw_size": [
+            59.81,
+            69.874,
+            172.56
+        ],
+        "calibrated_height": 2.5
+    },
+    "stop sign-8be31e33b3df4d6db7c75730ff11dfd8.glb": {
+        "category": "stop",
+        "scale": 7.561263,
+        "collision_radius": 0.311,
+        "pushable": false,
+        "raw_size": [
+            0.082,
+            0.331,
+            0.082
+        ],
+        "calibrated_height": 2.5
+    },
+    "stop sign-adca408fc3684648bc21b8deb3fe62dd.glb": {
+        "category": "stop",
+        "scale": 0.834604,
+        "collision_radius": 0.386,
+        "pushable": false,
+        "raw_size": [
+            0.925,
+            2.995,
+            0.098
+        ],
+        "calibrated_height": 2.5
+    },
+    "trafficcone-03bd1398d4fb417dbd1119b8d2eba072.glb": {
+        "category": "trafficcone",
+        "scale": 0.003674,
+        "collision_radius": 0.184,
+        "pushable": true,
+        "raw_size": [
+            100.0,
+            204.15,
+            100.0
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-19a78c587c3b4ea68a832b665ce58ca7.glb": {
+        "category": "trafficcone",
+        "scale": 0.85261,
+        "collision_radius": 0.217,
+        "pushable": true,
+        "raw_size": [
+            0.508,
+            0.88,
+            0.508
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-1d3f306efb4e4b43869b986c0f428b8f.glb": {
+        "category": "trafficcone",
+        "scale": 0.242268,
+        "collision_radius": 0.242,
+        "pushable": true,
+        "raw_size": [
+            2.0,
+            3.096,
+            2.0
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-24966191cff0474facf8e56dcee453bf.glb": {
+        "category": "trafficcone",
+        "scale": 0.011549,
+        "collision_radius": 0.334,
+        "pushable": true,
+        "raw_size": [
+            57.88,
+            64.943,
+            57.88
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-35388e3fadfa4fd2a453d36b3ce2af4b.glb": {
+        "category": "trafficcone",
+        "scale": 1.016018,
+        "collision_radius": 0.332,
+        "pushable": true,
+        "raw_size": [
+            0.653,
+            0.738,
+            0.653
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-36a9ebf2c3584519a8dbd3b7e8c2a348.glb": {
+        "category": "trafficcone",
+        "scale": 0.018675,
+        "collision_radius": 0.205,
+        "pushable": true,
+        "raw_size": [
+            22.001,
+            40.162,
+            22.001
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-41db138b35db45cf97624669f03b89fd.glb": {
+        "category": "trafficcone",
+        "scale": 0.044357,
+        "collision_radius": 0.333,
+        "pushable": true,
+        "raw_size": [
+            15.0,
+            16.908,
+            15.0
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-44ac0cee8ae2411f8b15218e9aec0043.glb": {
+        "category": "trafficcone",
+        "scale": 0.221478,
+        "collision_radius": 0.363,
+        "pushable": true,
+        "raw_size": [
+            3.23,
+            3.386,
+            3.28
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-51cc688ae4254e30813e0bdc5997af1e.glb": {
+        "category": "trafficcone",
+        "scale": 0.116718,
+        "collision_radius": 0.25,
+        "pushable": true,
+        "raw_size": [
+            4.289,
+            6.426,
+            4.289
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-6bead16346974abba15357a2d1adc0d9.glb": {
+        "category": "trafficcone",
+        "scale": 7.259579,
+        "collision_radius": 0.183,
+        "pushable": true,
+        "raw_size": [
+            0.051,
+            0.103,
+            0.051
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-87e57a593d684dc4a6dfd70e598b1cef.glb": {
+        "category": "trafficcone",
+        "scale": 0.014989,
+        "collision_radius": 0.309,
+        "pushable": true,
+        "raw_size": [
+            41.288,
+            50.037,
+            41.288
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-89a750d568cc4817b163daec27625dd0.glb": {
+        "category": "trafficcone",
+        "scale": 0.003007,
+        "collision_radius": 0.301,
+        "pushable": true,
+        "raw_size": [
+            200.0,
+            249.414,
+            200.0
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-c469cc01064742b4a730d51526458c78.glb": {
+        "category": "trafficcone",
+        "scale": 0.232393,
+        "collision_radius": 0.356,
+        "pushable": true,
+        "raw_size": [
+            2.862,
+            3.227,
+            3.061
+        ],
+        "calibrated_height": 0.75
+    },
+    "trafficcone-c87799d0ebca4d939112bcee151f80cc.glb": {
+        "category": "trafficcone",
+        "scale": 0.19445,
+        "collision_radius": 0.194,
+        "pushable": true,
+        "raw_size": [
+            2.0,
+            3.857,
+            2.0
+        ],
+        "calibrated_height": 0.75
+    },
+    "traffic light-477c336845b94b8a82b486735f748b34.glb": {
+        "category": "Traffic_light",
+        "scale": 0.683176,
+        "collision_radius": 2.5,
+        "pushable": false,
+        "raw_size": [
+            7.319,
+            7.03,
+            0.613
+        ],
+        "calibrated_height": 5.0
+    }
+}
