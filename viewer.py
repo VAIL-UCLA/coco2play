@@ -16,6 +16,7 @@ import base64
 import hashlib
 import json
 import math
+import os
 import random
 import re
 import struct
@@ -2067,14 +2068,9 @@ def main() -> None:
 
     def _ensure_autopilot_navigator(ap: AutopilotSession) -> None:
         if ap.navigator is None:
-            device = "cuda"
-            try:
-                import torch
-
-                if not torch.cuda.is_available():
-                    device = "cpu"
-            except Exception:
-                device = "cpu"
+            # "auto" tries CUDA when available; coco_navigator falls back to CPU
+            # if cuDNN/CUDA init fails (common on misconfigured GPU servers).
+            device = os.environ.get("COCO_AUTOPILOT_DEVICE", "auto")
             ap.navigator = CocoNavigator(device=device)
 
     def _run_autopilot_inference(sess: ClientSession, client: viser.ClientHandle) -> None:

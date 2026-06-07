@@ -111,6 +111,36 @@ class PDController:
         return v, w
 
 
+def _create_ort_session(onnx_path: str | os.PathLike[str], prefer_cuda: bool):
+    """Open an ONNX session, falling back to CPU if CUDA/cuDNN init fails."""
+    import onnxruntime as ort
+
+    ort.set_default_logger_severity(3)
+    sess_opts = ort.SessionOptions()
+    sess_opts.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
+    cpu_providers = ["CPUExecutionProvider"]
+
+    if prefer_cuda and "CUDAExecutionProvider" in ort.get_available_providers():
+        cuda_providers = [
+            ("CUDAExecutionProvider", {"arena_extend_strategy": "kSameAsRequested"}),
+            "CPUExecutionProvider",
+        ]
+        try:
+            session = ort.InferenceSession(
+                str(onnx_path), sess_options=sess_opts, providers=cuda_providers
+            )
+            print("✓ CocoNavigator ONNX session: CUDAExecutionProvider")
+            return session, "cuda"
+        except Exception as exc:
+            print(f"⚠ CocoNavigator CUDA init failed ({exc!r}), using CPU")
+
+    session = ort.InferenceSession(
+        str(onnx_path), sess_options=sess_opts, providers=cpu_providers
+    )
+    print("✓ CocoNavigator ONNX session: CPUExecutionProvider")
+    return session, "cpu"
+
+
 class CocoNavigator:
     context_size = 21
     multimodal = True
@@ -118,30 +148,22 @@ class CocoNavigator:
     def __init__(
         self,
         onnx_path: str | os.PathLike[str] = ONNX_PATH,
-        device: str = "cuda",
+        device: str = "auto",
         max_v: float = 1.5,
         max_w: float = 0.65,
         dt: float = 1.0,
     ) -> None:
-        import onnxruntime as ort
         import yaml
 
-        self.device = device
         self.dt = dt
-
-        ort.set_default_logger_severity(3)
-        sess_opts = ort.SessionOptions()
-        sess_opts.graph_optimization_level = ort.GraphOptimizationLevel.ORT_DISABLE_ALL
-        available = set(ort.get_available_providers())
-        providers: list = []
-        if "CUDAExecutionProvider" in available:
-            providers.append(
-                ("CUDAExecutionProvider", {"arena_extend_strategy": "kSameAsRequested"})
-            )
-        providers.append("CPUExecutionProvider")
-        self._session = ort.InferenceSession(
-            str(onnx_path), sess_options=sess_opts, providers=providers
+        prefer_cuda = device.lower() == "cuda" or (
+            device.lower() == "auto" and os.environ.get("COCO_AUTOPILOT_DEVICE", "auto").lower() != "cpu"
         )
+        if os.environ.get("COCO_AUTOPILOT_DEVICE", "").lower() == "cpu":
+            prefer_cuda = False
+
+        self._session, self.ort_device = _create_ort_session(onnx_path, prefer_cuda=prefer_cuda)
+
         with open(INFO_PATH, "r", encoding="utf-8") as f:
             self._info = yaml.safe_load(f)
 
@@ -213,7 +235,7 @@ class CocoNavigator:
 
         trajectory, scores = self.inference_trajectory(obs)
         best_traj, _ = select_best_mode(trajectory, scores)
-        waypoints = torch.from_numpy(best_traj).float().to(self.device)
+        waypoints = torch.from_numpy(best_traj).float()
         _, w = self._controller(waypoints[..., :2], dt=self.dt)
         v = waypoints[:, 5, 2]
         return torch.stack([v, w], dim=1), best_traj
