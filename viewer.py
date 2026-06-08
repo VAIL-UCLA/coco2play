@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Viser viewer: 3DGS scene + drivable robot + collision physics.
+"""Coco2Play: 3DGS scene + drivable robot + collision physics (COCOVerse photorealistic simulator).
 
 Usage:
     python viewer.py
 
-Then open http://localhost:8080 in your browser.
+Then open http://localhost:1234 in your browser.
 Use IJKL to drive the robot. Press R to record ego observations to recordings/.
 The invisible mesh provides collision boundaries.
 """

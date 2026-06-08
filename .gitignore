@@ -1,12 +1,9 @@
 __pycache__/
 dist/
-web/node_modules/
-worker/node_modules/
-worker/.wrangler/
 .DS_Store
 
-# Gaussian splat point clouds are hosted via GitHub Releases.
-# See scripts/upload-pointclouds.sh and data/meta.json (_data_sources).
+# Gaussian splat point clouds are large (~200–800 MB); keep on disk locally.
+# Optional: scripts/upload-pointclouds.sh to publish copies via GitHub Releases.
 data/scene*/point_cloud.ply
 
 # Pushable assets are not committed (~1k GLBs); host out-of-band when needed.
@@ -16,3 +13,6 @@ data/scene*/point_cloud.ply
 recordings/
 
 models/Coco_GL_SW1k/
+
+deploy/
+docs/

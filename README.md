@@ -1,22 +1,23 @@
 # Coco2Play — Interactive 3DGS Robot Viewer
 
-An interactive web-based viewer for driving a robot through photorealistic 3D Gaussian Splatting scenes with real-time collision physics.
+An interactive web-based viewer for driving the [COCO](https://www.cocodelivery.com/) delivery robot through photorealistic 3D Gaussian Splatting (3DGS) scenes with real-time collision physics, ego recording, and learned autopilot.
+
+Part of **COCOVerse**, a UCLA capstone project that also includes the stylized sandbox [coco-playground](https://github.com/VAIL-UCLA/coco-playground) (Sketchbook fork, GTA-style mesh world).
 
 ## Features
 
 - **3D Gaussian Splatting** — Photorealistic scene rendering via [Viser](https://github.com/viser-project/viser)
-- **Drivable Robot** — Full URDF robot (coco_one) with textured body mesh recovered from GLB
+- **Drivable Robot** — Full URDF robot (`coco_one`) with textured body mesh recovered from GLB
 - **Collision Detection** — FCL box-vs-mesh collision with fallback to trimesh ray casting
-- **Bicycle Kinematics** — Realistic steering, wheel roll animation, and speed dynamics
-- **Collision Banner** — Dramatic animated "COLLISION!" overlay on impact
-- **Camera Orbit** — Follow-cam with adjustable elevation and orbit angle
-- **Ego Camera** — First-person camera view from the robot with HUD overlay and optional frustum visualization
-- **Observation Recording** — Save ego-view JPEGs plus drive controls to `recordings/` (4 Hz, press **R**)
-- **Pushable Assets** — Calibrated GLB objects placed in the scene that respond to robot collisions with real-time physics
-- **Multi-Client Sessions** — Each browser tab gets its own robot; disconnected robots are automatically cleaned up from the scene
-- **Multi-Scene** — Switch scenes at runtime; each has its own spawn point and rotation defined in `data/meta.json`
-- **Bandwidth Optimised** — Collision mesh kept server-side only (~53 MB saved per client connection), suitable for Cloudflare tunnels
-- **Single-Port Architecture** — aiohttp proxy on port 1234 routes keyboard WebSocket (`/keyboard`) and all Viser traffic through one port, Cloudflare-tunnel-compatible
+- **Bicycle Kinematics** — Spring-damper steering, wheel roll animation, and speed dynamics
+- **Ego Camera** — First-person view with optional frustum visualization
+- **Observation Recording** — Ego-view JPEGs plus drive controls to `recordings/` (4 Hz, press **R**)
+- **Autopilot** — Closed-loop **Coco-GL-SW1k** ONNX navigation (`models/coco_navigator.py`)
+- **Pushable Assets** — Calibrated GLB objects with real-time push physics
+- **Multi-Client Sessions** — Each browser tab gets its own robot; cleanup on disconnect
+- **Multi-Scene** — Ten scenes with per-scene spawn and rotation in `data/meta.json`
+- **Bandwidth Optimised** — Collision mesh server-side only (~53 MB saved per client)
+- **Single-Port Architecture** — aiohttp proxy on port 1234 (Cloudflare-tunnel-friendly)
 
 ---
 
@@ -24,35 +25,18 @@ An interactive web-based viewer for driving a robot through photorealistic 3D Ga
 
 ```
 .
-├── viewer.py                  # Main application (Viser server + TCP proxy + sim loop)
+├── viewer.py                  # Main application (Viser + proxy + sim + autopilot)
+├── models/
+│   ├── coco_navigator.py      # Coco-GL-SW1k ONNX wrapper
+│   └── Coco_GL_SW1k/          # coco.onnx (not committed — see README there)
 ├── data/
 │   ├── meta.json              # Scene metadata (name, spawn_point, scene_rotation)
-│   ├── objects/
-│   │   ├── calibration.json   # Asset scale, collision radius, and physics metadata
-│   │   └── *.glb              # Pushable 3D asset meshes
-│   ├── scene1/
-│   │   ├── point_cloud.ply    # 3DGS point cloud (NOT committed — hosted as a GitHub Release asset)
-│   │   └── mesh.ply           # Collision mesh (Git LFS)
-│   └── scene2/  ...
-├── urdf/
-│   ├── coco_one.urdf          # Robot description
-│   ├── meshes/
-│   │   ├── Back_Graphic.obj   # Textured body mesh (extracted from coco-gradient.glb)
-│   │   ├── Back_Graphic.mtl   # Material definitions
-│   │   ├── base_link.obj      # Chassis mesh
-│   │   ├── front_axle_link.obj
-│   │   └── *_wheel_link.obj   # Wheel meshes (x4)
-│   └── textures/              # PNG textures extracted from GLB
-│       ├── Body.png
-│       ├── Back-Graphic.png
-│       ├── LID.png
-│       └── coco-white.png
-├── web/                       # Static GitHub Pages app (Three.js + GaussianSplats3D)
-│   ├── src/main.js
-│   ├── index.html
-│   └── package.json
-└── .github/workflows/
-    └── deploy.yml             # Auto-deploy to GitHub Pages on push to main
+│   ├── objects/               # Pushable GLB assets + calibration.json
+│   └── scene*/                # point_cloud.ply (local) + mesh.ply (Git LFS)
+├── urdf/                      # coco_one.urdf + meshes
+├── scripts/upload-pointclouds.sh   # Optional: publish PLYs to GitHub Releases
+├── deploy/                    # Cloudflare Tunnel + systemd templates
+└── docs/                      # capstone report, DEPLOYMENT.md
 ```
 
 ---
@@ -62,14 +46,25 @@ An interactive web-based viewer for driving a robot through photorealistic 3D Ga
 ### Prerequisites
 
 ```bash
-pip install viser trimesh plyfile numpy
+pip install viser trimesh plyfile numpy aiohttp
+pip install python-fcl          # optional, preferred collision
 ```
 
-Optional — full FCL box-vs-mesh collision:
+**Autopilot (optional):**
 
 ```bash
-pip install python-fcl
+pip install onnxruntime torch pyyaml        # macOS / CPU
+pip install onnxruntime-gpu torch pyyaml    # Linux + NVIDIA GPU
 ```
+
+Copy `coco.onnx` into `models/Coco_GL_SW1k/` (see `models/Coco_GL_SW1k/README.md`).
+
+### Scene data
+
+Each `data/sceneN/` needs both:
+
+- `point_cloud.ply` — 3DGS splats (~200–800 MB, **not in git**; keep on disk)
+- `mesh.ply` — collision mesh (Git LFS)
 
 ### Run
 
@@ -77,7 +72,7 @@ pip install python-fcl
 python viewer.py
 ```
 
-Opens on **http://localhost:1234**
+Open **http://localhost:1234** in your browser. Click the viewport to capture keyboard focus.
 
 ---
 
@@ -93,172 +88,112 @@ Opens on **http://localhost:1234**
 | **W / S** | Tilt camera up / down |
 | **R** | Toggle observation recording |
 
-### GUI Panel
+### GUI
 
 | Control | Description |
 |---------|-------------|
-| Scene dropdown | Switch between scenes (resets robot to spawn) |
-| Camera FOV | Adjust field of view (30°–120°) |
-| Max Speed | Cap robot top speed (0.5–10 m/s) |
-| Enable Collision | Toggle collision detection |
-| Camera Follow Robot | Toggle follow-cam |
-| Ego Camera View | Toggle first-person camera from robot |
-| Show Ego Frustum | Show/hide camera frustum wireframe |
-| Record Observations | Start/stop recording for all connected clients |
-| Show Mesh | Visualise the hidden collision mesh |
-| Reset Position | Teleport robot back to spawn point |
+| Scene dropdown | Switch scenes (resets robot to spawn) |
+| Autopilot | Coco-GL-SW1k closed-loop driving (Ego Camera panel) |
+| Ego / Frustum | First-person view and camera frustum viz |
+| Record Observations | Start/stop recording for all clients |
+| Survival / Free Roam | Collision + lives vs. open exploration |
+| Reset Position | Teleport robot to spawn |
 
 ---
 
 ## Observation Recording
 
-Press **R** (or enable **Record Observations** in the GUI) to save ego-view data under `recordings/`:
+Episodes are saved under `recordings/`:
 
 ```
-recordings/
-  scene1_20260601_143022_3/
-    meta.json          # episode metadata (scene, hz, resolution, duration)
-    manifest.jsonl     # one JSON line per frame (controls, pose, image path)
-    frames/
-      000000.jpg
-      000001.jpg
-      ...
+recordings/scene1_20260601_143022_3/
+  meta.json
+  manifest.jsonl
+  frames/000000.jpg ...
 ```
 
-Each frame is captured at **4 Hz** from the browser viewport while the camera is locked to ego view, using `readPixels` immediately after each animation frame (async `canvas.toBlob` reads a cleared WebGL buffer and saves black images). Drive keys (`IJKL` / arrows) and robot pose are logged alongside each JPEG.
+Captured at **4 Hz** from the ego-locked viewport (960×540 JPEG + pose + controls).
 
 ---
 
-## Scene Configuration (`data/meta.json`)
+## Autopilot
 
-Each scene entry supports:
+Enable **Autopilot (Coco-GL-SW1k)** in the Ego Camera panel. The server:
 
-```json
-{
-  "scene1": {
-    "name": "Scene 1",
-    "spawn_point": { "x": -1.0, "y": 0.0, "z": -17.0 },
-    "scene_rotation": { "x": 0.0, "y": 0.0, "z": 0.0 }
-  }
-}
-```
+1. Renders ego frames at 5 Hz via `client.get_render()`
+2. Runs ONNX inference (`CocoNavigator`)
+3. Maps $(v, \omega)$ to throttle/steering at 30 Hz physics
 
-- **`spawn_point`** — Robot start position (world coordinates)
-- **`scene_rotation`** — XYZ Euler angles in degrees applied to the `/scene` frame (rotates splats + collision mesh together)
-
-Changes take effect on the next scene switch — **no server restart required**.
+Force CPU on misconfigured GPU servers: `export COCO_AUTOPILOT_DEVICE=cpu`
 
 ---
 
-## Sharing Publicly — Cloudflare Tunnel
+## Public hosting (stable URL)
 
-The server uses a single-port architecture (port 1234) so one tunnel exposes everything — the Viser UI, keyboard WebSocket, and collision banner.
+Coco2Play needs a always-on server (unlike the static [coco-playground](https://vail-ucla.github.io/coco-playground/) demo). For a **stable VAIL URL**, use a free **named Cloudflare Tunnel** pointing at port 1234.
+
+**Full guide:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ```bash
-# Terminal 1 — start the server
-python viewer.py
+# One-time: create tunnel + DNS (e.g. coco2play.vail.ucla.edu)
+cloudflared tunnel login
+cloudflared tunnel create coco2play
+cloudflared tunnel route dns coco2play coco2play.vail.ucla.edu
+cp deploy/cloudflared/config.yml.example ~/.cloudflared/config.yml  # edit UUID + hostname
 
-# Terminal 2 — expose publicly
-cloudflared tunnel --url http://localhost:1234
+# Run
+python viewer.py
+cloudflared tunnel run coco2play
 ```
 
-Share the generated `*.trycloudflare.com` URL. Keyboard control works remotely because the keyboard WebSocket is routed through the same port via the built-in TCP proxy.
+Templates for `systemd` are in `deploy/systemd/`.
+
+**Ad-hoc demo** (URL changes every run):
+
+```bash
+python viewer.py
+cloudflared tunnel --url http://localhost:1234
+```
 
 ---
 
 ## Server Architecture
 
 ```
-Browser / Cloudflare
-        │
-        ▼
-  aiohttp Proxy  :1234
-    ├── WS /keyboard  →  keyboard WebSocket handler  (inline)
-    └── everything else →  bidirectional proxy to Viser :1235
-                                    │
-                                    ▼
-                           Viser Server :1235
-                         (HTTP + WebSocket + 3DGS)
+Browser
+   │
+   ▼
+aiohttp Proxy :1234
+   ├── WS /keyboard  →  keyboard + recording frames
+   └── /*            →  Viser :1235 (3DGS + URDF + GUI)
 ```
 
-The aiohttp proxy forwards HTTP and WebSocket traffic to Viser, preserving all headers (including `Sec-WebSocket-Protocol` for version negotiation). The `/keyboard` path is intercepted and handled inline for low-latency key input.
+Collision meshes are loaded server-side only and never streamed to clients.
 
 ---
 
-## GitHub Pages Deployment
+## Large Assets
 
-The `web/` directory contains a static Three.js app that mirrors the viewer's features and runs entirely in the browser.
+| Asset | Storage |
+|-------|---------|
+| `point_cloud.ply` | Local disk (gitignored) |
+| `mesh.ply` | Git LFS |
+| `coco.onnx` | Local (`models/Coco_GL_SW1k/`, gitignored) |
 
-### How big assets are split
-
-GitHub Pages caps individual files at **100 MB** and the published site at **1 GB**, which the per-scene point clouds (200–400 MB each) blow past. So:
-
-| Asset | Size | Where it lives |
-|-------|------|----------------|
-| `data/scene*/point_cloud.ply` | 200–400 MB | **GitHub Release asset** — fetched by the web client at runtime |
-| `data/scene*/mesh.ply` | 19–72 MB | Git LFS, bundled into the Pages build |
-| `urdf/meshes/*.obj` | 3–44 MB | Git LFS, bundled into the Pages build |
-| `urdf/textures/*.png`, JSON, code | KB-range | Plain Git, bundled into the Pages build |
-
-The web client reads `data/meta.json` `_data_sources.point_cloud_url_template` and substitutes `{scene_id}` to build the download URL. To switch hosts (e.g. R2, S3) just change that one string.
-
-### Setup (one time)
+To share point clouds with collaborators without committing them:
 
 ```bash
-git lfs install
-git remote add coco2play git@github.com:VAIL-UCLA/coco2play.git
-git push -u coco2play main          # commits + LFS objects (~95 MB)
+scripts/upload-pointclouds.sh [tag]   # publishes to GitHub Releases
 ```
-
-### Publish point clouds to a GitHub Release
-
-```bash
-# Defaults to the tag set in data/meta.json (_data_sources.tag).
-# Requires the GitHub CLI (`gh auth login`) and `jq`.
-scripts/upload-pointclouds.sh                # uses tag "data-v1"
-scripts/upload-pointclouds.sh data-v2        # cut a new tag
-```
-
-If you change the tag, also update `_data_sources.tag` and the URL template in `data/meta.json` so the web client points at the new release.
-
-### Enable GitHub Pages
-
-In **Settings → Pages**, set source to the `gh-pages` branch. GitHub Actions deploys automatically on every push to `main`.
-
-Live URL: **https://vail-ucla.github.io/coco2play/**
 
 ---
 
 ## Adding a New Scene
 
 1. Create `data/<scene_id>/` with `point_cloud.ply` and `mesh.ply`
-2. Add an entry to `data/meta.json`:
-   ```json
-   "scene3": {
-     "name": "My New Scene",
-     "spawn_point": { "x": 0.0, "y": 0.0, "z": 0.0 },
-     "scene_rotation": { "x": 0.0, "y": 0.0, "z": 0.0 }
-   }
-   ```
-3. Commit `mesh.ply` (Git LFS picks it up automatically); `point_cloud.ply` stays on disk only.
-4. Run `scripts/upload-pointclouds.sh` to push the new point cloud to the GitHub Release.
-5. Select the scene from the dropdown — no restart needed.
-
----
-
-## Asset Calibration (`data/objects/calibration.json`)
-
-Each pushable GLB asset has calibration metadata:
-
-| Field | Description |
-|-------|-------------|
-| `scale` | Uniform scale factor: `calibrated_height / raw_size[1]` |
-| `raw_size` | Bounding box `[X, Y, Z]` of the original GLB mesh |
-| `calibrated_height` | Target real-world height in metres |
-| `collision_radius` | Physics collision radius for push interactions |
-| `pushable` | Whether the robot can push this asset |
-
-The scale normalises each asset's Y-axis (height) to match its `calibrated_height` in metres.
+2. Add an entry to `data/meta.json` (`name`, `spawn_point`, `scene_rotation`)
+3. Commit `mesh.ply` (LFS); keep `point_cloud.ply` local
+4. Select the scene from the dropdown — no restart needed
 
 ---
 

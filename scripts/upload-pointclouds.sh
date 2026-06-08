@@ -3,14 +3,14 @@
 # upload-pointclouds.sh
 #
 # Uploads every data/scene*/point_cloud.ply to a GitHub Release as a flat asset.
-# These files are too large for GitHub Pages (>100 MB per file) and too costly
-# for Git LFS bandwidth (~1.5 GB pulled on every CI deploy), so they live
-# outside the repo and are referenced via meta.json (_data_sources).
+# Point clouds are too large to commit (~200–800 MB each). Use this script to
+# share scene data with collaborators who can download from the release and place
+# files under data/scene*/point_cloud.ply locally.
 #
 # Usage:
 #   scripts/upload-pointclouds.sh [tag]
 #
-# Defaults to the tag in data/meta.json (_data_sources.tag), or `data-v1`.
+# Default tag: data-v1
 #
 # Requires the GitHub CLI (`gh`) to be authenticated for the current repo.
 
@@ -23,19 +23,13 @@ if ! command -v gh >/dev/null 2>&1; then
   exit 1
 fi
 
-if ! command -v jq >/dev/null 2>&1; then
-  echo "error: jq is required (brew install jq)" >&2
-  exit 1
-fi
-
 REPO="$(gh repo view --json nameWithOwner -q .nameWithOwner 2>/dev/null || true)"
 if [[ -z "${REPO}" ]]; then
   echo "error: could not detect repo. Run 'gh auth login' or set a git remote." >&2
   exit 1
 fi
 
-DEFAULT_TAG="$(jq -r '._data_sources.tag // "data-v1"' data/meta.json)"
-TAG="${1:-$DEFAULT_TAG}"
+TAG="${1:-data-v1}"
 
 shopt -s nullglob
 PLYS=(data/scene*/point_cloud.ply)
@@ -56,13 +50,9 @@ if ! gh release view "${TAG}" --repo "${REPO}" >/dev/null 2>&1; then
   gh release create "${TAG}" \
     --repo "${REPO}" \
     --title "Data ${TAG}" \
-    --notes "Point cloud assets for the web viewer. Managed by scripts/upload-pointclouds.sh."
+    --notes "Point cloud assets for Coco2Play. Managed by scripts/upload-pointclouds.sh."
 fi
 
-# `gh release upload` uses each file's basename as the asset name. Since every
-# source file is literally `point_cloud.ply`, we stage symlinks with the
-# desired final names so `gh` uploads them as scene{N}_point_cloud.ply rather
-# than clobbering one shared `point_cloud.ply` asset on every iteration.
 STAGE_DIR="$(mktemp -d -t coco2play-pcs.XXXXXX)"
 trap 'rm -rf "${STAGE_DIR}"' EXIT
 
@@ -78,18 +68,6 @@ for ply in "${PLYS[@]}"; do
 done
 
 echo
-echo "Verifying release contents..."
-asset_count="$(gh release view "${TAG}" --repo "${REPO}" --json assets -q '.assets | length')"
-if [[ "${asset_count}" -ne "${#PLYS[@]}" ]]; then
-  echo "warning: expected ${#PLYS[@]} assets, release has ${asset_count}." >&2
-  gh release view "${TAG}" --repo "${REPO}" --json assets -q '.assets[] | "  - \(.name) (\(.size) bytes)"'
-  exit 1
-fi
-echo "OK: ${asset_count} assets present."
-
-echo
-echo "Done. Verify with:"
-echo "  gh release view ${TAG} --repo ${REPO}"
-echo
-echo "Web client will fetch from:"
-echo "  https://github.com/${REPO}/releases/download/${TAG}/<scene_id>_point_cloud.ply"
+echo "Done. Collaborators can download with:"
+echo "  gh release download ${TAG} --repo ${REPO} -D ./downloads"
+echo "  # then move sceneN_point_cloud.ply -> data/sceneN/point_cloud.ply"
