@@ -120,7 +120,7 @@ Captured at **4 Hz** from the ego-locked viewport (960×540 JPEG + pose + contro
 
 Enable **Autopilot (Coco-GL-SW1k)** in the Ego Camera panel. The server:
 
-1. Renders ego frames at 5 Hz via `client.get_render()`
+1. Captures ego viewport frames at 5 Hz from the browser (no `get_render()` re-render)
 2. Runs ONNX inference (`CocoNavigator`)
 3. Maps $(v, \omega)$ to throttle/steering at 30 Hz physics
 

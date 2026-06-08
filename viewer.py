@@ -14,6 +14,7 @@ from __future__ import annotations
 import asyncio
 import base64
 import hashlib
+from io import BytesIO
 import json
 import math
 import os
@@ -353,6 +354,8 @@ class AutopilotSession:
         self.last_inference_time: float = 0.0
         self.warmup_until: float = 0.0
         self.inference_in_flight: bool = False
+        self.latest_jpeg_b64: str | None = None
+        self.latest_frame_time: float = 0.0
 
     def reset(self) -> None:
         self.frame_buffer.clear()
@@ -361,6 +364,8 @@ class AutopilotSession:
         self.last_inference_time = 0.0
         self.warmup_until = time.time() + AUTOPILOT_WARMUP_S
         self.inference_in_flight = False
+        self.latest_jpeg_b64 = None
+        self.latest_frame_time = 0.0
         if self.navigator is not None:
             self.navigator.reset()
 
@@ -564,6 +569,7 @@ class ObservationRecorder:
 def main() -> None:
     # Viser runs on internal port 1235; an aiohttp proxy on 1234 routes
     # /keyboard (WebSocket) here and forwards everything else to viser.
+    autopilot_cb = None
     PUBLIC_PORT = 1234
 
     server = viser.ViserServer(port=PUBLIC_PORT + 1)  # internal; proxy exposes PUBLIC_PORT
@@ -875,6 +881,34 @@ def main() -> None:
         _update_recording_hud(client, False, 0)
         print(f"⏹ Recording stopped ({count} frames) → {episode_dir}")
 
+    def _decode_autopilot_jpeg(image_b64: str) -> npt.NDArray[np.floating] | None:
+        """Decode a JPEG viewport capture to CHW float32 in [0, 1]."""
+        try:
+            raw = base64.b64decode(image_b64)
+        except Exception:
+            return None
+        try:
+            import torch
+            import torchvision.io as tvio
+
+            t = tvio.decode_jpeg(torch.frombuffer(raw, dtype=torch.uint8))
+            if t.shape[0] == 4:
+                t = t[:3]
+            return (t.to(torch.float32) / 255.0).numpy()
+        except Exception:
+            try:
+                from PIL import Image
+
+                img = np.array(Image.open(BytesIO(raw)).convert("RGB"))
+                return np.transpose(img.astype(np.float32) / 255.0, (2, 0, 1))
+            except Exception:
+                return None
+
+    def _on_client_autopilot_frame(sess: ClientSession, image_b64: str) -> None:
+        ap = sess.autopilot
+        ap.latest_jpeg_b64 = image_b64
+        ap.latest_frame_time = time.time()
+
     def _on_client_frame(sess: ClientSession, client: viser.ClientHandle, image_b64: str) -> None:
         if sess.recorder is None:
             return
@@ -940,6 +974,15 @@ def main() -> None:
                         client = server.get_clients().get(session_id)
                         if client is not None:
                             _on_client_frame(sess, client, image_b64)
+                        continue
+                    if data.get("type") == "autopilot_frame":
+                        image_b64 = data.get("image_b64")
+                        if not image_b64:
+                            continue
+                        with sessions_lock:
+                            sess = sessions.get(session_id)
+                        if sess is not None:
+                            _on_client_autopilot_frame(sess, image_b64)
                         continue
                     action, key = data.get("action"), data.get("key")
                     with sessions_lock:
@@ -1483,6 +1526,8 @@ def main() -> None:
 
     record_interval_ms = int(1000.0 / RECORDING_HZ)
     record_warmup_ms = int(RECORDING_WARMUP_S * 1000)
+    autopilot_interval_ms = int(1000 / AUTOPILOT_HZ)
+    autopilot_warmup_ms = int(AUTOPILOT_WARMUP_S * 1000)
 
     # Patch WebGL context creation so canvas reads work after compositing (page reload required).
     webgl_preserve_buffer_js = """
@@ -1509,13 +1554,22 @@ def main() -> None:
         const RECORD_WARMUP_MS = {record_warmup_ms};
         const RECORD_TARGET_W = {RECORDING_WIDTH};
         const RECORD_TARGET_H = {RECORDING_HEIGHT};
+        const AUTOPILOT_INTERVAL_MS = {autopilot_interval_ms};
+        const AUTOPILOT_WARMUP_MS = {autopilot_warmup_ms};
+        const AUTOPILOT_TARGET_W = {AUTOPILOT_OBS_W};
+        const AUTOPILOT_TARGET_H = {AUTOPILOT_OBS_H};
         let recordingActive = false;
         let recordingStartMs = 0;
         let lastCaptureMs = 0;
+        let autopilotActive = false;
+        let autopilotStartMs = 0;
+        let lastAutopilotCaptureMs = 0;
         let encodeCanvas = null;
         let encodeCtx = null;
         let readCanvas = null;
         let readCtx = null;
+        let autopilotEncodeCanvas = null;
+        let autopilotEncodeCtx = null;
 
         const keys = {{up: false, down: false, left: false, right: false, orbit_left: false, orbit_right: false, orbit_up: false, orbit_down: false}};
         const keyMap = {{
@@ -1665,6 +1719,57 @@ def main() -> None:
             lastCaptureMs = now;
         }}
 
+        function captureAutopilotFrameAfterRender() {{
+            if (!autopilotActive || !ws || ws.readyState !== WebSocket.OPEN) return;
+            const now = performance.now();
+            if (now - autopilotStartMs < AUTOPILOT_WARMUP_MS) return;
+            if (now - lastAutopilotCaptureMs < AUTOPILOT_INTERVAL_MS) return;
+
+            const canvas = getMainGlCanvas();
+            if (!canvas) return;
+            const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+            if (!gl) return;
+
+            const w = canvas.width;
+            const h = canvas.height;
+            if (w < 1 || h < 1) return;
+
+            const pixels = new Uint8Array(w * h * 4);
+            gl.readPixels(0, 0, w, h, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+            if (!autopilotEncodeCanvas) {{
+                autopilotEncodeCanvas = document.createElement('canvas');
+                autopilotEncodeCtx = autopilotEncodeCanvas.getContext('2d');
+            }}
+            if (!readCanvas) {{
+                readCanvas = document.createElement('canvas');
+                readCtx = readCanvas.getContext('2d');
+            }}
+            autopilotEncodeCanvas.width = AUTOPILOT_TARGET_W;
+            autopilotEncodeCanvas.height = AUTOPILOT_TARGET_H;
+            readCanvas.width = w;
+            readCanvas.height = h;
+
+            const imageData = readCtx.createImageData(w, h);
+            const row = w * 4;
+            for (let y = 0; y < h; y++) {{
+                const srcY = h - 1 - y;
+                imageData.data.set(
+                    pixels.subarray(srcY * row, srcY * row + row),
+                    y * row,
+                );
+            }}
+            readCtx.putImageData(imageData, 0, 0);
+            autopilotEncodeCtx.drawImage(
+                readCanvas, 0, 0, AUTOPILOT_TARGET_W, AUTOPILOT_TARGET_H);
+
+            const dataUrl = autopilotEncodeCanvas.toDataURL('image/jpeg', 0.85);
+            const comma = dataUrl.indexOf(',');
+            const image_b64 = comma >= 0 ? dataUrl.slice(comma + 1) : dataUrl;
+            ws.send(JSON.stringify({{type: 'autopilot_frame', image_b64: image_b64}}));
+            lastAutopilotCaptureMs = now;
+        }}
+
         function installRecordingCaptureHook() {{
             if (window.__recordingCaptureHookInstalled) return;
             window.__recordingCaptureHookInstalled = true;
@@ -1672,6 +1777,7 @@ def main() -> None:
             window.requestAnimationFrame = (cb) => raf((ts) => {{
                 cb(ts);
                 captureViewportFrameAfterRender();
+                captureAutopilotFrameAfterRender();
             }});
         }}
         installRecordingCaptureHook();
@@ -1684,6 +1790,16 @@ def main() -> None:
 
         window.stopClientRecording = function() {{
             recordingActive = false;
+        }};
+
+        window.startClientAutopilot = function() {{
+            autopilotActive = true;
+            autopilotStartMs = performance.now();
+            lastAutopilotCaptureMs = 0;
+        }};
+
+        window.stopClientAutopilot = function() {{
+            autopilotActive = false;
         }};
 
         console.log('🎮 Robot keyboard controller initialized');
@@ -1729,6 +1845,13 @@ def main() -> None:
                 client._websock_connection.queue_message(
                     viser_messages.RunJavascriptMessage(source=keyboard_js)
                 )
+                if autopilot_cb is not None and autopilot_cb.value:
+                    client._websock_connection.queue_message(
+                        viser_messages.RunJavascriptMessage(
+                            source="window.setEgoViewVisible && window.setEgoViewVisible(true); "
+                                   "window.startClientAutopilot && window.startClientAutopilot();"
+                        )
+                    )
                 client._websock_connection.queue_message(
                     viser_messages.RunJavascriptMessage(source=title_js)
                 )
@@ -1813,6 +1936,10 @@ def main() -> None:
         if sess is None:
             return
 
+        _send_client_recording_js(
+            client,
+            "window.stopClientAutopilot && window.stopClientAutopilot();",
+        )
         if sess.recorder is not None:
             _send_client_recording_js(
                 client,
@@ -1979,7 +2106,6 @@ def main() -> None:
                 except Exception:
                     pass
 
-        autopilot_cb = None
         if AUTOPILOT_AVAILABLE:
             autopilot_cb = server.gui.add_checkbox(
                 "Autopilot (Coco-GL-SW1k)",
@@ -1992,16 +2118,19 @@ def main() -> None:
                 with sessions_lock:
                     for sess in sessions.values():
                         sess.autopilot.reset()
-                if enabled:
-                    for client in server.get_clients().values():
-                        try:
-                            client._websock_connection.queue_message(
-                                viser_messages.RunJavascriptMessage(
-                                    source="window.setEgoViewVisible && window.setEgoViewVisible(true);"
-                                )
-                            )
-                        except Exception:
-                            pass
+                js = (
+                    "window.setEgoViewVisible && window.setEgoViewVisible(true); "
+                    "window.startClientAutopilot && window.startClientAutopilot();"
+                    if enabled
+                    else "window.stopClientAutopilot && window.stopClientAutopilot();"
+                )
+                for client in server.get_clients().values():
+                    try:
+                        client._websock_connection.queue_message(
+                            viser_messages.RunJavascriptMessage(source=js)
+                        )
+                    except Exception:
+                        pass
 
         record_obs_cb = server.gui.add_checkbox(
             "Record Observations (all clients)",
@@ -2073,25 +2202,15 @@ def main() -> None:
             device = os.environ.get("COCO_AUTOPILOT_DEVICE", "auto")
             ap.navigator = CocoNavigator(device=device)
 
-    def _run_autopilot_inference(sess: ClientSession, client: viser.ClientHandle) -> None:
+    def _run_autopilot_inference(sess: ClientSession, image_b64: str) -> None:
         ap = sess.autopilot
         _ensure_autopilot_navigator(ap)
         assert ap.navigator is not None
 
-        pos, _, wxyz, _ = compute_ego_camera_pose(sess.robot_state)
-        img = client.get_render(
-            height=AUTOPILOT_OBS_H,
-            width=AUTOPILOT_OBS_W,
-            wxyz=wxyz,
-            position=pos,
-            fov=EGO_FOV_Y,
-            transport_format="jpeg",
-        )
-        if img.ndim != 3 or img.shape[2] < 3:
+        frame = _decode_autopilot_jpeg(image_b64)
+        if frame is None:
             return
 
-        frame = img[:, :, :3].astype(np.float32) / 255.0
-        frame = np.transpose(frame, (2, 0, 1))
         ap.frame_buffer.append(frame)
         while len(ap.frame_buffer) > AUTOPILOT_OBS_FRAMES:
             ap.frame_buffer.pop(0)
@@ -2116,8 +2235,8 @@ def main() -> None:
         if now - ap.last_inference_time < 1.0 / AUTOPILOT_HZ:
             return
 
-        client = server.get_clients().get(sess.client_id)
-        if client is None:
+        jpeg_b64 = ap.latest_jpeg_b64
+        if jpeg_b64 is None or ap.latest_frame_time <= ap.last_inference_time:
             return
 
         ap.inference_in_flight = True
@@ -2125,7 +2244,7 @@ def main() -> None:
 
         def _worker() -> None:
             try:
-                _run_autopilot_inference(sess, client)
+                _run_autopilot_inference(sess, jpeg_b64)
             except Exception as exc:
                 print(f"⚠ Autopilot inference failed (client {sess.client_id}): {exc}")
             finally:
