@@ -58,6 +58,10 @@ EGO_CAM_FORWARD_OFFSET = 0.60   # metres in front of robot centre (clears body)
 EGO_CAM_UP_OFFSET = 0.35        # metres above robot centre (−Y direction)
 EGO_FRUSTUM_FORWARD_OFFSET = 0.4  # frustum drawn slightly behind camera (near robot head)
 
+# ──────────────────────── Autopilot path visualization ────────────────────────
+
+AUTOPILOT_PATH_LIFT = 0.06  # metres above ground to reduce z-fighting
+
 # ──────────────────────── Observation recording ────────────────────────
 
 RECORDINGS_DIR = BASE_DIR / "recordings"
@@ -343,6 +347,26 @@ def vw_to_throttle_steering(v: float, w: float, rs: "RobotState") -> tuple[float
     return throttle, steering
 
 
+def _ego_traj_to_world(
+    traj: npt.NDArray[np.floating],
+    rs: "RobotState",
+) -> npt.NDArray[np.float32]:
+    """Map model waypoints (x=fwd, y=lateral) to world XYZ (Y-up)."""
+    cos_y, sin_y = math.cos(rs.yaw), math.sin(rs.yaw)
+    xf = traj[:, 0].astype(np.float64)
+    yf = traj[:, 1].astype(np.float64)
+    wx = rs.x + xf * cos_y - yf * sin_y
+    wz = rs.z + xf * sin_y + yf * cos_y
+    wy = np.full_like(wx, rs.y - AUTOPILOT_PATH_LIFT)
+    return np.stack([wx, wy, wz], axis=1).astype(np.float32)
+
+
+def _waypoints_to_segments(pts: npt.NDArray[np.floating]) -> npt.NDArray[np.float32]:
+    if len(pts) < 2:
+        return np.zeros((0, 2, 3), dtype=np.float32)
+    return np.stack([pts[:-1], pts[1:]], axis=1).astype(np.float32)
+
+
 class AutopilotSession:
     """Per-client autopilot state: frame buffer, navigator, and held commands."""
 
@@ -356,6 +380,9 @@ class AutopilotSession:
         self.inference_in_flight: bool = False
         self.latest_jpeg_b64: str | None = None
         self.latest_frame_time: float = 0.0
+        # Predicted path in model ego frame (x=fwd, y=lateral); updated at inference Hz.
+        self.path_center_ego: npt.NDArray[np.floating] | None = None
+        self.path_line: object | None = None
 
     def reset(self) -> None:
         self.frame_buffer.clear()
@@ -366,6 +393,9 @@ class AutopilotSession:
         self.inference_in_flight = False
         self.latest_jpeg_b64 = None
         self.latest_frame_time = 0.0
+        self.path_center_ego = None
+        if self.path_line is not None:
+            self.path_line.visible = False
         if self.navigator is not None:
             self.navigator.reset()
 
@@ -570,6 +600,7 @@ def main() -> None:
     # Viser runs on internal port 1235; an aiohttp proxy on 1234 routes
     # /keyboard (WebSocket) here and forwards everything else to viser.
     autopilot_cb = None
+    autopilot_path_cb = None
     PUBLIC_PORT = 1234
 
     server = viser.ViserServer(port=PUBLIC_PORT + 1)  # internal; proxy exposes PUBLIC_PORT
@@ -1964,6 +1995,7 @@ def main() -> None:
                 ("axis_gizmo", sess.axis_gizmo),
                 ("robot_frame", sess.robot_frame),
                 ("ego_frustum", sess.ego_frustum),
+                ("path_line", sess.autopilot.path_line),
             ]:
                 if node is None:
                     continue
@@ -2112,6 +2144,11 @@ def main() -> None:
                 initial_value=False,
             )
 
+            autopilot_path_cb = server.gui.add_checkbox(
+                "Show Predicted Path",
+                initial_value=True,
+            )
+
             @autopilot_cb.on_update
             def _(_) -> None:
                 enabled = autopilot_cb.value
@@ -2131,6 +2168,16 @@ def main() -> None:
                         )
                     except Exception:
                         pass
+
+            @autopilot_path_cb.on_update
+            def _(_) -> None:
+                show = autopilot_path_cb.value
+                with sessions_lock:
+                    for sess in sessions.values():
+                        if not show:
+                            ap = sess.autopilot
+                            if ap.path_line is not None:
+                                ap.path_line.visible = False
 
         record_obs_cb = server.gui.add_checkbox(
             "Record Observations (all clients)",
@@ -2202,6 +2249,40 @@ def main() -> None:
             device = os.environ.get("COCO_AUTOPILOT_DEVICE", "auto")
             ap.navigator = CocoNavigator(device=device)
 
+    def _update_autopilot_path_vis(sess: ClientSession) -> None:
+        """Draw predicted path as a green centerline."""
+        ap = sess.autopilot
+        show = (
+            autopilot_path_cb is not None
+            and autopilot_path_cb.value
+            and autopilot_cb is not None
+            and autopilot_cb.value
+            and ap.path_center_ego is not None
+        )
+        if not show:
+            if ap.path_line is not None:
+                ap.path_line.visible = False
+            return
+
+        rs = sess.robot_state
+        center_w = _ego_traj_to_world(ap.path_center_ego, rs)
+        center_segs = _waypoints_to_segments(center_w)
+        if len(center_segs) == 0:
+            return
+
+        cid = sess.client_id
+        if ap.path_line is None:
+            ap.path_line = server.scene.add_line_segments(
+                f"/autopilot_path_{cid}",
+                points=center_segs,
+                colors=(80, 255, 80),
+                line_width=5.5,
+            )
+        else:
+            ap.path_line.points = center_segs
+
+        ap.path_line.visible = True
+
     def _run_autopilot_inference(sess: ClientSession, image_b64: str) -> None:
         ap = sess.autopilot
         _ensure_autopilot_navigator(ap)
@@ -2219,12 +2300,13 @@ def main() -> None:
         padded = [ap.frame_buffer[0]] * pad_count + ap.frame_buffer
         obs = np.stack(padded[-AUTOPILOT_OBS_FRAMES :], axis=0)[np.newaxis, ...]
 
-        vw, _ = ap.navigator.inference_vw(obs)
+        vw, best_center, _ = ap.navigator.inference_vw(obs)
         v = float(vw[0, 0].detach().cpu().item())
         w = float(vw[0, 1].detach().cpu().item())
         ap.throttle, ap.steering_angle = vw_to_throttle_steering(
             v, w, sess.robot_state
         )
+        ap.path_center_ego = best_center[0, :, :2].copy()
 
     def _maybe_run_autopilot_inference(sess: ClientSession, now: float) -> None:
         if autopilot_cb is None or not autopilot_cb.value:
@@ -2354,6 +2436,8 @@ def main() -> None:
         if sess.ego_frustum is not None:
             sess.ego_frustum.position = pos_ego
             sess.ego_frustum.wxyz = wxyz_frust
+
+        _update_autopilot_path_vis(sess)
 
         # ── Asset push physics ──
         asset_hit = False

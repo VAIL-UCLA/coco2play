@@ -67,13 +67,15 @@ def _softmax(x: np.ndarray, axis: int = -1) -> np.ndarray:
     return e / e.sum(axis=axis, keepdims=True)
 
 
-def _parse_plan(plan_raw: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+def _parse_plan(plan_raw: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     B = plan_raw.shape[0]
     per_mode = NUM_PTS * 2 * POSE_WIDTH + 1
     pr = plan_raw.reshape(B, M, per_mode)
     scores = _softmax(pr[:, :, -1], axis=-1)
-    means = pr[:, :, :-1].reshape(B, M, 2, NUM_PTS, POSE_WIDTH)[:, :, 0, :, :]
-    return means, scores
+    trajs = pr[:, :, :-1].reshape(B, M, 2, NUM_PTS, POSE_WIDTH)
+    center = trajs[:, :, 0, :, :]
+    edge = trajs[:, :, 1, :, :]
+    return center, edge, scores
 
 
 def select_best_mode(trajectory: np.ndarray, scores: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -225,17 +227,19 @@ class CocoNavigator:
         self._roll_feat_buffer(feat_out)
         return plan, pose, feat_out
 
-    def inference_trajectory(self, obs) -> tuple[np.ndarray, np.ndarray]:
+    def inference_trajectory(self, obs) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
         plan, *_ = self._forward(obs)
-        traj3d, scores = _parse_plan(plan)
-        return traj3d, scores
+        return _parse_plan(plan)
 
     def inference_vw(self, obs):
         import torch
 
-        trajectory, scores = self.inference_trajectory(obs)
-        best_traj, _ = select_best_mode(trajectory, scores)
+        trajectory, boundaries, scores = self.inference_trajectory(obs)
+        best_idx = scores.argmax(axis=1)
+        batch = np.arange(trajectory.shape[0])
+        best_traj = trajectory[batch, best_idx]
+        best_edge = boundaries[batch, best_idx]
         waypoints = torch.from_numpy(best_traj).float()
         _, w = self._controller(waypoints[..., :2], dt=self.dt)
         v = waypoints[:, 5, 2]
-        return torch.stack([v, w], dim=1), best_traj
+        return torch.stack([v, w], dim=1), best_traj, best_edge

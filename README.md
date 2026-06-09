@@ -94,6 +94,7 @@ Open **http://localhost:1234** in your browser. Click the viewport to capture ke
 |---------|-------------|
 | Scene dropdown | Switch scenes (resets robot to spawn) |
 | Autopilot | Coco-GL-SW1k closed-loop driving (Ego Camera panel) |
+| Show Predicted Path | Green centerline for the model's predicted trajectory |
 | Ego / Frustum | First-person view and camera frustum viz |
 | Record Observations | Start/stop recording for all clients |
 | Survival / Free Roam | Collision + lives vs. open exploration |
@@ -123,6 +124,7 @@ Enable **Autopilot (Coco-GL-SW1k)** in the Ego Camera panel. The server:
 1. Captures ego viewport frames at 5 Hz from the browser (no `get_render()` re-render)
 2. Runs ONNX inference (`CocoNavigator`)
 3. Maps $(v, \omega)$ to throttle/steering at 30 Hz physics
+4. Overlays the predicted path on the ground as a green centerline (**Show Predicted Path**)
 
 Force CPU on misconfigured GPU servers: `export COCO_AUTOPILOT_DEVICE=cpu`
 
