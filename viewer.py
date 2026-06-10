@@ -1222,11 +1222,19 @@ def main() -> None:
         app = web.Application()
         if COCO_BASE_PATH:
 
-            async def _base_redirect(_request: web.Request) -> web.Response:
-                raise web.HTTPFound(f"{COCO_BASE_PATH}/")
+            async def _base_path_entry(request: web.Request) -> web.StreamResponse:
+                # Viser opens ws://host/coco2play (no trailing slash) — must proxy, not redirect.
+                if (
+                    request.method in ("GET", "HEAD")
+                    and request.headers.get("Upgrade", "").lower() != "websocket"
+                    and request.path == COCO_BASE_PATH
+                ):
+                    raise web.HTTPFound(f"{COCO_BASE_PATH}/")
+                return await _proxy(request)
 
-            app.router.add_get(COCO_BASE_PATH, _base_redirect)
             app.router.add_get(f"{COCO_BASE_PATH}/keyboard", _keyboard_ws)
+            app.router.add_route("*", COCO_BASE_PATH, _base_path_entry)
+            app.router.add_route("*", f"{COCO_BASE_PATH}/", _proxy)
             app.router.add_route("*", f"{COCO_BASE_PATH}/{{path:.*}}", _proxy)
         else:
             app.router.add_get("/keyboard", _keyboard_ws)
