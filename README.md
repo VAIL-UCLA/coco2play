@@ -17,7 +17,7 @@ Part of **COCOVerse**, a UCLA capstone project that also includes the stylized s
 - **Multi-Client Sessions** — Each browser tab gets its own robot; cleanup on disconnect
 - **Multi-Scene** — Ten scenes with per-scene spawn and rotation in `data/meta.json`
 - **Bandwidth Optimised** — Collision mesh server-side only (~53 MB saved per client)
-- **Single-Port Architecture** — aiohttp proxy on port 1234 (Cloudflare-tunnel-friendly)
+- **Single-Port Architecture** — aiohttp proxy on port 1234 (Apache reverse-proxy friendly)
 
 ---
 
@@ -34,9 +34,7 @@ Part of **COCOVerse**, a UCLA capstone project that also includes the stylized s
 │   ├── objects/               # Pushable GLB assets + calibration.json
 │   └── scene*/                # point_cloud.ply (local) + mesh.ply (Git LFS)
 ├── urdf/                      # coco_one.urdf + meshes
-├── scripts/upload-pointclouds.sh   # Optional: publish PLYs to GitHub Releases
-├── deploy/                    # Cloudflare Tunnel + systemd templates
-└── docs/                      # capstone report, DEPLOYMENT.md
+└── scripts/upload-pointclouds.sh   # Optional: publish PLYs to GitHub Releases
 ```
 
 ---
@@ -130,34 +128,92 @@ Force CPU on misconfigured GPU servers: `export COCO_AUTOPILOT_DEVICE=cpu`
 
 ---
 
-## Public hosting (stable URL)
+## Deployment
 
-Coco2Play needs a always-on server (unlike the static [coco-playground](https://vail-ucla.github.io/coco-playground/) demo).
+Coco2Play needs an always-on server (unlike the static [coco-playground](https://vail-ucla.github.io/coco-playground/) demo).
 
-**Apache (UCLA lab / internal):** [docs/DEPLOYMENT-APACHE.md](docs/DEPLOYMENT-APACHE.md) — root or `/coco2play` subpath via `COCO_BASE_PATH`.
+**Live demo:** [http://bolei-gpu07.cs.ucla.edu/coco2play/](http://bolei-gpu07.cs.ucla.edu/coco2play/) (UCLA lab GPU host)
 
-**Cloudflare Tunnel (public DNS):** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+The viewer runs as a long-lived Python process on port **1234**. Apache reverse-proxies HTTP and WebSocket traffic on port 80. On shared lab hosts, Coco2Play is served at the **`/coco2play/`** subpath so other apps can keep the site root.
 
-```bash
-# One-time: create tunnel + DNS (e.g. coco2play.vail.ucla.edu)
-cloudflared tunnel login
-cloudflared tunnel create coco2play
-cloudflared tunnel route dns coco2play coco2play.vail.ucla.edu
-cp deploy/cloudflared/config.yml.example ~/.cloudflared/config.yml  # edit UUID + hostname
+### 1. systemd service
 
-# Run
-python viewer.py
-cloudflared tunnel run coco2play
+Create `/etc/systemd/system/coco2play.service` (adjust paths to your install):
+
+```ini
+[Unit]
+Description=Coco2Play Viser server (port 1234)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=krystof
+WorkingDirectory=/home/krystof/github/coco2play
+Environment=PATH=/home/krystof/miniconda3/bin:/usr/bin:/bin
+Environment=PYTHONUNBUFFERED=1
+Environment=COCO_BASE_PATH=/coco2play
+Environment=COCO_AUTOPILOT_DEVICE=auto
+ExecStart=/home/krystof/miniconda3/bin/python viewer.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
 ```
 
-Templates for `systemd` are in `deploy/systemd/`.
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now coco2play
+```
 
-**Ad-hoc demo** (URL changes every run):
+`COCO_BASE_PATH=/coco2play` is required for subpath hosting — the app serves all routes under `/coco2play/`.
+
+Verify locally (use GET, not `curl -I` — HEAD is not supported by Viser):
 
 ```bash
-python viewer.py
-cloudflared tunnel --url http://localhost:1234
+curl -s -o /dev/null -w "%{http_code}\n" http://127.0.0.1:1234/coco2play/
 ```
+
+### 2. Apache reverse proxy
+
+Enable proxy modules once:
+
+```bash
+sudo a2enmod proxy proxy_http proxy_wstunnel rewrite headers
+sudo systemctl restart apache2
+```
+
+Add the following inside your existing `<VirtualHost *:80>` (keeps the default site at `/` for other apps):
+
+```apache
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ProxyTimeout 3600
+
+    RewriteEngine On
+    RewriteCond %{HTTP:Upgrade} =websocket [NC]
+    RewriteRule ^/coco2play/?(.*) ws://127.0.0.1:1234/coco2play/$1 [P,L]
+
+    ProxyPass        /coco2play/ http://127.0.0.1:1234/coco2play/
+    ProxyPassReverse /coco2play/ http://127.0.0.1:1234/coco2play/
+```
+
+```bash
+sudo apache2ctl configtest
+sudo systemctl reload apache2
+```
+
+Open **http://bolei-gpu07.cs.ucla.edu/coco2play/** (trailing slash recommended).
+
+### Troubleshooting
+
+| Symptom | Fix |
+|---------|-----|
+| 502 Bad Gateway | `sudo systemctl status coco2play` |
+| Subpath 404 | `COCO_BASE_PATH` must be `/coco2play` and match the Apache path |
+| Keyboard dead | Click the viewport; check WebSocket proxy rules |
+| Old page in browser | Hard refresh or incognito (cache) |
 
 ---
 
