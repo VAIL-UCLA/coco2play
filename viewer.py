@@ -113,6 +113,81 @@ def load_scene_meta() -> dict:
             return json.load(f)
     return {}
 
+
+def normalize_base_path(raw: str | None) -> str:
+    """Return '' for site root, else '/coco2play' (leading slash, no trailing slash)."""
+    if not raw:
+        return ""
+    path = raw.strip()
+    if not path or path == "/":
+        return ""
+    if not path.startswith("/"):
+        path = "/" + path
+    return path.rstrip("/")
+
+
+_RE_QUOTED_ROOT_PATH = re.compile(
+    r'(?P<q>["\'])(?P<path>/(?!/)(?:[^"\'\\]|\\.)*)(?P=q)'
+)
+
+
+def _prefix_quoted_root_paths(text: str, base_path: str) -> str:
+    """Prefix root-absolute paths in HTML/JS/CSS so Viser works behind a subpath."""
+    if not base_path:
+        return text
+
+    def repl(match: re.Match[str]) -> str:
+        path = match.group("path")
+        if path == base_path or path.startswith(base_path + "/"):
+            return match.group(0)
+        return f'{match.group("q")}{base_path}{path}{match.group("q")}'
+
+    return _RE_QUOTED_ROOT_PATH.sub(repl, text)
+
+
+def _rewrite_location_header(location: str, base_path: str) -> str:
+    if not base_path:
+        return location
+    if location.startswith(base_path + "/") or location == base_path:
+        return location
+    if location.startswith("/") and not location.startswith("//"):
+        return base_path + location
+    return location
+
+
+def _should_rewrite_proxy_body(content_type: str) -> bool:
+    ct = content_type.lower().split(";")[0].strip()
+    return ct in {
+        "text/html",
+        "application/javascript",
+        "text/javascript",
+        "text/css",
+        "application/json",
+    }
+
+
+def _rewrite_proxy_body(body: bytes, content_type: str, base_path: str) -> bytes:
+    if not base_path or not _should_rewrite_proxy_body(content_type):
+        return body
+    try:
+        text = body.decode("utf-8")
+    except UnicodeDecodeError:
+        return body
+    return _prefix_quoted_root_paths(text, base_path).encode("utf-8")
+
+
+def _viser_path_qs(request: web.Request, base_path: str) -> str:
+    """Map external request path to Viser's internal root-relative path."""
+    path = request.path
+    if base_path:
+        if path == base_path:
+            path = "/"
+        elif path.startswith(base_path + "/"):
+            path = path[len(base_path) :] or "/"
+    qs = request.rel_url.query_string
+    return path + (f"?{qs}" if qs else "")
+
+
 # ──────────────────────── 3DGS Loading ────────────────────────
 
 
@@ -602,6 +677,13 @@ def main() -> None:
     autopilot_cb = None
     autopilot_path_cb = None
     PUBLIC_PORT = 1234
+    COCO_BASE_PATH = normalize_base_path(os.environ.get("COCO_BASE_PATH", ""))
+    KEYBOARD_WS_PATH = f"{COCO_BASE_PATH}/keyboard" if COCO_BASE_PATH else "/keyboard"
+    PUBLIC_URL = (
+        f"http://localhost:{PUBLIC_PORT}{COCO_BASE_PATH}/"
+        if COCO_BASE_PATH
+        else f"http://localhost:{PUBLIC_PORT}"
+    )
 
     server = viser.ViserServer(port=PUBLIC_PORT + 1)  # internal; proxy exposes PUBLIC_PORT
     server.gui.configure_theme(show_logo=False, titlebar_content=None)
@@ -1033,7 +1115,8 @@ def main() -> None:
 
     async def _proxy(request: web.Request) -> web.StreamResponse:
         """Proxy HTTP and WebSocket requests to viser."""
-        target = f"http://127.0.0.1:{VISER_PORT}{request.path_qs}"
+        viser_path_qs = _viser_path_qs(request, COCO_BASE_PATH)
+        target = f"http://127.0.0.1:{VISER_PORT}{viser_path_qs}"
 
         # ── WebSocket upgrade → bidirectional proxy to viser ──
         if request.headers.get("Upgrade", "").lower() == "websocket":
@@ -1048,7 +1131,8 @@ def main() -> None:
             await ws_browser.prepare(request)
             print(f"[proxy] WS browser connected, subprotos={subprotos}")
 
-            ws_url = f"ws://127.0.0.1:{VISER_PORT}{request.path}"
+            viser_path = viser_path_qs.split("?", 1)[0]
+            ws_url = f"ws://127.0.0.1:{VISER_PORT}{viser_path}"
             try:
                 async with AioClientSession() as cs:
                     async with cs.ws_connect(
@@ -1116,11 +1200,19 @@ def main() -> None:
                 allow_redirects=False,
             ) as resp:
                 body = await resp.read()
+                content_type = resp.headers.get("Content-Type", "")
+                body = _rewrite_proxy_body(body, content_type, COCO_BASE_PATH)
                 headers = {
                     k: v for k, v in resp.headers.items()
                     if k.lower() not in ("transfer-encoding", "connection",
                                          "content-length")
                 }
+                if COCO_BASE_PATH:
+                    for key in list(headers):
+                        if key.lower() == "location":
+                            headers[key] = _rewrite_location_header(
+                                headers[key], COCO_BASE_PATH
+                            )
                 return web.Response(status=resp.status, headers=headers, body=body)
 
     def _start_proxy() -> None:
@@ -1128,8 +1220,17 @@ def main() -> None:
         asyncio.set_event_loop(loop)
 
         app = web.Application()
-        app.router.add_get("/keyboard", _keyboard_ws)
-        app.router.add_route("*", "/{path:.*}", _proxy)
+        if COCO_BASE_PATH:
+
+            async def _base_redirect(_request: web.Request) -> web.Response:
+                raise web.HTTPFound(f"{COCO_BASE_PATH}/")
+
+            app.router.add_get(COCO_BASE_PATH, _base_redirect)
+            app.router.add_get(f"{COCO_BASE_PATH}/keyboard", _keyboard_ws)
+            app.router.add_route("*", f"{COCO_BASE_PATH}/{{path:.*}}", _proxy)
+        else:
+            app.router.add_get("/keyboard", _keyboard_ws)
+            app.router.add_route("*", "/{path:.*}", _proxy)
 
         async def _run() -> None:
             runner = web.AppRunner(app, handle_signals=False)
@@ -1141,7 +1242,12 @@ def main() -> None:
                 print(f"\n❌ Port {PUBLIC_PORT} is already in use.")
                 print(f"   Run:  fuser -k {PUBLIC_PORT}/tcp   then restart.\n")
                 return
-            print(f"✓ Proxy running on http://localhost:{PUBLIC_PORT} → viser:{VISER_PORT}")
+            route = f"{COCO_BASE_PATH}/" if COCO_BASE_PATH else "/"
+            print(
+                f"✓ Proxy running on http://localhost:{PUBLIC_PORT}{route} → viser:{VISER_PORT}"
+            )
+            if COCO_BASE_PATH:
+                print(f"  Base path: {COCO_BASE_PATH}")
             await asyncio.Event().wait()
 
         loop.run_until_complete(_run())
@@ -1622,7 +1728,7 @@ def main() -> None:
 
         function connect() {{
             const _proto = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            ws = new WebSocket(_proto + '//' + window.location.host + '/keyboard');
+            ws = new WebSocket(_proto + '//' + window.location.host + '{KEYBOARD_WS_PATH}');
 
             ws.onopen = () => {{
                 // Send init frame to link this WS to the viser session.
@@ -2607,7 +2713,9 @@ def main() -> None:
     else:
         print(f"⚠ Autopilot disabled: {_AUTOPILOT_STATUS}")
     print("\n" + "=" * 60)
-    print(f"  Viewer ready! Open http://localhost:{PUBLIC_PORT}")
+    print(f"  Viewer ready! Open {PUBLIC_URL}")
+    if COCO_BASE_PATH:
+        print(f"  (served under base path {COCO_BASE_PATH})")
     print("  Click in the browser window first to capture keys!")
     print("  Press R to record ego observations → recordings/")
     if AUTOPILOT_AVAILABLE:

@@ -132,9 +132,11 @@ Force CPU on misconfigured GPU servers: `export COCO_AUTOPILOT_DEVICE=cpu`
 
 ## Public hosting (stable URL)
 
-Coco2Play needs a always-on server (unlike the static [coco-playground](https://vail-ucla.github.io/coco-playground/) demo). For a **stable VAIL URL**, use a free **named Cloudflare Tunnel** pointing at port 1234.
+Coco2Play needs a always-on server (unlike the static [coco-playground](https://vail-ucla.github.io/coco-playground/) demo).
 
-**Full guide:** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
+**Apache (UCLA lab / internal):** [docs/DEPLOYMENT-APACHE.md](docs/DEPLOYMENT-APACHE.md) — root or `/coco2play` subpath via `COCO_BASE_PATH`.
+
+**Cloudflare Tunnel (public DNS):** [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
 
 ```bash
 # One-time: create tunnel + DNS (e.g. coco2play.vail.ucla.edu)
